@@ -1,0 +1,103 @@
+---
+const routeId = Astro.locals.starlightRoute?.id ?? '';
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isEnglish = pathname === '/en' || pathname.startsWith('/en/');
+const isExperienceRoute = routeId === 'experience' || routeId.startsWith('experience/');
+
+const localize = (href: string) => {
+	if (isEnglish) {
+		if (href === '/') return '/en/';
+		return `/en${href}`;
+	}
+	return href;
+};
+
+const nextLanguageHref = isEnglish
+	? (pathname.replace(/^\/en(?=\/|$)/, '') || '/')
+	: pathname === '/'
+		? '/en/'
+		: `/en${pathname}`;
+
+const labels = isEnglish
+	? {
+			education: 'Education',
+			work: 'Work Experience',
+			projects: 'Projects',
+			lang: '中文',
+			theme: 'Theme',
+			toggleTheme: 'Toggle dark mode',
+		}
+	: {
+			education: '教育经历',
+			work: '工作经历',
+			projects: '项目经历',
+			lang: 'EN',
+			theme: '主题',
+			toggleTheme: '切换夜间模式',
+		};
+
+const tabs = [
+	{ label: labels.education, href: localize('/experience/education/'), key: 'education' },
+	{ label: labels.work, href: localize('/experience/work-experience/'), key: 'work-experience' },
+	{ label: labels.projects, href: localize('/experience/projects/'), key: 'projects' },
+];
+
+const activeKey =
+	routeId === 'experience/education'
+		? 'education'
+		: routeId === 'experience/projects'
+			? 'projects'
+			: routeId === 'experience' || routeId === 'experience/work-experience'
+				? 'work-experience'
+				: '';
+---
+
+<header class:list={['resume-header not-content', !isExperienceRoute && 'is-compact']}>
+	{isExperienceRoute && (
+		<nav class="resume-tabs" aria-label="页面分区导航">
+			{
+				tabs.map((tab) => (
+					<a class:list={['resume-tab', activeKey === tab.key && 'is-active']} href={tab.href}>
+						{tab.label}
+					</a>
+				))
+			}
+		</nav>
+	)}
+
+	<div class="resume-header-actions">
+		<a class="resume-utility-button" href={nextLanguageHref} aria-label={isEnglish ? '切换到中文' : 'Switch to English'}>
+			<span>{labels.lang}</span>
+		</a>
+		<button class="resume-utility-button resume-theme-toggle" type="button" aria-label={labels.toggleTheme} data-theme-toggle>
+			<svg class="resume-theme-icon is-light" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.75v2.1m0 12.3v2.1m8.25-8.25h-2.1M5.85 12H3.75m14.08 5.83-1.48-1.48M7.23 7.23 5.75 5.75m12.08 0-1.48 1.48M7.23 16.77l-1.48 1.48M12 8.15a3.85 3.85 0 1 1 0 7.7 3.85 3.85 0 0 1 0-7.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			<svg class="resume-theme-icon is-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3.3a8.55 8.55 0 1 0 6.2 12.48 7.2 7.2 0 0 1-9-9.01A8.48 8.48 0 0 0 14.5 3.3Z" fill="currentColor"/></svg>
+			<span>{labels.theme}</span>
+		</button>
+	</div>
+</header>
+
+<script is:inline>
+	const syncResumeThemeButtons = () => {
+		const theme = document.documentElement.dataset.theme || 'light';
+		document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+			button.setAttribute('data-theme-state', theme);
+		});
+	};
+
+	const applyResumeTheme = (theme) => {
+		document.documentElement.dataset.theme = theme;
+		localStorage.setItem('starlight-theme', theme);
+		syncResumeThemeButtons();
+	};
+
+	document.addEventListener('astro:page-load', () => {
+		syncResumeThemeButtons();
+		document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+			button.addEventListener('click', () => {
+				const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+				applyResumeTheme(current === 'dark' ? 'light' : 'dark');
+			});
+		});
+	});
+</script>

@@ -1,0 +1,24 @@
+---
+const route = Astro.locals.starlightRoute;
+const title = route?.entry?.data?.title;
+const description = route?.entry?.data?.description;
+const isHome = (route?.id ?? '') === '';
+const isEnglish = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/');
+const eyebrow = isHome
+	? isEnglish
+		? 'Portfolio Overview'
+		: '作品总览'
+	: isEnglish
+		? 'Section Overview'
+		: '页面概览';
+---
+
+{
+	title && (
+		<div class:list={['resume-page-title', isHome && 'is-home']}>
+			<p class="resume-eyebrow">{eyebrow}</p>
+			<h1 id="_top">{title}</h1>
+			{description && <p class="resume-page-description">{description}</p>}
+		</div>
+	)
+}

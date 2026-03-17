@@ -1,11 +1,11 @@
 ---
-title: Example Guide
-description: A guide in my new Starlight docs site.
+title: 示例指南
+description: Theo 双语 Starlight 站点中的一篇指南示例。
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+指南类内容适合带着读者完成一个明确任务，通常会包含一组清晰的步骤。
+写好指南的关键，是始终围绕读者真正想完成的事情来组织内容。
 
-## Further reading
+## 延伸阅读
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- 阅读 Diátaxis 框架中关于 how-to guide 的说明：https://diataxis.fr/how-to-guides/

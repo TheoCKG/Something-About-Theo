@@ -1,5 +1,15 @@
+// 【文件作用】TypeScript 编译器配置文件，定义代码类型检查的严格程度与作用范围。
 {
+  // 继承 Astro 官方提供的严格（strict）TypeScript 配置预设
+  // 严格模式会开启 strictNullChecks、noImplicitAny 等规则，帮助提早发现潜在问题
   "extends": "astro/tsconfigs/strict",
+
+  // include：指定 TypeScript 需要处理哪些文件
+  // ".astro/types.d.ts" 是 Astro 自动生成的类型声明文件（包含内容集合的 TS 类型）
+  // "**/*" 表示包含项目中的所有文件
   "include": [".astro/types.d.ts", "**/*"],
+
+  // exclude：排除不需要类型检查的目录
+  // "dist" 是构建输出目录，不需要对其进行检查
   "exclude": ["dist"]
 }

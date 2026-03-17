@@ -1,0 +1,35 @@
+---
+const routeId = Astro.locals.starlightRoute?.id ?? '';
+const pageId = routeId === '' ? 'home' : routeId;
+const pageGroup = routeId === '' ? 'home' : routeId.split('/')[0];
+const isEnglish = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/');
+const backToTopLabel = isEnglish ? 'Back to top' : '回到顶部';
+---
+
+<div class="resume-layout not-content" data-page-id={pageId} data-page-group={pageGroup}>
+	<input id="resume-nav-toggle" class="resume-nav-toggle" type="checkbox" />
+	<label for="resume-nav-toggle" class="resume-mobile-toggle" aria-label="打开导航菜单">
+		<span></span>
+		<span></span>
+		<span></span>
+	</label>
+	<label for="resume-nav-toggle" class="resume-backdrop" aria-hidden="true"></label>
+
+	<aside class="resume-sidebar-shell">
+		<slot name="sidebar" />
+	</aside>
+
+	<div class="resume-main-shell">
+		<div class="resume-header-shell">
+			<slot name="header" />
+		</div>
+
+		<main class="resume-content-shell">
+			<slot />
+		</main>
+	</div>
+
+	<a class="resume-back-to-top" href="#_top" aria-label={backToTopLabel} title={backToTopLabel}>
+		<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5 6.75 10.75m5.25-5.25 5.25 5.25M12 6v12.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+	</a>
+</div>

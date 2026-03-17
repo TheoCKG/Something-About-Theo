@@ -8,9 +8,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	// TODO: 将此处替换为你自己的正式域名，例如：https://theo.example.com
 	// 网站的正式部署地址，用于生成 sitemap 和规范 URL
-	site: 'https://example.com',
+	site: 'https://www.theo99.me/',
 
 	// integrations：注册 Astro 集成插件，这里启用 Starlight 主题
 	integrations: [
@@ -68,7 +67,7 @@ export default defineConfig({
 				{
 					icon: 'github',
 					label: 'GitHub',
-					href: 'https://github.com/withastro/starlight',
+					href: 'https://github.com/TheoCKG/Something-About-Theo',
 				},
 			],
 

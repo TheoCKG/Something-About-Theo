@@ -50,6 +50,8 @@ const blogLinks = [
 	{ label: labels.levelDesign, href: localize('/blog/level-design/first-level-design/') },
 	{ label: labels.narrativeNotes, href: localize('/blog/narrative-notes/first-narrative-note/') },
 ];
+
+const resumeDownloadHref = '/张文韬_战斗策划_清华大学_18523868820.pdf';
 ---
 
 <div class="resume-sidebar not-content">
@@ -93,7 +95,7 @@ const blogLinks = [
 		</details>
 	</nav>
 
-	<a class="resume-cv-button" href={localize('/experience/work-experience/')}>
+	<a class="resume-cv-button" href={resumeDownloadHref} download="张文韬_战斗策划_清华大学_18523868820.pdf">
 		<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h8l4 4v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1Zm8 1.5V9h3.5ZM8 13.25h8m-8 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
 		<span>{labels.downloadCv}</span>
 	</a>

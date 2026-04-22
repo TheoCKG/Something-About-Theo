@@ -88,7 +88,7 @@ export default defineConfig({
 					// 第二个侧边栏分组：个人博客
 					label: '个人博客',
 					items: [
-						{ label: '博客导航', slug: 'blog' },
+						{ label: '博客导航', slug: 'blog/blog-home' },
 						{
 							label: '游戏拆解',
 							// autogenerate：自动扫描指定目录下的所有 .md/.mdx 文件并生成链接列表

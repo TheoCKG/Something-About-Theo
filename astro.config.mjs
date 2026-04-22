@@ -35,7 +35,7 @@ export default defineConfig({
 			},
 
 			// customCss：引入自定义样式文件，覆盖默认 Starlight 外观
-			customCss: ['./src/styles/resume-theme.css'],
+			customCss: ['./src/styles/custom-theme.css'],
 
 			// markdown：控制 Markdown 内容的渲染行为
 			markdown: {
@@ -51,15 +51,15 @@ export default defineConfig({
 
 			// components：覆写 Starlight 内置组件，替换为自定义布局部件
 			components: {
-				PageFrame: './src/components/resume/PageFrame.astro',
-				TwoColumnContent: './src/components/resume/TwoColumnContent.astro',
-				Header: './src/components/resume/Header.astro',
-				Sidebar: './src/components/resume/Sidebar.astro',
-				PageSidebar: './src/components/resume/PageSidebar.astro',
-				ContentPanel: './src/components/resume/ContentPanel.astro',
-				PageTitle: './src/components/resume/PageTitle.astro',
-				MarkdownContent: './src/components/resume/MarkdownContent.astro',
-				Footer: './src/components/resume/Footer.astro',
+				PageFrame: './src/components/layout/PageFrame.astro',
+				TwoColumnContent: './src/components/layout/TwoColumnContent.astro',
+				Header: './src/components/layout/Header.astro',
+				Sidebar: './src/components/layout/Sidebar.astro',
+				PageSidebar: './src/components/layout/PageSidebar.astro',
+				ContentPanel: './src/components/layout/ContentPanel.astro',
+				PageTitle: './src/components/layout/PageTitle.astro',
+				MarkdownContent: './src/components/layout/MarkdownContent.astro',
+				Footer: './src/components/layout/Footer.astro',
 			},
 
 			// social：配置显示在页面页脚或导航栏的社交媒体链接
@@ -79,8 +79,9 @@ export default defineConfig({
 					label: '个人经历',
 					items: [
 						// slug 对应 src/content/docs/ 下的文件路径（不含扩展名）
-						{ label: '个人简介', slug: 'about' },
-						{ label: '经历一览', slug: 'experience' },
+						{ label: '工作经历', slug: 'experience/work-experience' },
+						{ label: '教育经历', slug: 'experience/education' },
+						{ label: '项目经历', slug: 'experience/projects' },
 					],
 				},
 				{
@@ -89,17 +90,21 @@ export default defineConfig({
 					items: [
 						{ label: '博客导航', slug: 'blog' },
 						{
-							label: '游戏设计',
+							label: '游戏拆解',
 							// autogenerate：自动扫描指定目录下的所有 .md/.mdx 文件并生成链接列表
-							autogenerate: { directory: 'blog/game-design' },
+							autogenerate: { directory: 'blog/game-breakdown' },
 						},
 						{
-							label: '关卡设计',
-							autogenerate: { directory: 'blog/level-design' },
+							label: '游戏鉴赏',
+							autogenerate: { directory: 'blog/game-appreciation' },
 						},
 						{
-							label: '叙事笔记',
-							autogenerate: { directory: 'blog/narrative-notes' },
+							label: '电影锐评',
+							autogenerate: { directory: 'blog/movie-critique' },
+						},
+						{
+							label: '学习笔记',
+							autogenerate: { directory: 'blog/study-notes' },
 						},
 					],
 				},

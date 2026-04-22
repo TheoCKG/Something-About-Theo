@@ -19,9 +19,10 @@ const labels = isEnglish
 			downloadCv: 'Download CV',
 			socialLinks: 'SOCIAL LINKS',
 			blogHome: 'Blog Home',
-			gameDesign: 'Game Design',
-			levelDesign: 'Level Design',
-			narrativeNotes: 'Narrative Notes',
+			gameBreakdown: 'Game Breakdown',
+			gameAppreciation: 'Game Appreciation',
+			movieCritique: 'Movie Critique',
+			studyNotes: 'Study Notes',
 		}
 	: {
 			role: '战斗设计',
@@ -31,9 +32,10 @@ const labels = isEnglish
 			downloadCv: '下载简历',
 			socialLinks: 'SOCIAL LINKS',
 			blogHome: '博客首页',
-			gameDesign: '游戏设计',
-			levelDesign: '关卡设计',
-			narrativeNotes: '叙事笔记',
+			gameBreakdown: '游戏拆解',
+			gameAppreciation: '游戏鉴赏',
+			movieCritique: '电影锐评',
+			studyNotes: '学习笔记',
 		};
 
 const isCurrent = (href: string) => {
@@ -46,16 +48,17 @@ const isBlogRoute = isCurrent(localize('/blog'));
 
 const blogLinks = [
 	{ label: labels.blogHome, href: localize('/blog/') },
-	{ label: labels.gameDesign, href: localize('/blog/game-design/first-game-design/') },
-	{ label: labels.levelDesign, href: localize('/blog/level-design/first-level-design/') },
-	{ label: labels.narrativeNotes, href: localize('/blog/narrative-notes/first-narrative-note/') },
+	{ label: labels.gameBreakdown, href: localize('/blog/game-breakdown/first-game-analysis/') },
+	{ label: labels.gameAppreciation, href: localize('/blog/game-appreciation/first-game-review/') },
+	{ label: labels.movieCritique, href: localize('/blog/movie-critique/first-movie-review/') },
+	{ label: labels.studyNotes, href: localize('/blog/study-notes/first-study-note/') },
 ];
 
 const resumeDownloadHref = '/张文韬_战斗策划_清华大学_18523868820.pdf';
 ---
 
 <div class="resume-sidebar not-content">
-	<a class="resume-profile" href={localize('/about/')}>
+	<a class="resume-profile" href={localize('/')}>
 		<div class="resume-avatar" aria-hidden="true">T</div>
 		<div class="resume-profile-copy">
 			<strong>Theo</strong>

@@ -400,6 +400,17 @@ main {
 	color: var(--resume-blue);
 }
 
+.resume-subnav-articles {
+	display: flex;
+	flex-direction: column;
+	padding-left: 0.8rem;
+}
+
+.resume-subnav-article {
+	font-size: 0.82rem;
+	font-weight: 500;
+}
+
 .resume-cv-button {
 	justify-content: center;
 	padding: 1rem 1.1rem;

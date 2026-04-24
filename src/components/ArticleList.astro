@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+	directory: string;
+}
+
+const { directory } = Astro.props;
+const isEnglish = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/');
+const prefix = isEnglish ? `en/${directory}` : directory;
+
+const allDocs = await getCollection('docs');
+const articles = allDocs
+	.filter((doc) => {
+		const id = doc.id;
+		return id.startsWith(prefix + '/') && !id.endsWith('/index.mdx') && !id.endsWith('/index.md');
+	})
+	.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+{articles.length > 0 ? (
+	<ul>
+		{articles.map((article) => {
+			const slug = article.id.replace(/\.mdx?$/, '').replace(/^en\//, '');
+			const href = isEnglish ? `/en/${slug}/` : `/${slug}/`;
+			return (
+				<li>
+					<a href={href}><strong>{article.data.title}</strong></a>
+					{article.data.description && <span> — {article.data.description}</span>}
+				</li>
+			);
+		})}
+	</ul>
+) : (
+	<p>{isEnglish ? 'No articles yet.' : '暂无文章。'}</p>
+)}

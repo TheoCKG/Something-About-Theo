@@ -1,4 +1,6 @@
 ---
+import { getCollection } from 'astro:content';
+
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isEnglish = pathname === '/en' || pathname.startsWith('/en/');
 
@@ -46,13 +48,38 @@ const isCurrent = (href: string) => {
 
 const isBlogRoute = isCurrent(localize('/blog'));
 
-const blogLinks = [
-	{ label: labels.blogHome, href: localize('/blog/blog-home/') },
-	{ label: labels.gameBreakdown, href: localize('/blog/game-breakdown/first-game-analysis/') },
-	{ label: labels.gameAppreciation, href: localize('/blog/game-appreciation/first-game-review/') },
-	{ label: labels.movieCritique, href: localize('/blog/movie-critique/first-movie-review/') },
-	{ label: labels.studyNotes, href: localize('/blog/study-notes/first-study-note/') },
+const allDocs = await getCollection('docs');
+const langPrefix = isEnglish ? 'en/' : '';
+
+const categories = [
+	{ label: labels.gameBreakdown, dir: 'blog/game-breakdown' },
+	{ label: labels.gameAppreciation, dir: 'blog/game-appreciation' },
+	{ label: labels.movieCritique, dir: 'blog/movie-critique' },
+	{ label: labels.studyNotes, dir: 'blog/study-notes' },
 ];
+
+const blogCategories = categories.map((cat) => {
+	const prefix = `${langPrefix}${cat.dir}/`;
+	const articles = allDocs
+		.filter((doc) => {
+			const id = doc.id;
+			return id.startsWith(prefix) && !id.endsWith('/index.mdx') && !id.endsWith('/index.md');
+		})
+		.sort((a, b) => a.data.title.localeCompare(b.data.title))
+		.map((doc) => {
+			const slug = doc.id.replace(/\.mdx?$/, '').replace(/^en\//, '');
+			return {
+				label: doc.data.title,
+				href: isEnglish ? `/en/${slug}/` : `/${slug}/`,
+			};
+		});
+
+	return {
+		label: cat.label,
+		href: localize(`/${cat.dir}/`),
+		articles,
+	};
+});
 
 const resumeDownloadHref = '/张文韬_战斗策划_清华大学_18523868820.pdf';
 ---
@@ -87,11 +114,25 @@ const resumeDownloadHref = '/张文韬_战斗策划_清华大学_18523868820.pdf
 			</summary>
 
 			<div class="resume-subnav">
+				<a class:list={['resume-subnav-link', isCurrent(localize('/blog/blog-home/')) && 'is-active']} href={localize('/blog/blog-home/')}>
+					{labels.blogHome}
+				</a>
 				{
-					blogLinks.map((link) => (
-						<a class:list={['resume-subnav-link', isCurrent(link.href) && 'is-active']} href={link.href}>
-							{link.label}
-						</a>
+					blogCategories.map((cat) => (
+						<div class="resume-subnav-group">
+							<a class:list={['resume-subnav-link', isCurrent(cat.href) && 'is-active']} href={cat.href}>
+								{cat.label}
+							</a>
+							{cat.articles.length > 0 && isCurrent(cat.href) && (
+								<div class="resume-subnav-articles">
+									{cat.articles.map((article) => (
+										<a class:list={['resume-subnav-link resume-subnav-article', isCurrent(article.href) && 'is-active']} href={article.href}>
+											{article.label}
+										</a>
+									))}
+								</div>
+							)}
+						</div>
 					))
 				}
 			</div>

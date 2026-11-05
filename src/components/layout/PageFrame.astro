@@ -1,61 +1,87 @@
 ---
+// 全站外框：所有页面统一使用深色作品集外壳（2026-11 起不再使用浅蓝 Starlight 简历布局）。
 import '../../styles/portfolio.css';
-const routeId = Astro.locals.starlightRoute?.id ?? '';
-const pageId = routeId === '' ? 'home' : routeId;
-const pageGroup = routeId === '' ? 'home' : routeId.split('/')[0];
+import GameArticleHeader from '../games/GameArticleHeader.astro';
+import { getGameCard } from '../../data/gameCards';
+
+const route = Astro.locals.starlightRoute;
 const isEnglish = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/');
 const backToTopLabel = isEnglish ? 'Back to top' : '回到顶部';
 const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, '').replace(/\/+$/, '') || '/';
-const isPortfolioRoute = path === '/' || path.startsWith('/blog/game-breakdown');
-const isArticle = path.startsWith('/blog/game-breakdown/');
+const isLanding = path === '/' || path === '/blog/game-breakdown';
+const isBreakdownArticle = path.startsWith('/blog/game-breakdown/');
+const breakdownSlug = isBreakdownArticle ? path.split('/').pop()! : '';
+const game = breakdownSlug ? getGameCard(breakdownSlug) : undefined;
 const homeHref = isEnglish ? '/en/' : '/';
+const localize = (href: string) => (isEnglish ? `/en${href}` : href);
 const resumeHref = '/张文韬_战斗策划_清华大学_18523868820.pdf';
+const pageTitle = route?.entry?.data?.title ?? '';
+
+// 二级导航：经历页和博客页各自一组标签
+const experienceTabs = [
+	{ href: '/experience/work-experience', label: isEnglish ? 'Work' : '工作经历' },
+	{ href: '/experience/projects', label: isEnglish ? 'Projects' : '项目经历' },
+	{ href: '/experience/education', label: isEnglish ? 'Education' : '教育经历' },
+];
+const blogTabs = [
+	{ href: '/blog/blog-home', label: isEnglish ? 'Blog' : '博客导航' },
+	{ href: '/blog/game-breakdown', label: isEnglish ? 'Game studies' : '游戏拆解' },
+	{ href: '/blog/game-appreciation', label: isEnglish ? 'Game reviews' : '游戏鉴赏' },
+	{ href: '/blog/movie-critique', label: isEnglish ? 'Film' : '电影锐评' },
+	{ href: '/blog/study-notes', label: isEnglish ? 'Notes' : '学习笔记' },
+];
+const tabs = path.startsWith('/experience') ? experienceTabs : path.startsWith('/blog') && !path.startsWith('/blog/game-breakdown') ? blogTabs : null;
+const isTabActive = (href: string) => path === href || (href !== '/blog/blog-home' && path.startsWith(href + '/')) || (path === '/experience' && href === '/experience/work-experience');
+const kicker = path.startsWith('/experience') ? 'EXPERIENCE / 经历' : path.startsWith('/blog') ? 'JOURNAL / 博客' : '';
 ---
 
-{isPortfolioRoute ? (
-	<div class="portfolio-shell">
-		<header class="folio-header not-content">
-			<a class="folio-logo" href={homeHref} aria-label="Theo 首页"><span class="folio-logo-mark" aria-hidden="true">t</span>THEO.</a>
-			<nav aria-label={isEnglish ? 'Main navigation' : '主导航'}>
-				<a href={`${homeHref}#work`}>{isEnglish ? 'Selected work' : '精选作品'}</a>
-				<a href="/blog/game-breakdown/" aria-current={path.startsWith('/blog/game-breakdown') ? 'page' : undefined}>{isEnglish ? 'Game studies' : '游戏拆解'}</a>
-				<a href={`${homeHref}#about`}>{isEnglish ? 'Experience' : '关于与经历'}</a>
-				<a href={`${homeHref}#contact`}>{isEnglish ? 'Contact' : '联系'}</a>
-			</nav>
-			<div class="folio-header-tools"><a href={isEnglish ? '/' : '/en/'} aria-label={isEnglish ? '切换到中文首页' : 'English homepage'}>{isEnglish ? '中文' : 'EN'}</a><a class="folio-header-cv" href={resumeHref} download>{isEnglish ? 'RÉSUMÉ' : '简历'} ↓</a></div>
-		</header>
-		<main id="_top" class:list={['folio-main', isArticle && 'is-article']}>
-			{isArticle && <a class="article-breadcrumb" href="/blog/game-breakdown/">← {isEnglish ? 'All game studies' : '返回游戏拆解'}</a>}
-			<slot />
-		</main>
-		<footer class="folio-footer not-content"><span>THEO / COMBAT & TECHNICAL DESIGN</span><a href="#_top">{backToTopLabel} ↑</a></footer>
-	</div>
-) : (
-<div class="resume-layout not-content" data-page-id={pageId} data-page-group={pageGroup}>
-	<input id="resume-nav-toggle" class="resume-nav-toggle" type="checkbox" />
-	<label for="resume-nav-toggle" class="resume-mobile-toggle" aria-label="打开导航菜单">
-		<span></span>
-		<span></span>
-		<span></span>
-	</label>
-	<label for="resume-nav-toggle" class="resume-backdrop" aria-hidden="true"></label>
-
-	<aside class="resume-sidebar-shell">
-		<slot name="sidebar" />
-	</aside>
-
-	<div class="resume-main-shell">
-		<div class="resume-header-shell">
-			<slot name="header" />
-		</div>
-
-		<main class="resume-content-shell">
-			<slot />
-		</main>
-	</div>
-
-	<a class="resume-back-to-top" href="#_top" aria-label={backToTopLabel} title={backToTopLabel}>
-		<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5 6.75 10.75m5.25-5.25 5.25 5.25M12 6v12.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-	</a>
+<div class="portfolio-shell">
+	<div class="folio-progress" aria-hidden="true"></div>
+	<header class="folio-header not-content">
+		<a class="folio-logo" href={homeHref} aria-label="Theo 首页"><span class="folio-logo-mark" aria-hidden="true">t</span>THEO.</a>
+		<nav aria-label={isEnglish ? 'Main navigation' : '主导航'}>
+			<a href={`${homeHref}#work`}>{isEnglish ? 'Selected work' : '精选作品'}</a>
+			<a href="/blog/game-breakdown/" aria-current={path.startsWith('/blog/game-breakdown') ? 'page' : undefined}>{isEnglish ? 'Game studies' : '游戏拆解'}</a>
+			<a href={localize('/experience/work-experience/')} aria-current={path.startsWith('/experience') ? 'page' : undefined}>{isEnglish ? 'Experience' : '经历'}</a>
+			<a href={localize('/blog/blog-home/')} aria-current={tabs === blogTabs ? 'page' : undefined}>{isEnglish ? 'Journal' : '博客'}</a>
+			<a href={`${homeHref}#contact`}>{isEnglish ? 'Contact' : '联系'}</a>
+		</nav>
+		<div class="folio-header-tools"><a href={isEnglish ? '/' : '/en/'} aria-label={isEnglish ? '切换到中文首页' : 'English homepage'}>{isEnglish ? '中文' : 'EN'}</a><a class="folio-header-cv" href={resumeHref} download>{isEnglish ? 'RÉSUMÉ' : '简历'} ↓</a></div>
+	</header>
+	<main id="_top" class:list={['folio-main', !isLanding && 'is-article', tabs && 'has-tabs', tabs === experienceTabs && 'is-experience']}>
+		{isBreakdownArticle && <a class="article-breadcrumb" href="/blog/game-breakdown/">← {isEnglish ? 'All game studies' : '返回游戏库'}</a>}
+		{game && <GameArticleHeader game={game} />}
+		{tabs && (
+			<div class="page-head not-content">
+				<p class="folio-kicker"><span class="signal-square"></span>{kicker}</p>
+				<h1 class="page-title">{pageTitle}</h1>
+				<nav class="section-tabs" aria-label={isEnglish ? 'Section' : '栏目'}>
+					{tabs.map((t) => <a href={localize(t.href + '/')} aria-current={isTabActive(t.href) ? 'page' : undefined}>{t.label}</a>)}
+				</nav>
+			</div>
+		)}
+		<slot />
+	</main>
+	<footer class="folio-footer not-content"><span>THEO / COMBAT & TECHNICAL DESIGN</span><a href="#_top">{backToTopLabel} ↑</a></footer>
 </div>
-)}
+
+<script>
+	// 滚动进场：首页各区块、作品卡片、经历条目依次浮现（游戏小卡有自己的入场逻辑）
+	if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const targets = document.querySelectorAll<HTMLElement>('.section-heading, .work-card, .experience-list > div, .about-intro, .contact-band, .is-article .resume-markdown > *:not(figure):not(details)');
+		const io = new IntersectionObserver((entries) => {
+			for (const e of entries) {
+				if (!e.isIntersecting) continue;
+				e.target.classList.add('is-revealed');
+				io.unobserve(e.target);
+			}
+		}, { rootMargin: '0px 0px -6% 0px' });
+		targets.forEach((el, i) => {
+			const r = el.getBoundingClientRect();
+			if (r.top < innerHeight) return; // 首屏内容直接显示，不闪
+			el.classList.add('reveal');
+			el.style.setProperty('--d', `${(i % 3) * 70}ms`);
+			io.observe(el);
+		});
+	}
+</script>

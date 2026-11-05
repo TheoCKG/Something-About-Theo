@@ -1,10 +1,12 @@
 ---
 import CameraLab from './CameraLab.astro';
+import GameCard from './games/GameCard.astro';
 import { breakdowns } from '../data/breakdowns';
+import { getGameCard } from '../data/gameCards';
 
 const english = Astro.url.pathname.startsWith('/en');
 const localize = (path: string) => english ? `/en${path}` : path;
-const studies = ['monster-hunter-world', 'sekiro', 'apex-legends'].map(slug => breakdowns.find(item => item.slug === slug)).filter(Boolean);
+const featured = ['sekiro', 'monster-hunter-world', 'god-of-war-2018', 'apex-legends', 'the-witcher-3', 'it-takes-two'].map((slug) => getGameCard(slug)).filter((g) => g !== undefined);
 const cv = '/张文韬_战斗策划_清华大学_18523868820.pdf';
 ---
 
@@ -51,11 +53,8 @@ const cv = '/张文韬_战斗策划_清华大学_18523868820.pdf';
 			<div><p class="folio-kicker">02 / GAME STUDIES</p><h2 id="studies-heading">{english ? 'Play. Question. Break it down.' : '拆开好游戏，理解好设计。'}</h2></div>
 			<a class="folio-text-link" href="/blog/game-breakdown/">{english ? `Explore ${breakdowns.length} studies · 中文` : `浏览 ${breakdowns.length} 篇拆解`} ↗</a>
 		</div>
-		<div class="studies-grid">
-			{studies.map((study, index) => study && <a class="study-card" href={`/blog/game-breakdown/${study.slug}/`}>
-				<div class="study-image"><img src={`/media/games/${study.slug}.jpg`} alt={`${study.game}官方商店截图`} loading="lazy" width="640" height="360" /><span>STUDY / {String(index + 1).padStart(2, '0')}</span></div>
-				<div class="study-caption"><p class="work-tags">{study.category}</p><h3>{study.game}<span aria-hidden="true">↗</span></h3><p>{study.summary}</p><span class="card-footer">{english ? 'Official store screenshot · Chinese analysis' : '官方商店截图 · 机制与设计分析'}</span></div>
-			</a>)}
+		<div class="studies-cards">
+			{featured.map((game, index) => <GameCard game={game} index={index} compact english={english} />)}
 		</div>
 	</section>
 

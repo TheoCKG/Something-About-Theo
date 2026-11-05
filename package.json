@@ -7,11 +7,15 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sync:games": "node scripts/sync-games.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.38.0",
     "astro": "^6.0.2",
     "sharp": "^0.34.2"
+  },
+  "devDependencies": {
+    "psn-api": "^2.18.1"
   }
 }

@@ -1,0 +1,90 @@
+---
+// 拆解文章顶部的“游戏档案”头：封面（与小卡共享过渡名，点击小卡时封面会飞过来）+ MC + 时长 + 奖项。
+import McBadge from './McBadge.astro';
+import { AWARD_FULL, AWARD_LABEL, CATEGORY_HUE, formatHours, sourceLabel, type GameCard } from '../../data/gameCards';
+
+interface Props { game: GameCard }
+const { game } = Astro.props;
+const hours = formatHours(game.hours);
+const hue = CATEGORY_HUE[game.category] ?? '#d7ff3f';
+const groups = (['TGA', 'GJ'] as const).map((show) => ({ show, items: game.awards.filter((a) => a.show === show) })).filter((g) => g.items.length);
+---
+
+<section class:list={['gah', `tier-${game.tier}`]} style={`--hue:${hue}`} aria-label={`${game.game} 游戏档案`}>
+	<div class="gah-cover">
+		{game.cover ? (
+			<img src={game.cover} alt={`${game.titleEn} 封面`} width="600" height="900" decoding="async" fetchpriority="high" />
+		) : (
+			<div class="gah-poster"><span>{game.titleEn}</span></div>
+		)}
+	</div>
+	<div class="gah-info">
+		<p class="gah-kicker">PLAYER FILE · {game.category}</p>
+		<p class="gah-name">{game.game}</p>
+		<p class="gah-en">{game.titleEn}{game.year && ` · ${game.year}`}</p>
+		<div class="gah-stats">
+			<McBadge mc={game.mc} size="lg" link />
+			<div class="gah-hours">
+				<span>MY PLAYTIME</span>
+				<strong>{hours ?? '—'}<small>h</small></strong>
+				<em>{hours ? Object.keys(game.hourSources).map((k) => sourceLabel[k] ?? k).join(' + ') : '待同步'}{game.sharedPlaytime && ' · 含合集'}</em>
+			</div>
+		</div>
+		{groups.length > 0 ? (
+			<div class="gah-awards">
+				{groups.map((g) => (
+					<div>
+						<p class:list={['gah-show', `show-${g.show}`]} title={AWARD_FULL[g.show]}>{AWARD_LABEL[g.show]} <b>×{g.items.length}</b></p>
+						<ul>
+							{g.items.map((a) => <li class:list={[a.grand && 'is-grand']}><span>{a.year}</span>{a.category}</li>)}
+						</ul>
+					</div>
+				))}
+			</div>
+		) : (
+			<p class="gah-noaward">未获 TGA / 金摇杆奖项</p>
+		)}
+	</div>
+</section>
+
+<style>
+	.gah { --gold: #f6c453; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 32px; margin-bottom: 48px; padding: 22px; border: 1px solid #30342d; background: radial-gradient(90% 120% at 0% 0%, color-mix(in srgb, var(--hue) 14%, transparent), transparent 60%), #121411; position: relative; }
+	.gah::before, .gah::after { content: ''; position: absolute; width: 14px; height: 14px; border-color: var(--hue); border-style: solid; }
+	.gah::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+	.gah::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+	.gah-cover { aspect-ratio: 2 / 3; overflow: hidden; background: #1a1d18; box-shadow: 0 20px 50px -20px #000; }
+	.gah-cover img { width: 100%; height: 100%; object-fit: cover; display: block; margin: 0 !important; background: none !important; view-transition-name: game-cover; }
+	.tier-grand .gah-cover { outline: 2px solid var(--gold); outline-offset: 3px; }
+	.gah-poster { height: 100%; display: flex; align-items: center; padding: 16px; background: repeating-linear-gradient(135deg, #ffffff06 0 2px, transparent 2px 10px), #11130f; view-transition-name: game-cover; }
+	.gah-poster span { font: 800 30px/.95 'Impact', 'Arial Narrow', sans-serif; text-transform: uppercase; color: #f4f1e8; }
+	.gah-info { min-width: 0; display: flex; flex-direction: column; }
+	.gah-kicker { font: 10px 'Consolas', 'Microsoft YaHei', monospace; letter-spacing: .14em; color: var(--hue); margin: 0 !important; }
+	.gah-name { margin: 10px 0 2px !important; font-size: clamp(26px, 3.4vw, 36px); font-weight: 800; letter-spacing: -.03em; line-height: 1.2; color: #f4f1e8 !important; }
+	.gah-en { margin: 0 !important; font-size: 13px; color: #9da394 !important; }
+	.gah-stats { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin: 20px 0 18px; padding-bottom: 18px; border-bottom: 1px solid #262a23; }
+	.gah-hours { display: grid; grid-template-columns: auto auto; column-gap: 10px; align-items: baseline; }
+	.gah-hours span { grid-column: 1 / -1; font: 9px 'Consolas', monospace; letter-spacing: .14em; color: #7f8778; }
+	.gah-hours strong { font: 700 34px/1.1 'Bahnschrift', sans-serif; letter-spacing: -.04em; color: #f4f1e8; }
+	.gah-hours small { font-size: 13px; color: #8d9586; margin-left: 2px; }
+	.gah-hours em { font-style: normal; font-size: 11px; color: #8d9586; }
+	.gah-awards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px 24px; }
+	.gah-show { display: inline-block; margin: 0 0 8px !important; padding: 3px 8px; font: 700 11px/1.4 'Bahnschrift', 'Microsoft YaHei', sans-serif; color: #0d0f0e !important; }
+	.gah-show.show-TGA { background: #f2efe6; }
+	.gah-show.show-GJ { background: var(--gold); }
+	.gah ul { list-style: none; margin: 0; padding: 0 !important; }
+	.gah li { display: flex; gap: 10px; margin: 0 !important; padding: 3px 0; font-size: 13px; line-height: 1.6; color: #c1c6ba !important; }
+	.gah li span { flex: none; font: 12px/1.75 'Consolas', monospace; color: #7f8778; }
+	.gah li.is-grand { color: var(--gold) !important; font-weight: 700; }
+	.gah-noaward { margin: 0 !important; font-size: 13px; color: #7f8778 !important; }
+	@media (max-width: 640px) {
+		.gah { grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 14px; }
+		.gah-name { font-size: 22px; }
+		.gah-stats { gap: 14px; margin: 14px 0 12px; }
+		.gah-hours strong { font-size: 26px; }
+		.gah-awards { grid-column: 1 / -1; }
+		.gah-info { display: contents; }
+		.gah-cover { grid-row: 1 / span 4; align-self: start; }
+		.gah-kicker, .gah-name, .gah-en, .gah-stats { grid-column: 2; }
+		.gah-awards, .gah-noaward { grid-column: 1 / -1; }
+	}
+</style>

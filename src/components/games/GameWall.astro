@@ -1,0 +1,218 @@
+---
+// 游戏拆解主视觉：所有玩过的游戏小卡墙 + 档案统计 + 筛选/排序/搜索。
+import GameCard from './GameCard.astro';
+import { gameCards, syncedAt } from '../../data/gameCards';
+
+const categories = ['全部', ...new Set(gameCards.map((g) => g.category))];
+const scored = gameCards.filter((g) => g.mc?.score != null);
+const avgMc = scored.length ? Math.round(scored.reduce((s, g) => s + (g.mc!.score as number), 0) / scored.length) : null;
+const grandGames = gameCards.filter((g) => g.tier === 'grand');
+const tgaTotal = gameCards.reduce((s, g) => s + g.tgaCount, 0);
+const gjTotal = gameCards.reduce((s, g) => s + g.gjCount, 0);
+const timed = gameCards.filter((g) => g.hours != null);
+const totalHours = timed.reduce((s, g) => s + (g.hours as number), 0);
+const mustPlay = gameCards.filter((g) => g.mc?.mustPlay).length;
+const syncDate = new Date(syncedAt).toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai', year: 'numeric', month: 'long', day: 'numeric' });
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<game-wall class="game-wall not-content">
+	<header class="gw-hero">
+		<div class="gw-hero-copy">
+			<p class="gw-kicker"><span></span> PLAYER FILE / GAME LIBRARY</p>
+			<h1>玩过，<br />然后<span>拆开。</span></h1>
+			<p class="gw-lead">每张卡是一款我玩过并写下拆解的游戏：封面、我的游玩时长、Metacritic 媒体评分，以及它在 TGA 和金摇杆拿过的奖。点开卡片，进入对应的拆解。</p>
+		</div>
+		<dl class="gw-stats">
+			<div><dt>GAMES</dt><dd>{pad(gameCards.length)}</dd><span>款游戏 · {pad(categories.length - 1)} 个方向</span></div>
+			<div><dt>AVG MC</dt><dd>{avgMc ?? '—'}</dd><span>{mustPlay} 款 Metacritic Must-Play</span></div>
+			<div class="is-gold"><dt>GOTY</dt><dd>{pad(grandGames.length)}</dd><span>款拿过年度游戏</span></div>
+			<div><dt>AWARDS</dt><dd>{tgaTotal + gjTotal}</dd><span>TGA {tgaTotal} · 金摇杆 {gjTotal}</span></div>
+			<div><dt>HOURS</dt><dd>{timed.length ? Math.round(totalHours).toLocaleString('en-US') : '—'}</dd><span>{timed.length ? `${timed.length} 款有时长记录` : '时长待同步'}</span></div>
+		</dl>
+	</header>
+
+	<div class="gw-tools" role="toolbar" aria-label="筛选与排序">
+		<div class="gw-filters" aria-label="按研究方向筛选">
+			{categories.map((c, i) => (
+				<button type="button" data-filter={c} aria-pressed={i === 0 ? 'true' : 'false'}>
+					{c}<span>{i === 0 ? gameCards.length : gameCards.filter((g) => g.category === c).length}</span>
+				</button>
+			))}
+			<button type="button" class="gw-toggle" data-awarded aria-pressed="false">只看获奖<span>{gameCards.filter((g) => g.awards.length).length}</span></button>
+		</div>
+		<div class="gw-right">
+			<label class="gw-sort">
+				<span>排序</span>
+				<select aria-label="排序方式">
+					<option value="index">默认</option>
+					<option value="awards">奖项</option>
+					<option value="mc">MC 评分</option>
+					<option value="hours">游玩时长</option>
+					<option value="year">发售年份</option>
+				</select>
+			</label>
+			<label class="gw-search">
+				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.3 4.3" /></svg>
+				<input type="search" placeholder="搜索游戏 / 设计问题" aria-label="搜索游戏或设计问题" />
+			</label>
+		</div>
+	</div>
+
+	<div class="gw-legend">
+		<p><i class="lg-grand"></i>年度游戏（镭射金卡）<i class="lg-award"></i>单项奖<i class="lg-none"></i>未获大奖</p>
+		<p data-count aria-live="polite">{gameCards.length} 款</p>
+	</div>
+
+	<div class="gw-grid">
+		{gameCards.map((g, i) => <GameCard game={g} index={i} />)}
+	</div>
+
+	<div class="gw-empty" hidden>
+		<p>没有找到对应的游戏。</p>
+		<button type="button" data-reset>清除筛选</button>
+	</div>
+
+	<footer class="gw-note">
+		<span>DATA NOTE</span>
+		<p>
+			评分来自 <a href="https://www.metacritic.com/" target="_blank" rel="noreferrer">Metacritic</a> 媒体均分（取该作主平台）；奖项为 The Game Awards 与 Golden Joystick Awards 的获奖记录，不含提名，资料片获奖计入本体；游玩时长来自 Steam / PlayStation 账号，合集与跨平台游玩可能合并计算。数据同步于 {syncDate}。部分文章含剧透，详见篇首。
+		</p>
+	</footer>
+</game-wall>
+
+<script>
+	class GameWall extends HTMLElement {
+		connectedCallback() {
+			const grid = this.querySelector<HTMLElement>('.gw-grid')!;
+			const cards = [...this.querySelectorAll<HTMLElement>('.gw-card')];
+			const filters = this.querySelectorAll<HTMLButtonElement>('[data-filter]');
+			const awardedBtn = this.querySelector<HTMLButtonElement>('[data-awarded]')!;
+			const select = this.querySelector('select')!;
+			const input = this.querySelector<HTMLInputElement>('input[type="search"]')!;
+			const count = this.querySelector<HTMLElement>('[data-count]')!;
+			const empty = this.querySelector<HTMLElement>('.gw-empty')!;
+			const state = { category: '全部', awarded: false, sort: 'index', q: '' };
+
+			// 记住上次的筛选，从文章返回时不丢
+			try { Object.assign(state, JSON.parse(sessionStorage.getItem('gw:state') ?? '{}')); } catch {}
+			input.value = state.q;
+			select.value = state.sort;
+
+			const num = (el: HTMLElement, k: string) => Number(el.dataset[k] ?? 0);
+			const apply = (animate = false) => {
+				const q = state.q.trim().toLocaleLowerCase();
+				let visible = 0;
+				for (const c of cards) {
+					const show = (state.category === '全部' || c.dataset.category === state.category) && (!state.awarded || c.dataset.awarded === '1') && (!q || c.dataset.search!.includes(q));
+					c.hidden = !show;
+					if (show) visible++;
+				}
+				const sorted = [...cards].sort((a, b) =>
+					state.sort === 'index' ? num(a, 'index') - num(b, 'index')
+						: num(b, state.sort) - num(a, state.sort) || num(a, 'index') - num(b, 'index'));
+				const reorder = () => sorted.forEach((c) => grid.appendChild(c));
+				if (animate && 'startViewTransition' in document && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+					cards.forEach((c, i) => (c.style.viewTransitionName = `gw-${i}`));
+					(document as any).startViewTransition(reorder).finished.finally(() => cards.forEach((c) => (c.style.viewTransitionName = '')));
+				} else reorder();
+				count.textContent = `${visible} 款`;
+				empty.hidden = visible > 0;
+				filters.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === state.category)));
+				awardedBtn.setAttribute('aria-pressed', String(state.awarded));
+				sessionStorage.setItem('gw:state', JSON.stringify(state));
+			};
+
+			filters.forEach((b) => b.addEventListener('click', () => { state.category = b.dataset.filter!; apply(true); }));
+			awardedBtn.addEventListener('click', () => { state.awarded = !state.awarded; apply(true); });
+			select.addEventListener('change', () => { state.sort = select.value; apply(true); });
+			input.addEventListener('input', () => { state.q = input.value; apply(); });
+			this.querySelector('[data-reset]')!.addEventListener('click', () => {
+				Object.assign(state, { category: '全部', awarded: false, q: '' });
+				input.value = '';
+				apply(true);
+			});
+			apply();
+		}
+	}
+	if (!customElements.get('game-wall')) customElements.define('game-wall', GameWall);
+</script>
+
+<style>
+	.game-wall { --gw-text: #eeeae1; --gw-muted: #a7ada2; --gw-line: #30342d; --gw-accent: #d7ff3f; --gw-gold: #f6c453; display: block; padding: 3.5rem 0 2rem; color: var(--gw-text); }
+	.game-wall :where(p, h1, h2, dl, dd, dt) { margin: 0; }
+
+	.gw-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 3rem; align-items: end; padding-bottom: 3rem; }
+	.gw-kicker { display: flex; align-items: center; gap: .7rem; font: 600 .7rem/1.4 'Consolas', monospace; letter-spacing: .17em; color: var(--gw-accent); }
+	.gw-kicker span { width: .45rem; height: .45rem; background: currentColor; animation: gw-blink 1.6s steps(2) infinite; }
+	@keyframes gw-blink { 50% { opacity: .2; } }
+	.gw-hero h1 { margin: 1.4rem 0 1.5rem; font: 800 clamp(3rem, 6.4vw, 6rem)/1.02 'Bahnschrift', 'PingFang SC', 'Microsoft YaHei', sans-serif; letter-spacing: -.055em; }
+	.gw-hero h1 span { color: var(--gw-accent); }
+	.gw-lead { max-width: 34rem; color: var(--gw-muted); font-size: .95rem; line-height: 1.9; }
+
+	.gw-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--gw-line); border-left: 1px solid var(--gw-line); }
+	.gw-stats > div { position: relative; padding: 1rem 1.1rem 1.1rem; border-right: 1px solid var(--gw-line); border-bottom: 1px solid var(--gw-line); }
+	.gw-stats > div:nth-child(1) { grid-column: span 2; }
+	.gw-stats dt { font: .62rem 'Consolas', monospace; letter-spacing: .16em; color: #7f8778; }
+	.gw-stats dd { margin-top: .35rem; font: 700 clamp(2.2rem, 4vw, 3.6rem)/1 'Bahnschrift', sans-serif; letter-spacing: -.05em; }
+	.gw-stats > div:nth-child(1) dd { font-size: clamp(3.2rem, 6vw, 5.4rem); }
+	.gw-stats span { display: block; margin-top: .45rem; font-size: .7rem; color: var(--gw-muted); }
+	.gw-stats .is-gold dd { background: linear-gradient(135deg, #fff2b0, #f6c453 50%, #b07a1c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+	.gw-stats > div::after { content: ''; position: absolute; top: -1px; left: -1px; width: 8px; height: 8px; border-top: 2px solid var(--gw-accent); border-left: 2px solid var(--gw-accent); }
+
+	.gw-tools { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-block: 1px solid var(--gw-line); background: #0d0f0ee6; backdrop-filter: blur(10px); }
+	.gw-filters { display: flex; flex-wrap: wrap; gap: .4rem; }
+	.gw-filters button { display: flex; align-items: center; gap: .45rem; padding: .55rem .7rem; border: 1px solid transparent; color: var(--gw-muted); background: transparent; font: inherit; font-size: .8rem; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+	.gw-filters button span { font-size: .65rem; opacity: .7; }
+	.gw-filters button:hover { border-color: var(--gw-accent); color: var(--gw-text); }
+	.gw-filters button[aria-pressed='true'] { color: #0d0f0e; background: var(--gw-accent); }
+	.gw-filters .gw-toggle { margin-left: .4rem; border-color: #f6c45355; color: var(--gw-gold); }
+	.gw-filters .gw-toggle[aria-pressed='true'] { background: var(--gw-gold); color: #2a1a02; }
+	.gw-right { display: flex; gap: .6rem; align-items: center; }
+	.gw-sort { display: flex; align-items: center; gap: .5rem; padding: .5rem .7rem; border: 1px solid var(--gw-line); font-size: .78rem; color: var(--gw-muted); }
+	.gw-sort select { border: 0; outline: none; background: transparent; color: var(--gw-text); font: inherit; cursor: pointer; }
+	.gw-sort select option { background: #151815; }
+	.gw-search { display: flex; align-items: center; gap: .6rem; min-width: 13rem; padding: .55rem .8rem; border: 1px solid var(--gw-line); color: var(--gw-muted); }
+	.gw-search svg { width: 1rem; height: 1rem; flex: none; stroke: currentColor; stroke-width: 1.5; }
+	.gw-search input { width: 100%; min-width: 0; padding: 0; border: 0; outline: none; color: var(--gw-text); background: transparent; font: inherit; font-size: .8rem; }
+	.gw-search:focus-within, .gw-sort:focus-within { border-color: var(--gw-accent); }
+
+	.gw-legend { display: flex; justify-content: space-between; gap: 1rem; padding: 1.4rem 0 1.2rem; font: .7rem/1.4 'Consolas', 'Microsoft YaHei', monospace; letter-spacing: .06em; color: var(--gw-muted); }
+	.gw-legend i { display: inline-block; width: 10px; height: 14px; margin: 0 .45rem 0 1rem; vertical-align: -2px; }
+	.gw-legend i:first-child { margin-left: 0; }
+	.lg-grand { background: conic-gradient(#fff2b0, #f6c453, #8a5a12, #ffe48f, #fff2b0); }
+	.lg-award { border: 1px solid #c9cdc3; }
+	.lg-none { border: 1px solid #3a3e36; }
+
+	.gw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: 2.2rem 1.25rem; }
+
+	.gw-empty { padding: 4rem 1rem; text-align: center; color: var(--gw-muted); }
+	.gw-empty[hidden] { display: none; }
+	.gw-empty button { margin-top: 1rem; padding: .6rem .8rem; border: 1px solid var(--gw-line); color: var(--gw-accent); background: transparent; font: inherit; cursor: pointer; }
+
+	.gw-note { display: flex; gap: 2rem; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gw-line); color: var(--gw-muted); }
+	.gw-note > span { flex: none; font: .65rem/1.9 'Consolas', monospace; letter-spacing: .08em; color: var(--gw-accent); }
+	.gw-note p { max-width: 60rem; font-size: .75rem; line-height: 1.9; }
+	.gw-note a { color: var(--gw-text); text-decoration: underline; }
+	.game-wall :is(button, select, input):focus-visible { outline: 2px solid var(--gw-accent); outline-offset: 3px; }
+
+	@media (max-width: 1000px) {
+		.gw-hero { grid-template-columns: 1fr; gap: 2rem; }
+		.gw-search { min-width: 0; flex: 1; }
+		.gw-right { width: 100%; }
+	}
+	@media (max-width: 700px) {
+		.game-wall { padding-top: 2.2rem; }
+		.gw-hero h1 { font-size: 2.9rem; }
+		.gw-lead { font-size: .85rem; }
+		.gw-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.gw-stats > div:nth-child(1) { grid-column: span 2; }
+		.gw-stats dd { font-size: 2.2rem; }
+		.gw-tools { position: static; }
+		.gw-filters button { padding: .5rem .5rem; font-size: .73rem; }
+		.gw-filters .gw-toggle { margin-left: 0; }
+		.gw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem .8rem; }
+		.gw-legend { flex-direction: column; }
+		.gw-note { flex-direction: column; gap: .6rem; }
+	}
+</style>

@@ -1,0 +1,39 @@
+---
+// Metacritic 评分徽章：分数方块按 MC 规则变色 + 圆形 "m" 标识。size="lg" 用于文章头部。
+import { mcTone, type Metacritic } from '../../data/gameCards';
+
+interface Props {
+	mc: Metacritic | null;
+	size?: 'sm' | 'lg';
+	link?: boolean;
+}
+const { mc, size = 'sm', link = false } = Astro.props;
+const tone = mcTone(mc?.score);
+const label = mc?.score != null ? `Metacritic 媒体评分 ${mc.score}${mc.platform ? `（${mc.platform}）` : ''}` : '暂无 Metacritic 评分';
+const Tag = link && mc?.url ? 'a' : 'span';
+---
+
+<Tag class:list={['mc-badge', `is-${size}`, `tone-${tone}`]} href={Tag === 'a' ? mc?.url : undefined} target={Tag === 'a' ? '_blank' : undefined} rel={Tag === 'a' ? 'noreferrer' : undefined} title={label} aria-label={label}>
+	<span class="mc-score">{mc?.score ?? 'tbd'}</span>
+	<svg class="mc-logo" viewBox="0 0 32 32" aria-hidden="true">
+		<circle cx="16" cy="16" r="14.2" fill="#000" stroke="#ffcc34" stroke-width="2.6" />
+		<path d="M8.6 21.6V12.4h2.5l.2 1.2c.8-1 1.8-1.5 3-1.5 1.3 0 2.2.5 2.8 1.5.8-1 1.9-1.5 3.2-1.5 2.1 0 3.2 1.3 3.2 3.8v5.7h-2.9v-5.2c0-1.1-.4-1.7-1.3-1.7-.8 0-1.4.5-1.6 1.3v5.6h-2.9v-5.2c0-1.1-.4-1.7-1.3-1.7-.8 0-1.4.5-1.6 1.2v5.7z" fill="#fff" />
+	</svg>
+	{size === 'lg' && <span class="mc-word">metacritic{mc?.mustPlay && <em>MUST-PLAY</em>}</span>}
+</Tag>
+
+<style>
+	.mc-badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 7px 3px 3px; background: #0b0c0bdd; border: 1px solid #ffffff22; color: #fff; text-decoration: none; backdrop-filter: blur(6px); }
+	.mc-score { display: grid; place-items: center; min-width: 30px; height: 30px; padding: 0 4px; font: 800 15px/1 'Bahnschrift', 'Arial', sans-serif; color: #0b0c0b; letter-spacing: -.02em; }
+	.mc-logo { width: 20px; height: 20px; flex: none; }
+	.tone-good .mc-score { background: #00ce7a; }
+	.tone-mixed .mc-score { background: #ffbd3f; }
+	.tone-bad .mc-score { background: #ff6874; }
+	.tone-none .mc-score { background: #3a3d38; color: #c9cdc3; font-size: 11px; }
+	.is-lg { gap: 10px; padding: 5px 12px 5px 5px; }
+	.is-lg .mc-score { min-width: 52px; height: 52px; font-size: 27px; }
+	.is-lg .mc-logo { width: 28px; height: 28px; }
+	.mc-word { display: flex; flex-direction: column; gap: 3px; font: 700 13px/1 'Bahnschrift', sans-serif; letter-spacing: .02em; }
+	.mc-word em { font-style: normal; font-size: 10px; letter-spacing: .14em; color: #ffcc34; }
+	a.mc-badge:hover { border-color: #ffcc34; }
+</style>

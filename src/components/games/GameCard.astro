@@ -1,0 +1,292 @@
+---
+// 单张游戏小卡：竖版封面 + Metacritic + 游玩时长 + TGA/金摇杆奖项。
+// 稀有度：拿过年度游戏 = grand（镭射金卡），拿过单项奖 = award（银色反光），其余 = none。
+// 交互（倾斜、镭射跟随、点击 hit-stop、封面过渡）统一在本文件底部的 <script> 里处理，组件被用多少次脚本都只打包一份。
+import McBadge from './McBadge.astro';
+import { AWARD_LABEL, CATEGORY_HUE, formatHours, type GameCard } from '../../data/gameCards';
+
+interface Props {
+	game: GameCard;
+	index?: number;
+	compact?: boolean;
+	english?: boolean;
+}
+const { game, index = 0, compact = false, english = false } = Astro.props;
+const hours = formatHours(game.hours);
+const hue = CATEGORY_HUE[game.category] ?? '#d7ff3f';
+const grandLabel = game.grandAwards.length > 1 ? `年度游戏 ×${game.grandAwards.length}` : game.grandAwards.length ? `${AWARD_LABEL[game.grandAwards[0].show]} 年度游戏` : '';
+const shown = game.awards.slice(0, 4);
+const more = game.awards.length - shown.length;
+const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.category} ${game.summary}`.toLocaleLowerCase();
+---
+
+<article
+	class:list={['gw-card', `tier-${game.tier}`, compact && 'is-compact']}
+	style={`--i:${index};--hue:${hue}`}
+	data-slug={game.slug}
+	data-category={game.category}
+	data-index={index}
+	data-mc={game.mc?.score ?? -1}
+	data-hours={game.hours ?? -1}
+	data-awards={game.awards.length * 10 + game.grandAwards.length * 100}
+	data-year={game.year ?? 0}
+	data-awarded={game.awards.length > 0 ? '1' : '0'}
+	data-search={searchText}
+>
+	<a href={game.href} aria-label={`${game.game}：${game.articleTitle}`}>
+		<div class="gw-frame">
+			{game.cover ? (
+				<img class="gw-cover" src={game.cover} alt={`${game.titleEn} 封面`} width="600" height="900" loading={index < 8 ? 'eager' : 'lazy'} decoding="async" />
+			) : (
+				<div class="gw-cover gw-poster" aria-hidden="true">
+					<span class="gw-poster-en">{game.titleEn}</span>
+					<span class="gw-poster-cn">{game.game}</span>
+					<span class="gw-poster-year">{game.year}</span>
+				</div>
+			)}
+			<span class="gw-shine" aria-hidden="true"></span>
+			<span class="gw-glare" aria-hidden="true"></span>
+			<span class="gw-corners" aria-hidden="true"></span>
+
+			<div class="gw-top">
+				<McBadge mc={game.mc} />
+				{game.tier === 'grand' && <span class="gw-ribbon">{grandLabel}</span>}
+			</div>
+
+			<div class="gw-caption">
+				<p class="gw-category">{game.category}</p>
+				<h2>{game.game}</h2>
+				<p class="gw-en">{game.titleEn}{game.year && <span> · {game.year}</span>}</p>
+			</div>
+
+			{!compact && (
+				<div class="gw-reveal" aria-hidden="true">
+					<p class="gw-summary">{game.summary}</p>
+					{shown.length > 0 && (
+						<ul>
+							{shown.map((a) => (
+								<li class:list={[a.grand && 'is-grand']}><b class={`show-${a.show}`}>{AWARD_LABEL[a.show]}</b><span>{a.year} · {a.category}</span></li>
+							))}
+							{more > 0 && <li class="gw-more">另有 {more} 项</li>}
+						</ul>
+					)}
+					<p class="gw-read">{english ? 'Read the study ↗' : '阅读拆解 ↗'}</p>
+				</div>
+			)}
+		</div>
+
+		<div class="gw-meta">
+			<p class="gw-hours" title={hours ? Object.entries(game.hourSources).map(([k, v]) => `${k}: ${v} h`).join(' / ') : '时长待同步'}>
+				<span class="gw-label">{english ? 'PLAYED' : '游玩'}</span>
+				{hours ? <strong>{hours}<small>h</small></strong> : <strong class="is-empty">—<small>h</small></strong>}
+			</p>
+			<p class="gw-award-chips">
+				{game.tgaCount > 0 && <span class="chip show-TGA">TGA<b>{game.tgaCount}</b></span>}
+				{game.gjCount > 0 && <span class="chip show-GJ">金摇杆<b>{game.gjCount}</b></span>}
+				{game.awards.length === 0 && <span class="chip is-none">{english ? 'NO MAJOR AWARD' : '无大奖'}</span>}
+			</p>
+		</div>
+	</a>
+</article>
+
+<script>
+	// 只给精细指针（鼠标/触控板）开倾斜；触屏和“减少动态效果”下保持静态
+	const canTilt = matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const VT = 'game-cover';
+	const KEY = 'gw:last';
+
+	const clearVt = () => document.querySelectorAll<HTMLElement>('.gw-card .gw-cover').forEach((el) => (el.style.viewTransitionName = ''));
+
+	function bind(card: HTMLElement) {
+		if (card.dataset.bound) return;
+		card.dataset.bound = '1';
+		const link = card.querySelector('a')!;
+		let raf = 0;
+
+		if (canTilt) {
+			card.addEventListener('pointermove', (e) => {
+				const r = card.getBoundingClientRect();
+				const x = (e.clientX - r.left) / r.width;
+				const y = (e.clientY - r.top) / r.height;
+				cancelAnimationFrame(raf);
+				raf = requestAnimationFrame(() => {
+					card.style.setProperty('--rx', `${(0.5 - y) * 16}deg`);
+					card.style.setProperty('--ry', `${(x - 0.5) * 18}deg`);
+					card.style.setProperty('--mx', `${x * 100}%`);
+					card.style.setProperty('--my', `${y * 100}%`);
+					card.style.setProperty('--px', `${30 + x * 40}%`);
+					card.style.setProperty('--py', `${30 + y * 40}%`);
+					card.style.setProperty('--o', '1');
+					card.classList.add('is-active');
+				});
+			});
+			card.addEventListener('pointerleave', () => {
+				cancelAnimationFrame(raf);
+				card.classList.remove('is-active');
+				['--rx', '--ry', '--mx', '--my', '--px', '--py', '--o'].forEach((p) => card.style.removeProperty(p));
+			});
+		}
+
+		// 点击：先来一下 hit-stop（短暂停顿 + 白闪），再跳转；封面挂上过渡名，进入文章时“飞”到头图
+		link.addEventListener('click', (e) => {
+			if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+			e.preventDefault();
+			clearVt();
+			const cover = card.querySelector<HTMLElement>('.gw-cover');
+			if (cover && 'startViewTransition' in document) cover.style.viewTransitionName = VT;
+			sessionStorage.setItem(KEY, card.dataset.slug ?? '');
+			card.classList.add('is-hit');
+			setTimeout(() => (location.href = link.href), matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 110);
+		});
+	}
+
+	const bindAll = () => document.querySelectorAll<HTMLElement>('.gw-card').forEach(bind);
+	bindAll();
+
+	// 从文章返回时，让对应卡片接住封面
+	const last = sessionStorage.getItem(KEY);
+	if (last) {
+		const cover = document.querySelector<HTMLElement>(`.gw-card[data-slug="${CSS.escape(last)}"] .gw-cover`);
+		if (cover) cover.style.viewTransitionName = VT;
+	}
+	window.addEventListener('pageshow', () => document.querySelectorAll('.gw-card.is-hit').forEach((c) => c.classList.remove('is-hit')));
+
+	// 入场：滚动到视口时逐张亮起
+	if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const io = new IntersectionObserver((entries) => {
+			for (const entry of entries) {
+				if (!entry.isIntersecting) continue;
+				entry.target.classList.add('is-in');
+				io.unobserve(entry.target);
+			}
+		}, { rootMargin: '0px 0px -8% 0px' });
+		document.querySelectorAll('.gw-card').forEach((c) => {
+			c.classList.add('is-armed');
+			io.observe(c);
+		});
+	}
+</script>
+
+<style>
+	@property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+
+	.gw-card { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; --px: 50%; --py: 50%; --o: 0; --gold: #f6c453; position: relative; min-width: 0; perspective: 1000px; }
+	.gw-card[hidden] { display: none; }
+	.gw-card > a { display: block; color: inherit; text-decoration: none; transform: rotateX(var(--rx)) rotateY(var(--ry)); transform-style: preserve-3d; transition: transform .55s cubic-bezier(.2, .8, .2, 1); will-change: transform; }
+	.gw-card.is-active > a { transition: transform .08s linear; }
+
+	/* ---------- 封面框 ---------- */
+	.gw-frame { position: relative; aspect-ratio: 2 / 3; overflow: hidden; background: #161915; isolation: isolate; outline: 1px solid #ffffff14; outline-offset: -1px; transition: outline-color .2s, box-shadow .3s; }
+	.gw-cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .45s cubic-bezier(.2, .8, .2, 1), filter .3s; }
+	.gw-card:hover .gw-cover { transform: scale(1.045); }
+	.gw-frame::after { content: ''; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, #000a 0%, transparent 22%, transparent 48%, #000d 82%, #000 100%); pointer-events: none; }
+
+	/* 无封面：排版海报兜底 */
+	.gw-poster { display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 22px 18px; background: radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--hue) 38%, transparent), transparent 60%), repeating-linear-gradient(135deg, #ffffff06 0 2px, transparent 2px 10px), #11130f; }
+	.gw-poster-en { font: 800 clamp(26px, 2.6vw, 38px)/.92 'Impact', 'Bahnschrift Condensed', 'Arial Narrow', sans-serif; text-transform: uppercase; color: #f4f1e8; letter-spacing: -.01em; overflow-wrap: anywhere; }
+	.gw-poster-cn { font-size: 13px; color: var(--hue); letter-spacing: .1em; }
+	.gw-poster-year { position: absolute; right: 14px; bottom: 96px; font: 64px/1 'Impact', sans-serif; color: #ffffff0d; }
+
+	/* 镭射层 */
+	.gw-shine, .gw-glare { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+	.gw-glare { background: radial-gradient(circle at var(--mx) var(--my), #ffffffa0 0%, #ffffff22 22%, transparent 55%); mix-blend-mode: overlay; opacity: calc(var(--o) * .9); transition: opacity .3s; }
+	.tier-grand .gw-shine {
+		background:
+			repeating-linear-gradient(115deg, #ff7aa8 0%, #ffd36b 4%, #8dff9c 8%, #6be4ff 12%, #a98bff 16%, #ff7aa8 20%),
+			repeating-linear-gradient(25deg, #0e152e 0%, #8f8f8f 3.8%, #0e152e 4.5%);
+		background-size: 260% 260%, 200% 200%;
+		background-position: var(--px) var(--py), calc(100% - var(--px)) var(--py);
+		background-blend-mode: hue;
+		mix-blend-mode: color-dodge;
+		filter: brightness(.65) contrast(1.6) saturate(1.2);
+		opacity: calc(.12 + var(--o) * .55);
+		transition: opacity .3s;
+	}
+	.tier-award .gw-shine { background: linear-gradient(105deg, transparent 30%, #ffffff40 46%, #ffffff10 52%, transparent 66%); background-size: 250% 100%; background-position: calc(var(--px) * 2 - 30%) 0; mix-blend-mode: soft-light; opacity: calc(var(--o) * .9); }
+
+	/* 稀有度边框：金卡用旋转的锥形渐变描边 */
+	.tier-grand .gw-frame { outline: none; }
+	.tier-grand .gw-frame::before { content: ''; position: absolute; inset: 0; z-index: 5; padding: 2px; background: conic-gradient(from var(--angle), #fff2b0, #f6c453 18%, #8a5a12 36%, #ffe48f 52%, #f6c453 70%, #7a4b0c 86%, #fff2b0); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: gw-spin 6s linear infinite; pointer-events: none; }
+	.tier-award .gw-frame { outline-color: #c9cdc366; }
+	@keyframes gw-spin { to { --angle: 360deg; } }
+
+	/* HUD 角标 */
+	.gw-corners { z-index: 6; opacity: 0; transition: opacity .2s, inset .25s cubic-bezier(.2, .8, .2, 1); inset: 14px; background:
+		linear-gradient(var(--hue), var(--hue)) top left / 14px 2px no-repeat, linear-gradient(var(--hue), var(--hue)) top left / 2px 14px no-repeat,
+		linear-gradient(var(--hue), var(--hue)) top right / 14px 2px no-repeat, linear-gradient(var(--hue), var(--hue)) top right / 2px 14px no-repeat,
+		linear-gradient(var(--hue), var(--hue)) bottom left / 14px 2px no-repeat, linear-gradient(var(--hue), var(--hue)) bottom left / 2px 14px no-repeat,
+		linear-gradient(var(--hue), var(--hue)) bottom right / 14px 2px no-repeat, linear-gradient(var(--hue), var(--hue)) bottom right / 2px 14px no-repeat; }
+	.gw-card:is(:hover, :focus-within) .gw-corners { opacity: 1; inset: 7px; }
+
+	/* 顶部：MC + 绶带 */
+	.gw-top { position: absolute; z-index: 7; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; transform: translateZ(30px); }
+	.gw-ribbon { padding: 5px 8px; background: linear-gradient(135deg, #ffe48f, #f6c453 45%, #b07a1c); color: #2a1a02; font: 700 10px/1.2 'Bahnschrift', 'Microsoft YaHei', sans-serif; letter-spacing: .04em; white-space: nowrap; clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px)); box-shadow: 0 6px 18px #f6c45355; }
+
+	/* 底部标题 */
+	.gw-caption { position: absolute; z-index: 7; left: 14px; right: 14px; bottom: 14px; transform: translateZ(24px); transition: opacity .25s, transform .3s; }
+	.gw-category { font: 10px/1.4 'Consolas', 'Microsoft YaHei', monospace; letter-spacing: .12em; color: var(--hue); }
+	.gw-caption h2 { margin: 5px 0 4px !important; font-size: clamp(17px, 1.45vw, 22px); font-weight: 800; line-height: 1.25; letter-spacing: -.02em; color: #fff; text-shadow: 0 2px 12px #000c; }
+	.gw-en { font-size: 11px; color: #d2d6cc; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+	/* 悬停揭示 */
+	.gw-reveal { position: absolute; z-index: 8; inset: auto 0 0 0; padding: 54px 14px 14px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(180deg, transparent, #070807ee 26%, #070807); transform: translateY(101%); transition: transform .35s cubic-bezier(.2, .8, .2, 1); }
+	.gw-card:is(:hover, :focus-within) .gw-reveal { transform: translateY(0); }
+	.gw-card:is(:hover, :focus-within) .gw-caption { opacity: 0; transform: translateY(-12px); }
+	.gw-summary { font-size: 12.5px; line-height: 1.7; color: #e6e3da; }
+	.gw-reveal ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+	.gw-reveal li { display: flex; gap: 7px; align-items: baseline; font-size: 11px; line-height: 1.45; color: #b8bdb1; }
+	.gw-reveal li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	.gw-reveal li.is-grand span { color: var(--gold); font-weight: 700; }
+	.gw-reveal li b { flex: none; min-width: 40px; text-align: center; padding: 1px 4px; font: 700 9.5px/1.5 'Bahnschrift', 'Microsoft YaHei', sans-serif; }
+	.gw-more { color: #858b7e !important; padding-left: 47px; }
+	.gw-read { font: 11px 'Consolas', monospace; letter-spacing: .08em; color: var(--hue); }
+
+	/* 卡片下方数据条 */
+	.gw-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 2px 0; }
+	.gw-hours { display: flex; align-items: baseline; gap: 6px; }
+	.gw-label { font: 9px 'Consolas', monospace; letter-spacing: .12em; color: #7f8778; }
+	.gw-hours strong { font: 700 20px/1 'Bahnschrift', sans-serif; letter-spacing: -.03em; color: #f2efe6; }
+	.gw-hours strong small { margin-left: 2px; font-size: 11px; color: #8d9586; }
+	.gw-hours strong.is-empty { color: #4e5449; }
+	.gw-award-chips { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+	.chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px; font: 700 10px/1.2 'Bahnschrift', 'Microsoft YaHei', sans-serif; letter-spacing: .02em; }
+	.chip b { font-weight: 800; }
+	.show-TGA { background: #f2efe6; color: #0d0f0e; }
+	.show-GJ { background: #f6c453; color: #2a1a02; }
+	.chip.is-none { background: transparent; border: 1px solid #30342d; color: #6c7366; font-weight: 400; }
+
+	/* 点击 hit-stop */
+	.gw-card.is-hit > a { transform: scale(.965) !important; transition: transform .06s steps(1) !important; }
+	.gw-card.is-hit .gw-frame { box-shadow: 0 0 0 2px var(--hue), 0 0 40px color-mix(in srgb, var(--hue) 50%, transparent); }
+	.gw-card.is-hit .gw-glare { opacity: 1; background: #ffffffcc; mix-blend-mode: normal; animation: gw-flash .11s steps(2) forwards; }
+	@keyframes gw-flash { to { opacity: 0; } }
+
+	.gw-card:hover .gw-frame { box-shadow: 0 24px 50px -18px #000, 0 0 0 1px color-mix(in srgb, var(--hue) 55%, transparent); }
+	.tier-grand:hover .gw-frame { box-shadow: 0 24px 60px -16px #000, 0 0 46px -10px #f6c45399; }
+	.gw-card > a:focus-visible { outline: 2px solid var(--hue); outline-offset: 6px; }
+
+	/* 入场 */
+	.gw-card.is-armed:not(.is-in) { opacity: 0; transform: translateY(28px); }
+	.gw-card.is-armed { transition: opacity .5s ease, transform .6s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(min(var(--i), 12) * 35ms); }
+
+	/* 紧凑版（首页） */
+	.is-compact .gw-caption h2 { font-size: 16px; }
+	.is-compact .gw-meta { padding-top: 8px; }
+	.is-compact .gw-hours strong { font-size: 17px; }
+
+	@media (max-width: 700px) {
+		.gw-caption { left: 10px; right: 10px; bottom: 10px; }
+		.gw-caption h2 { font-size: 16px; }
+		.gw-en { font-size: 10px; }
+		.gw-top { top: 7px; left: 7px; right: 7px; }
+		.gw-ribbon { font-size: 9px; padding: 4px 6px; }
+		.gw-reveal { display: none; }
+		.gw-card:is(:hover, :focus-within) .gw-caption { opacity: 1; transform: none; }
+		.gw-hours strong { font-size: 17px; }
+		.chip { font-size: 9px; padding: 2px 4px; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.gw-card > a, .gw-cover, .gw-reveal, .gw-caption { transition: none; }
+		.tier-grand .gw-frame::before { animation: none; }
+	}
+</style>

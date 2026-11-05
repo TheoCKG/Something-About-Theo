@@ -1,0 +1,1444 @@
+{
+	"$comment": "由 scripts/sync-games.mjs 生成，请勿手改；要改数据请编辑 games.manual.json 后重新运行 npm run sync:games",
+	"syncedAt": "2026-11-05T06:23:35.630Z",
+	"sources": {
+		"steam": "api",
+		"psn": "api"
+	},
+	"games": [
+		{
+			"slug": "monster-hunter-world",
+			"titleEn": "Monster Hunter: World",
+			"year": 2018,
+			"steam": [
+				582010
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳角色扮演游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "最佳多人游戏"
+				}
+			],
+			"metacritic": {
+				"score": 90,
+				"reviews": 100,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/monster-hunter-world/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 1168.5,
+				"sources": {
+					"steam": 9.7,
+					"psn": 1158.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/monster-hunter-world.jpg"
+		},
+		{
+			"slug": "bloodborne",
+			"titleEn": "Bloodborne",
+			"year": 2015,
+			"steam": [],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "最佳原创游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "年度 PlayStation 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 92,
+				"reviews": 100,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/bloodborne/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 66.8,
+				"sources": {
+					"psn": 66.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/bloodborne.jpg"
+		},
+		{
+			"slug": "black-myth-wukong",
+			"titleEn": "Black Myth: Wukong",
+			"year": 2024,
+			"steam": [
+				2358720
+			],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2024,
+					"category": "终极年度游戏",
+					"grand": true
+				},
+				{
+					"show": "TGA",
+					"year": 2024,
+					"category": "玩家之声"
+				},
+				{
+					"show": "TGA",
+					"year": 2024,
+					"category": "最佳动作游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2024,
+					"category": "最佳视觉设计"
+				}
+			],
+			"metacritic": {
+				"score": 81,
+				"reviews": 94,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/black-myth-wukong/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 89.9,
+				"sources": {
+					"psn": 89.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/black-myth-wukong.jpg"
+		},
+		{
+			"slug": "sekiro",
+			"titleEn": "Sekiro: Shadows Die Twice",
+			"year": 2019,
+			"steam": [
+				814380
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2019,
+					"category": "年度游戏",
+					"grand": true
+				},
+				{
+					"show": "TGA",
+					"year": 2019,
+					"category": "最佳动作冒险游戏"
+				}
+			],
+			"metacritic": {
+				"score": 90,
+				"reviews": 89,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/sekiro-shadows-die-twice/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 54.9,
+				"sources": {
+					"psn": 54.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/sekiro.jpg"
+		},
+		{
+			"slug": "the-witcher-3",
+			"titleEn": "The Witcher 3: Wild Hunt",
+			"year": 2015,
+			"steam": [
+				292030
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2015,
+					"category": "年度游戏",
+					"grand": true
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "终极年度游戏",
+					"grand": true
+				},
+				{
+					"show": "TGA",
+					"year": 2015,
+					"category": "最佳角色扮演游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "最佳视觉设计"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "最佳游戏时刻（血腥男爵）"
+				},
+				{
+					"show": "TGA",
+					"year": 2016,
+					"category": "最佳角色扮演游戏（血与酒）"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "最佳叙事（血与酒）"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "最佳视觉设计（血与酒）"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "最佳表演（Doug Cockle）"
+				}
+			],
+			"metacritic": {
+				"score": 92,
+				"reviews": 80,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/the-witcher-3-wild-hunt/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 199.2,
+				"sources": {
+					"psn": 199.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/the-witcher-3.jpg"
+		},
+		{
+			"slug": "gta-v",
+			"titleEn": "Grand Theft Auto V",
+			"year": 2013,
+			"steam": [
+				271590,
+				3240220
+			],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2013,
+					"category": "年度游戏",
+					"grand": true
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "最佳多人游戏（GTA Online）"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "年度创新（第一人称模式）"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "年度 PC 游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "年度最多游玩"
+				}
+			],
+			"metacritic": {
+				"score": 97,
+				"reviews": 58,
+				"platform": "Xbox 360",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/grand-theft-auto-v/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 647.9,
+				"sources": {
+					"psn": 647.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/gta-v.jpg"
+		},
+		{
+			"slug": "god-of-war-3",
+			"titleEn": "God of War III",
+			"year": 2010,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 92,
+				"reviews": 101,
+				"platform": "PlayStation 3",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/god-of-war-iii/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 26.3,
+				"sources": {
+					"psn": 26.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/god-of-war-3.jpg"
+		},
+		{
+			"slug": "nioh",
+			"titleEn": "Nioh",
+			"year": 2017,
+			"steam": [
+				485510
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 88,
+				"reviews": 107,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/nioh/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 57.7,
+				"sources": {
+					"psn": 57.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/nioh.jpg"
+		},
+		{
+			"slug": "nioh-2",
+			"titleEn": "Nioh 2",
+			"year": 2020,
+			"steam": [
+				1325200
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 85,
+				"reviews": 94,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/nioh-2/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 162,
+				"sources": {
+					"psn": 162
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/nioh-2.jpg"
+		},
+		{
+			"slug": "monster-hunter-rise",
+			"titleEn": "Monster Hunter Rise",
+			"year": 2021,
+			"steam": [
+				1446780
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 88,
+				"reviews": 130,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/monster-hunter-rise/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 89.2,
+				"sources": {
+					"steam": 89.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/monster-hunter-rise.jpg"
+		},
+		{
+			"slug": "apex-legends",
+			"titleEn": "Apex Legends",
+			"year": 2019,
+			"steam": [
+				1172470
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2019,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2019,
+					"category": "最佳多人游戏"
+				}
+			],
+			"metacritic": {
+				"score": 89,
+				"reviews": 38,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/apex-legends/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 1050.8,
+				"sources": {
+					"steam": 1034.3,
+					"psn": 16.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/apex-legends.jpg"
+		},
+		{
+			"slug": "valorant",
+			"titleEn": "VALORANT",
+			"year": 2020,
+			"steam": [],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "最佳电竞游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2023,
+					"category": "最佳电竞游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2023,
+					"category": "主播选择奖"
+				}
+			],
+			"metacritic": {
+				"score": 80,
+				"reviews": 45,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/valorant/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": null,
+				"sources": {},
+				"shared": false
+			},
+			"cover": null
+		},
+		{
+			"slug": "overwatch",
+			"titleEn": "Overwatch",
+			"year": 2016,
+			"steam": [
+				2357570
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2016,
+					"category": "年度游戏",
+					"grand": true
+				},
+				{
+					"show": "TGA",
+					"year": 2016,
+					"category": "最佳电竞游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2016,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2016,
+					"category": "最佳游戏指导"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "最佳原创游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "最佳游戏时刻"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "年度竞技游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "年度 PC 游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2017,
+					"category": "最佳电竞游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2017,
+					"category": "最佳持续运营游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "年度电竞游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳电竞游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "年度电竞游戏"
+				}
+			],
+			"metacritic": {
+				"score": 91,
+				"reviews": 68,
+				"platform": "PC",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/overwatch-2016/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": null,
+				"sources": {},
+				"shared": false
+			},
+			"cover": "/media/covers/overwatch.jpg"
+		},
+		{
+			"slug": "the-division",
+			"titleEn": "Tom Clancy's The Division",
+			"year": 2016,
+			"steam": [
+				365590
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 80,
+				"reviews": 67,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/tom-clancys-the-division/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 65.8,
+				"sources": {
+					"psn": 65.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/the-division.jpg"
+		},
+		{
+			"slug": "the-division-2",
+			"titleEn": "Tom Clancy's The Division 2",
+			"year": 2019,
+			"steam": [
+				2221490
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 82,
+				"reviews": 63,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/tom-clancys-the-division-2/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 494.2,
+				"sources": {
+					"psn": 494.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/the-division-2.jpg"
+		},
+		{
+			"slug": "ghost-of-tsushima",
+			"titleEn": "Ghost of Tsushima",
+			"year": 2020,
+			"steam": [
+				2215430
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "玩家之声"
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳艺术指导"
+				},
+				{
+					"show": "GJ",
+					"year": 2021,
+					"category": "最佳资料片（壹岐岛）"
+				}
+			],
+			"metacritic": {
+				"score": 83,
+				"reviews": 132,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/ghost-of-tsushima/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 133.2,
+				"sources": {
+					"psn": 133.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/ghost-of-tsushima.jpg"
+		},
+		{
+			"slug": "genshin-impact",
+			"titleEn": "Genshin Impact",
+			"year": 2020,
+			"steam": [],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2021,
+					"category": "最佳移动游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "玩家之声"
+				},
+				{
+					"show": "GJ",
+					"year": 2022,
+					"category": "最佳持续运营"
+				}
+			],
+			"metacritic": {
+				"score": 81,
+				"reviews": 26,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/genshin-impact/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 191.1,
+				"sources": {
+					"psn": 191.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/genshin-impact.jpg"
+		},
+		{
+			"slug": "zenless-zone-zero",
+			"titleEn": "Zenless Zone Zero",
+			"year": 2024,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 77,
+				"reviews": 37,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/zenless-zone-zero/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 9.9,
+				"sources": {
+					"psn": 9.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/zenless-zone-zero.jpg"
+		},
+		{
+			"slug": "honkai-star-rail",
+			"titleEn": "Honkai: Star Rail",
+			"year": 2023,
+			"steam": [],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2023,
+					"category": "最佳移动游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2024,
+					"category": "最佳持续运营（移动端）"
+				}
+			],
+			"metacritic": {
+				"score": 80,
+				"reviews": 26,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/honkai-star-rail/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 54.4,
+				"sources": {
+					"psn": 54.4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/honkai-star-rail.jpg"
+		},
+		{
+			"slug": "god-of-war-2018",
+			"titleEn": "God of War",
+			"year": 2018,
+			"steam": [
+				1593500
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "年度游戏",
+					"grand": true
+				},
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳动作冒险游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳游戏指导"
+				},
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "最佳视觉设计"
+				},
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "最佳音效"
+				},
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "年度 PlayStation 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 94,
+				"reviews": 131,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/god-of-war/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 45.4,
+				"sources": {
+					"psn": 45.4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/god-of-war-2018.jpg"
+		},
+		{
+			"slug": "god-of-war-ragnarok",
+			"titleEn": "God of War Ragnarök",
+			"year": 2022,
+			"steam": [
+				2322010
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "无障碍创新"
+				},
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "最佳表演（Christopher Judge）"
+				},
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "最佳音效设计"
+				},
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "最佳配乐"
+				},
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "最佳动作冒险游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2022,
+					"category": "最佳叙事"
+				}
+			],
+			"metacritic": {
+				"score": 94,
+				"reviews": 150,
+				"platform": "PlayStation 5",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/god-of-war-ragnarok/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 86.9,
+				"sources": {
+					"psn": 86.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/god-of-war-ragnarok.jpg"
+		},
+		{
+			"slug": "the-last-of-us",
+			"titleEn": "The Last of Us",
+			"year": 2013,
+			"steam": [
+				1888930
+			],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2013,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "GJ",
+					"year": 2013,
+					"category": "最佳新作"
+				},
+				{
+					"show": "GJ",
+					"year": 2014,
+					"category": "最佳叙事（遗落之物）"
+				},
+				{
+					"show": "GJ",
+					"year": 2014,
+					"category": "最佳游戏时刻（遗落之物）"
+				}
+			],
+			"metacritic": {
+				"score": 95,
+				"reviews": 98,
+				"platform": "PlayStation 3",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/the-last-of-us/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 69.4,
+				"sources": {
+					"psn": 69.4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/the-last-of-us.jpg"
+		},
+		{
+			"slug": "the-last-of-us-part-2",
+			"titleEn": "The Last of Us Part II",
+			"year": 2020,
+			"steam": [
+				2531310
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "年度游戏",
+					"grand": true
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "终极年度游戏",
+					"grand": true
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "无障碍创新"
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳动作冒险游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳表演（Laura Bailey）"
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳音效设计"
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳游戏指导"
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "最佳视觉设计"
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "最佳音效"
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "年度 PlayStation 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 93,
+				"reviews": 132,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/the-last-of-us-part-ii/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 45.6,
+				"sources": {
+					"psn": 45.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/the-last-of-us-part-2.jpg"
+		},
+		{
+			"slug": "uncharted",
+			"titleEn": "Uncharted: Drake's Fortune",
+			"year": 2007,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 88,
+				"reviews": 66,
+				"platform": "PlayStation 3",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/uncharted-drakes-fortune/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 79.2,
+				"sources": {
+					"psn": 79.2
+				},
+				"shared": true
+			},
+			"cover": "/media/covers/uncharted.jpg"
+		},
+		{
+			"slug": "uncharted-2",
+			"titleEn": "Uncharted 2: Among Thieves",
+			"year": 2009,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 96,
+				"reviews": 105,
+				"platform": "PlayStation 3",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/uncharted-2-among-thieves/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 79.2,
+				"sources": {
+					"psn": 79.2
+				},
+				"shared": true
+			},
+			"cover": "/media/covers/uncharted-2.jpg"
+		},
+		{
+			"slug": "uncharted-3",
+			"titleEn": "Uncharted 3: Drake's Deception",
+			"year": 2011,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 92,
+				"reviews": 97,
+				"platform": "PlayStation 3",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/uncharted-3-drakes-deception/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 79.2,
+				"sources": {
+					"psn": 79.2
+				},
+				"shared": true
+			},
+			"cover": "/media/covers/uncharted-3.jpg"
+		},
+		{
+			"slug": "uncharted-4",
+			"titleEn": "Uncharted 4: A Thief's End",
+			"year": 2016,
+			"steam": [
+				1659420
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2016,
+					"category": "最佳表演（Nolan North）"
+				},
+				{
+					"show": "TGA",
+					"year": 2016,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "年度 PlayStation 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 93,
+				"reviews": 119,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/uncharted-4-a-thiefs-end/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 58.8,
+				"sources": {
+					"psn": 58.8
+				},
+				"shared": true
+			},
+			"cover": "/media/covers/uncharted-4.jpg"
+		},
+		{
+			"slug": "marvels-spider-man",
+			"titleEn": "Marvel's Spider-Man",
+			"year": 2018,
+			"steam": [
+				1817070
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 87,
+				"reviews": 129,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/marvels-spider-man/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 55.1,
+				"sources": {
+					"psn": 55.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/marvels-spider-man.jpg"
+		},
+		{
+			"slug": "spider-man-miles-morales",
+			"titleEn": "Marvel's Spider-Man: Miles Morales",
+			"year": 2020,
+			"steam": [
+				1817190
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 85,
+				"reviews": 95,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/marvels-spider-man-miles-morales/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 32.1,
+				"sources": {
+					"psn": 32.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/spider-man-miles-morales.jpg"
+		},
+		{
+			"slug": "red-dead-redemption-2",
+			"titleEn": "Red Dead Redemption 2",
+			"year": 2018,
+			"steam": [
+				1174180
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳表演（Roger Clark）"
+				},
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳音效设计"
+				},
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳配乐"
+				},
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "评论家选择奖"
+				}
+			],
+			"metacritic": {
+				"score": 97,
+				"reviews": 109,
+				"platform": "PlayStation 4",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/red-dead-redemption-2/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 254.5,
+				"sources": {
+					"psn": 254.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/red-dead-redemption-2.jpg"
+		},
+		{
+			"slug": "death-stranding",
+			"titleEn": "Death Stranding",
+			"year": 2019,
+			"steam": [
+				1190460,
+				1850570
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2019,
+					"category": "最佳表演（Mads Mikkelsen）"
+				},
+				{
+					"show": "TGA",
+					"year": 2019,
+					"category": "最佳配乐"
+				},
+				{
+					"show": "TGA",
+					"year": 2019,
+					"category": "最佳游戏指导"
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "年度 PC 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 82,
+				"reviews": 122,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/death-stranding/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 105.9,
+				"sources": {
+					"psn": 105.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/death-stranding.jpg"
+		},
+		{
+			"slug": "star-wars-battlefront-2",
+			"titleEn": "Star Wars Battlefront II",
+			"year": 2017,
+			"steam": [
+				1237950
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 68,
+				"reviews": 67,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/star-wars-battlefront-ii/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 41.8,
+				"sources": {
+					"psn": 41.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/star-wars-battlefront-2.jpg"
+		},
+		{
+			"slug": "what-remains-of-edith-finch",
+			"titleEn": "What Remains of Edith Finch",
+			"year": 2017,
+			"steam": [
+				501300
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2017,
+					"category": "最佳叙事"
+				}
+			],
+			"metacritic": {
+				"score": 88,
+				"reviews": 68,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/what-remains-of-edith-finch/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 2.7,
+				"sources": {
+					"psn": 2.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/what-remains-of-edith-finch.jpg"
+		},
+		{
+			"slug": "it-takes-two",
+			"titleEn": "It Takes Two",
+			"year": 2021,
+			"steam": [
+				1426210
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2021,
+					"category": "年度游戏",
+					"grand": true
+				},
+				{
+					"show": "TGA",
+					"year": 2021,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2021,
+					"category": "最佳家庭游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2021,
+					"category": "最佳多人游戏"
+				}
+			],
+			"metacritic": {
+				"score": 88,
+				"reviews": 51,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/it-takes-two/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 28.8,
+				"sources": {
+					"psn": 28.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/it-takes-two.jpg"
+		},
+		{
+			"slug": "gris",
+			"titleEn": "GRIS",
+			"year": 2018,
+			"steam": [
+				683320
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2019,
+					"category": "最具影响力游戏"
+				}
+			],
+			"metacritic": {
+				"score": 83,
+				"reviews": 46,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/gris/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 6.6,
+				"sources": {
+					"psn": 6.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/gris.jpg"
+		},
+		{
+			"slug": "how-to-fish",
+			"titleEn": "How to Fish",
+			"year": 2026,
+			"steam": [
+				4001890
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": 1,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/how-to-fish/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 7.6,
+				"sources": {
+					"steam": 7.6
+				},
+				"shared": false
+			},
+			"cover": null
+		},
+		{
+			"slug": "the-roottrees-are-dead",
+			"titleEn": "The Roottrees are Dead",
+			"year": 2025,
+			"steam": [
+				2754380
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 86,
+				"reviews": 15,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/the-roottrees-are-dead/",
+				"source": "metacritic"
+			},
+			"playtime": {
+				"hours": 7.1,
+				"sources": {
+					"steam": 7.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/the-roottrees-are-dead.jpg"
+		}
+	]
+}

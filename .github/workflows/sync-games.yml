@@ -1,0 +1,50 @@
+# 每周同步一次游戏库数据（Metacritic 评分、Steam / PSN 游玩时长、封面），有变化就提交回 main。
+# 提交后会触发你现有的部署（Vercel / Netlify / Cloudflare Pages 等监听 main 的那套）。
+#
+# 需要在 GitHub 仓库 Settings → Secrets and variables → Actions → New repository secret 里添加：
+#   STEAM_API_KEY        必填（拿 Steam 全部游戏时长）
+#   PSN_NPSSO            选填（拿 PS4/PS5 时长；约 2 个月过期，过期后重新获取并更新这个 Secret）
+#   STEAMGRIDDB_API_KEY  选填（给 Steam 上没有的游戏找竖版封面）
+name: Sync game library
+
+on:
+  schedule:
+    - cron: '0 18 * * 0' # 每周一 02:00（北京时间）
+  workflow_dispatch: {}   # 也可以在 Actions 页面手动点 Run workflow
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-games
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Sync game data
+        run: npm run sync:games
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          PSN_NPSSO: ${{ secrets.PSN_NPSSO }}
+          STEAMGRIDDB_API_KEY: ${{ secrets.STEAMGRIDDB_API_KEY }}
+      - name: Build check
+        run: npm run build
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/games.json public/media/covers
+          if git diff --cached --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "chore: 同步游戏库数据"
+            git push
+          fi

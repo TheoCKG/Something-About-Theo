@@ -1,0 +1,17 @@
+---
+// 作品封面的排版插画（首页卡片和作品页共用）
+import type { WorkItem } from '../../data/profile';
+interface Props { item: WorkItem; index: number }
+const { item, index } = Astro.props;
+const label = { reaper: 'MONSTER REAPER / 2026', npc: 'AI NPC / UE5 + LLM', movement: 'MOVEMENT & ABILITIES', rift: 'RIFT VANGUARD / 2025', text: 'PROJECT tEXt / 2021' }[item.art];
+---
+
+<div class:list={['work-art', `${item.art}-art`]} aria-hidden="true">
+	<span class="art-label">{label}</span>
+	{item.art === 'reaper' && <span class="reaper-word">HIT.<br /><i>MOVE.</i><br />REPEAT.</span>}
+	{item.art === 'npc' && <div class="npc-orbit"><span>PERCEIVE</span><strong>NPC</strong><span>DECIDE → ACT</span></div>}
+	{item.art === 'movement' && <><div class="movement-lines"><i></i><i></i><i></i></div><span class="movement-word">FLOW<br />STATE.</span></>}
+	{item.art === 'rift' && <div class="rift-grid">{Array.from({ length: 15 }, (_, i) => <i class={[1, 6, 7, 12].includes(i) ? 'on' : ''}></i>)}<span class="rift-word">WAVE<br />AFTER<br />WAVE.</span></div>}
+	{item.art === 'text' && <span class="text-word">t<b>E</b><b>X</b>t<em>_</em></span>}
+	<span class="art-index">{String(index + 1).padStart(2, '0')}</span>
+</div>

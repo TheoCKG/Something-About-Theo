@@ -1,314 +1,659 @@
 {
-	"$comment": "手工维护的游戏档案。scripts/sync-games.mjs 读取本文件，合并 Metacritic / Steam / PSN 数据后生成 src/data/games.json。awards 来源：The Game Awards 与 Golden Joystick Awards 官方获奖名单（Wikipedia、GamesRadar、BBC 交叉核对，2026-11-05）。TGA 自 2014 年开办；金摇杆只核对了 2013–2025 年。hours 为手填时长，会与 Steam/PSN 自动时长相加；不想相加时用 hoursOverride。",
+	"$comment": "手工维护的游戏档案。games[] 是已写拆解的游戏（与 breakdowns.ts 对应）；没写拆解的游戏由 sync-games.mjs 从 Steam/PSN 自动发现，discover 控制门槛和忽略名单，extras 可给自动发现的游戏补中文名、隐藏、指定 Metacritic slug、手填时长、关联测评文章。奖项不在这里填，统一维护在 awards.json。hours 为手填时长，会与 Steam/PSN 自动时长相加；不想相加时用 hoursOverride。",
 	"profile": {
 		"steamId": "76561198278926562"
 	},
+	"discover": {
+		"minHours": 2,
+		"ignore": [
+			"Wallpaper Engine",
+			"3DMark",
+			"Bongo Cat",
+			"Aimlabs"
+		]
+	},
+	"extras": {
+		"STAR WARS Battlefront": {
+			"zh": "星球大战：前线",
+			"titleEn": "Star Wars Battlefront"
+		},
+		"Fall Guys: Ultimate Knockout": {
+			"zh": "糖豆人：终极淘汰赛"
+		},
+		"Thronebreaker: The Witcher Tales": {
+			"zh": "王权的陨落：巫师故事"
+		},
+		"Gran Turismo SPORT": {
+			"zh": "GT Sport",
+			"titleEn": "Gran Turismo Sport"
+		},
+		"Horizon Zero Dawn": {
+			"zh": "地平线：零之曙光"
+		},
+		"Far Cry 3 Classic Edition": {
+			"zh": "孤岛惊魂3",
+			"titleEn": "Far Cry 3",
+			"metacritic": "far-cry-3",
+			"year": 2012
+		},
+		"Phantom Blade Zero": {
+			"zh": "影之刃零"
+		},
+		"Assassin's Creed IV Black Flag": {
+			"zh": "刺客信条4：黑旗"
+		},
+		"Detroit: Become Human": {
+			"zh": "底特律：变人"
+		},
+		"Resident Evil 0": {
+			"zh": "生化危机0"
+		},
+		"Watch_Dogs": {
+			"zh": "看门狗",
+			"titleEn": "Watch Dogs"
+		},
+		"13 Sentinels: Aegis Rim": {
+			"zh": "十三机兵防卫圈"
+		},
+		"PUBG: BATTLEGROUNDS": {
+			"zh": "绝地求生",
+			"titleEn": "PUBG: Battlegrounds"
+		},
+		"Cuphead": {
+			"zh": "茶杯头"
+		},
+		"Nine Parchments": {
+			"zh": "九张羊皮纸"
+		},
+		"Overcooked! 2": {
+			"zh": "胡闹厨房2"
+		},
+		"Overcooked! All You Can Eat": {
+			"zh": "胡闹厨房：全都好吃"
+		},
+		"Battlefield V": {
+			"zh": "战地5"
+		},
+		"Battlefield 6": {
+			"zh": "战地6"
+		},
+		"The Order: 1886": {
+			"zh": "教团：1886"
+		},
+		"PC Building Simulator": {
+			"zh": "装机模拟器"
+		},
+		"Beyond: Two Souls": {
+			"zh": "超凡双生"
+		},
+		"Slay the Spire 2": {
+			"zh": "杀戮尖塔2"
+		},
+		"HEAVY RAIN": {
+			"zh": "暴雨",
+			"titleEn": "Heavy Rain"
+		},
+		"Tabletop Simulator": {
+			"zh": "桌游模拟器"
+		},
+		"Split Fiction": {
+			"zh": "双影奇境"
+		},
+		"Remnant: From the Ashes": {
+			"zh": "遗迹：灰烬重生"
+		},
+		"Super Bunny Man": {
+			"zh": "超级兔子人"
+		},
+		"Chinese Parents": {
+			"zh": "中国式家长"
+		},
+		"Counter-Strike 2": {
+			"zh": "反恐精英2"
+		},
+		"Rise of the Tomb Raider": {
+			"zh": "古墓丽影：崛起"
+		},
+		"Balatro": {
+			"zh": "小丑牌"
+		},
+		"Journey": {
+			"zh": "风之旅人"
+		},
+		"Chained Together": {
+			"zh": "链在一起"
+		},
+		"NARAKA: BLADEPOINT": {
+			"zh": "永劫无间",
+			"titleEn": "Naraka: Bladepoint"
+		},
+		"Watch_Dogs 2": {
+			"zh": "看门狗2",
+			"titleEn": "Watch Dogs 2"
+		},
+		"Project Winter": {
+			"zh": "冬日计划"
+		},
+		"A Way Out": {
+			"zh": "逃出生天"
+		},
+		"Dota 2": {
+			"zh": "刀塔2"
+		},
+		"Assassin's Creed Odyssey": {
+			"zh": "刺客信条：奥德赛"
+		},
+		"Human Fall Flat": {
+			"zh": "人类一败涂地"
+		},
+		"Titanfall 2": {
+			"zh": "泰坦陨落2"
+		},
+		"ASTRO's PLAYROOM": {
+			"zh": "宇宙机器人无线控制器使用指南",
+			"titleEn": "Astro's Playroom"
+		},
+		"Wo Long: Fallen Dynasty": {
+			"zh": "卧龙：苍天陨落"
+		},
+		"Risk of Rain 2": {
+			"zh": "雨中冒险2"
+		},
+		"To the Moon": {
+			"zh": "去月球"
+		},
+		"Cities: Skylines": {
+			"zh": "城市：天际线"
+		},
+		"Tom Clancy's Rainbow Six Siege": {
+			"zh": "彩虹六号：围攻"
+		},
+		"Tomb Raider": {
+			"zh": "古墓丽影"
+		},
+		"Assassin's Creed The Ezio Collection": {
+			"zh": "刺客信条：艾吉奥合集"
+		},
+		"Watch Dogs: Legion": {
+			"zh": "看门狗：军团"
+		},
+		"Cyberpunk 2077": {
+			"zh": "赛博朋克2077"
+		},
+		"RESIDENT EVIL RESISTANCE": {
+			"zh": "生化危机：抵抗",
+			"titleEn": "Resident Evil Resistance"
+		},
+		"HITMAN": {
+			"zh": "杀手",
+			"titleEn": "Hitman"
+		},
+		"Party Animals": {
+			"zh": "猛兽派对"
+		},
+		"Moving Out 2": {
+			"zh": "胡闹搬家2"
+		},
+		"Liar's Bar": {
+			"zh": "骗子酒馆"
+		}
+	},
 	"games": [
 		{
-			"slug": "monster-hunter-world", "titleEn": "Monster Hunter: World", "year": 2018,
-			"metacritic": "monster-hunter-world", "steam": [582010], "psn": ["monster hunter: world", "monster hunter world"],
-			"awards": [
-				{ "show": "TGA", "year": 2018, "category": "最佳角色扮演游戏" },
-				{ "show": "GJ", "year": 2018, "category": "最佳多人游戏" }
+			"slug": "monster-hunter-world",
+			"titleEn": "Monster Hunter: World",
+			"year": 2018,
+			"metacritic": "monster-hunter-world",
+			"steam": [
+				582010
+			],
+			"psn": [
+				"monster hunter: world",
+				"monster hunter world"
 			]
 		},
 		{
-			"slug": "bloodborne", "titleEn": "Bloodborne", "year": 2015,
-			"metacritic": "bloodborne", "steam": [], "psn": ["bloodborne"],
-			"awards": [
-				{ "show": "GJ", "year": 2015, "category": "最佳原创游戏" },
-				{ "show": "GJ", "year": 2015, "category": "年度 PlayStation 游戏" }
+			"slug": "bloodborne",
+			"titleEn": "Bloodborne",
+			"year": 2015,
+			"metacritic": "bloodborne",
+			"steam": [],
+			"psn": [
+				"bloodborne"
 			]
 		},
 		{
-			"slug": "black-myth-wukong", "titleEn": "Black Myth: Wukong", "year": 2024,
-			"metacritic": "black-myth-wukong", "steam": [2358720], "psn": ["black myth"],
-			"awards": [
-				{ "show": "GJ", "year": 2024, "category": "终极年度游戏", "grand": true },
-				{ "show": "GJ", "year": 2024, "category": "最佳视觉设计" },
-				{ "show": "TGA", "year": 2024, "category": "最佳动作游戏" },
-				{ "show": "TGA", "year": 2024, "category": "玩家之声" }
+			"slug": "black-myth-wukong",
+			"titleEn": "Black Myth: Wukong",
+			"year": 2024,
+			"metacritic": "black-myth-wukong",
+			"steam": [
+				2358720
+			],
+			"psn": [
+				"black myth"
 			]
 		},
 		{
-			"slug": "sekiro", "titleEn": "Sekiro: Shadows Die Twice", "year": 2019,
-			"metacritic": "sekiro-shadows-die-twice", "steam": [814380], "psn": ["sekiro"],
-			"awards": [
-				{ "show": "TGA", "year": 2019, "category": "年度游戏", "grand": true },
-				{ "show": "TGA", "year": 2019, "category": "最佳动作冒险游戏" }
+			"slug": "sekiro",
+			"titleEn": "Sekiro: Shadows Die Twice",
+			"year": 2019,
+			"metacritic": "sekiro-shadows-die-twice",
+			"steam": [
+				814380
+			],
+			"psn": [
+				"sekiro"
 			]
 		},
 		{
-			"slug": "the-witcher-3", "titleEn": "The Witcher 3: Wild Hunt", "year": 2015,
-			"metacritic": "the-witcher-3-wild-hunt", "steam": [292030], "psn": ["the witcher 3"],
-			"awards": [
-				{ "show": "TGA", "year": 2015, "category": "年度游戏", "grand": true },
-				{ "show": "GJ", "year": 2015, "category": "终极年度游戏", "grand": true },
-				{ "show": "TGA", "year": 2015, "category": "最佳角色扮演游戏" },
-				{ "show": "GJ", "year": 2015, "category": "最佳叙事" },
-				{ "show": "GJ", "year": 2015, "category": "最佳视觉设计" },
-				{ "show": "GJ", "year": 2015, "category": "最佳游戏时刻（血腥男爵）" },
-				{ "show": "TGA", "year": 2016, "category": "最佳角色扮演游戏（血与酒）" },
-				{ "show": "GJ", "year": 2016, "category": "最佳叙事（血与酒）" },
-				{ "show": "GJ", "year": 2016, "category": "最佳视觉设计（血与酒）" },
-				{ "show": "GJ", "year": 2016, "category": "最佳表演（Doug Cockle）" }
+			"slug": "the-witcher-3",
+			"titleEn": "The Witcher 3: Wild Hunt",
+			"year": 2015,
+			"metacritic": "the-witcher-3-wild-hunt",
+			"steam": [
+				292030
+			],
+			"psn": [
+				"the witcher 3"
 			]
 		},
 		{
-			"slug": "gta-v", "titleEn": "Grand Theft Auto V", "year": 2013,
-			"metacritic": "grand-theft-auto-v", "steam": [271590, 3240220], "psn": ["grand theft auto v", "grand theft auto 5"],
-			"awards": [
-				{ "show": "GJ", "year": 2013, "category": "年度游戏", "grand": true },
-				{ "show": "GJ", "year": 2015, "category": "最佳多人游戏（GTA Online）" },
-				{ "show": "GJ", "year": 2015, "category": "年度创新（第一人称模式）" },
-				{ "show": "GJ", "year": 2015, "category": "年度 PC 游戏" },
-				{ "show": "GJ", "year": 2015, "category": "年度最多游玩" }
+			"slug": "gta-v",
+			"titleEn": "Grand Theft Auto V",
+			"year": 2013,
+			"metacritic": "grand-theft-auto-v",
+			"steam": [
+				271590,
+				3240220
+			],
+			"psn": [
+				"grand theft auto v",
+				"grand theft auto 5"
 			]
 		},
 		{
-			"slug": "god-of-war-3", "titleEn": "God of War III", "year": 2010,
-			"metacritic": "god-of-war-iii", "steam": [], "psn": ["god of war iii", "god of war 3"],
-			"awards": []
-		},
-		{
-			"slug": "nioh", "titleEn": "Nioh", "year": 2017,
-			"metacritic": "nioh", "steam": [485510], "psn": ["nioh"], "psnExclude": ["nioh 2"],
-			"awards": []
-		},
-		{
-			"slug": "nioh-2", "titleEn": "Nioh 2", "year": 2020,
-			"metacritic": "nioh-2", "steam": [1325200], "psn": ["nioh 2"],
-			"awards": []
-		},
-		{
-			"slug": "monster-hunter-rise", "titleEn": "Monster Hunter Rise", "year": 2021,
-			"metacritic": "monster-hunter-rise", "steam": [1446780], "psn": ["monster hunter rise"],
-			"awards": []
-		},
-		{
-			"slug": "apex-legends", "titleEn": "Apex Legends", "year": 2019,
-			"metacritic": "apex-legends", "steam": [1172470], "psn": ["apex legends"],
-			"awards": [
-				{ "show": "TGA", "year": 2019, "category": "最佳多人游戏" },
-				{ "show": "GJ", "year": 2019, "category": "最佳多人游戏" }
+			"slug": "god-of-war-3",
+			"titleEn": "God of War III",
+			"year": 2010,
+			"metacritic": "god-of-war-iii",
+			"steam": [],
+			"psn": [
+				"god of war iii",
+				"god of war 3"
 			]
 		},
 		{
-			"slug": "valorant", "titleEn": "VALORANT", "year": 2020,
-			"metacritic": "valorant", "steam": [], "psn": ["valorant"],
-			"awards": [
-				{ "show": "TGA", "year": 2022, "category": "最佳电竞游戏" },
-				{ "show": "TGA", "year": 2023, "category": "最佳电竞游戏" },
-				{ "show": "GJ", "year": 2023, "category": "主播选择奖" }
+			"slug": "nioh",
+			"titleEn": "Nioh",
+			"year": 2017,
+			"metacritic": "nioh",
+			"steam": [
+				485510
+			],
+			"psn": [
+				"nioh"
+			],
+			"psnExclude": [
+				"nioh 2"
 			]
 		},
 		{
-			"slug": "overwatch", "titleEn": "Overwatch", "year": 2016,
-			"metacritic": "overwatch-2016", "steam": [2357570], "psn": ["overwatch"],
-			"awards": [
-				{ "show": "TGA", "year": 2016, "category": "年度游戏", "grand": true },
-				{ "show": "TGA", "year": 2016, "category": "最佳游戏指导" },
-				{ "show": "TGA", "year": 2016, "category": "最佳多人游戏" },
-				{ "show": "TGA", "year": 2016, "category": "最佳电竞游戏" },
-				{ "show": "GJ", "year": 2016, "category": "最佳原创游戏" },
-				{ "show": "GJ", "year": 2016, "category": "最佳多人游戏" },
-				{ "show": "GJ", "year": 2016, "category": "最佳游戏时刻" },
-				{ "show": "GJ", "year": 2016, "category": "年度竞技游戏" },
-				{ "show": "GJ", "year": 2016, "category": "年度 PC 游戏" },
-				{ "show": "TGA", "year": 2017, "category": "最佳持续运营游戏" },
-				{ "show": "TGA", "year": 2017, "category": "最佳电竞游戏" },
-				{ "show": "GJ", "year": 2017, "category": "年度电竞游戏" },
-				{ "show": "TGA", "year": 2018, "category": "最佳电竞游戏" },
-				{ "show": "GJ", "year": 2018, "category": "年度电竞游戏" }
+			"slug": "nioh-2",
+			"titleEn": "Nioh 2",
+			"year": 2020,
+			"metacritic": "nioh-2",
+			"steam": [
+				1325200
+			],
+			"psn": [
+				"nioh 2"
 			]
 		},
 		{
-			"slug": "the-division", "titleEn": "Tom Clancy's The Division", "year": 2016,
-			"metacritic": "tom-clancys-the-division", "steam": [365590], "psn": ["the division"], "psnExclude": ["division 2"],
-			"awards": []
-		},
-		{
-			"slug": "the-division-2", "titleEn": "Tom Clancy's The Division 2", "year": 2019,
-			"metacritic": "tom-clancys-the-division-2", "steam": [2221490], "psn": ["the division 2"],
-			"awards": []
-		},
-		{
-			"slug": "ghost-of-tsushima", "titleEn": "Ghost of Tsushima", "year": 2020,
-			"metacritic": "ghost-of-tsushima", "steam": [2215430], "psn": ["ghost of tsushima"],
-			"awards": [
-				{ "show": "TGA", "year": 2020, "category": "最佳艺术指导" },
-				{ "show": "TGA", "year": 2020, "category": "玩家之声" },
-				{ "show": "GJ", "year": 2021, "category": "最佳资料片（壹岐岛）" }
+			"slug": "monster-hunter-rise",
+			"titleEn": "Monster Hunter Rise",
+			"year": 2021,
+			"metacritic": "monster-hunter-rise",
+			"steam": [
+				1446780
+			],
+			"psn": [
+				"monster hunter rise"
 			]
 		},
 		{
-			"slug": "genshin-impact", "titleEn": "Genshin Impact", "year": 2020,
-			"metacritic": "genshin-impact", "steam": [], "psn": ["genshin impact"],
-			"awards": [
-				{ "show": "TGA", "year": 2021, "category": "最佳移动游戏" },
-				{ "show": "TGA", "year": 2022, "category": "玩家之声" },
-				{ "show": "GJ", "year": 2022, "category": "最佳持续运营" }
+			"slug": "apex-legends",
+			"titleEn": "Apex Legends",
+			"year": 2019,
+			"metacritic": "apex-legends",
+			"steam": [
+				1172470
+			],
+			"psn": [
+				"apex legends"
 			]
 		},
 		{
-			"slug": "zenless-zone-zero", "titleEn": "Zenless Zone Zero", "year": 2024,
-			"metacritic": "zenless-zone-zero", "steam": [], "psn": ["zenless zone zero"],
-			"awards": []
+			"slug": "valorant",
+			"titleEn": "VALORANT",
+			"year": 2020,
+			"metacritic": "valorant",
+			"steam": [],
+			"psn": [
+				"valorant"
+			],
+			"hours": 1227
 		},
 		{
-			"slug": "honkai-star-rail", "titleEn": "Honkai: Star Rail", "year": 2023,
-			"metacritic": "honkai-star-rail", "steam": [], "psn": ["honkai: star rail", "honkai star rail"],
-			"awards": [
-				{ "show": "TGA", "year": 2023, "category": "最佳移动游戏" },
-				{ "show": "GJ", "year": 2024, "category": "最佳持续运营（移动端）" }
+			"slug": "overwatch",
+			"titleEn": "Overwatch",
+			"year": 2016,
+			"metacritic": "overwatch-2016",
+			"steam": [
+				2357570
+			],
+			"psn": [
+				"overwatch"
+			],
+			"hours": 436
+		},
+		{
+			"slug": "the-division",
+			"titleEn": "Tom Clancy's The Division",
+			"year": 2016,
+			"metacritic": "tom-clancys-the-division",
+			"steam": [
+				365590
+			],
+			"psn": [
+				"the division"
+			],
+			"psnExclude": [
+				"division 2"
 			]
 		},
 		{
-			"slug": "god-of-war-2018", "titleEn": "God of War", "year": 2018,
-			"metacritic": "god-of-war", "steam": [1593500], "psn": ["=god of war"],
-			"awards": [
-				{ "show": "TGA", "year": 2018, "category": "年度游戏", "grand": true },
-				{ "show": "TGA", "year": 2018, "category": "最佳游戏指导" },
-				{ "show": "TGA", "year": 2018, "category": "最佳动作冒险游戏" },
-				{ "show": "GJ", "year": 2018, "category": "最佳叙事" },
-				{ "show": "GJ", "year": 2018, "category": "最佳视觉设计" },
-				{ "show": "GJ", "year": 2018, "category": "最佳音效" },
-				{ "show": "GJ", "year": 2018, "category": "年度 PlayStation 游戏" }
+			"slug": "the-division-2",
+			"titleEn": "Tom Clancy's The Division 2",
+			"year": 2019,
+			"metacritic": "tom-clancys-the-division-2",
+			"steam": [
+				2221490
+			],
+			"psn": [
+				"the division 2"
 			]
 		},
 		{
-			"slug": "god-of-war-ragnarok", "titleEn": "God of War Ragnarök", "year": 2022,
-			"metacritic": "god-of-war-ragnarok", "steam": [2322010], "psn": ["ragnar"],
-			"awards": [
-				{ "show": "TGA", "year": 2022, "category": "最佳叙事" },
-				{ "show": "TGA", "year": 2022, "category": "最佳动作冒险游戏" },
-				{ "show": "TGA", "year": 2022, "category": "最佳配乐" },
-				{ "show": "TGA", "year": 2022, "category": "最佳音效设计" },
-				{ "show": "TGA", "year": 2022, "category": "最佳表演（Christopher Judge）" },
-				{ "show": "TGA", "year": 2022, "category": "无障碍创新" }
+			"slug": "ghost-of-tsushima",
+			"titleEn": "Ghost of Tsushima",
+			"year": 2020,
+			"metacritic": "ghost-of-tsushima",
+			"steam": [
+				2215430
+			],
+			"psn": [
+				"ghost of tsushima"
 			]
 		},
 		{
-			"slug": "the-last-of-us", "titleEn": "The Last of Us", "year": 2013,
-			"metacritic": "the-last-of-us", "steam": [1888930], "psn": ["the last of us remastered", "the last of us part i", "the last of us™"], "psnExclude": ["part ii", "part 2"],
-			"awards": [
-				{ "show": "GJ", "year": 2013, "category": "最佳叙事" },
-				{ "show": "GJ", "year": 2013, "category": "最佳新作" },
-				{ "show": "GJ", "year": 2014, "category": "最佳叙事（遗落之物）" },
-				{ "show": "GJ", "year": 2014, "category": "最佳游戏时刻（遗落之物）" }
+			"slug": "genshin-impact",
+			"titleEn": "Genshin Impact",
+			"year": 2020,
+			"metacritic": "genshin-impact",
+			"steam": [],
+			"psn": [
+				"genshin impact"
 			]
 		},
 		{
-			"slug": "the-last-of-us-part-2", "titleEn": "The Last of Us Part II", "year": 2020,
-			"metacritic": "the-last-of-us-part-ii", "steam": [2531310], "psn": ["the last of us part ii", "the last of us part 2"],
-			"awards": [
-				{ "show": "TGA", "year": 2020, "category": "年度游戏", "grand": true },
-				{ "show": "GJ", "year": 2020, "category": "终极年度游戏", "grand": true },
-				{ "show": "TGA", "year": 2020, "category": "最佳游戏指导" },
-				{ "show": "TGA", "year": 2020, "category": "最佳叙事" },
-				{ "show": "TGA", "year": 2020, "category": "最佳音效设计" },
-				{ "show": "TGA", "year": 2020, "category": "最佳表演（Laura Bailey）" },
-				{ "show": "TGA", "year": 2020, "category": "最佳动作冒险游戏" },
-				{ "show": "TGA", "year": 2020, "category": "无障碍创新" },
-				{ "show": "GJ", "year": 2020, "category": "最佳叙事" },
-				{ "show": "GJ", "year": 2020, "category": "最佳视觉设计" },
-				{ "show": "GJ", "year": 2020, "category": "最佳音效" },
-				{ "show": "GJ", "year": 2020, "category": "年度 PlayStation 游戏" }
+			"slug": "zenless-zone-zero",
+			"titleEn": "Zenless Zone Zero",
+			"year": 2024,
+			"metacritic": "zenless-zone-zero",
+			"steam": [],
+			"psn": [
+				"zenless zone zero"
 			]
 		},
 		{
-			"slug": "uncharted", "titleEn": "Uncharted: Drake's Fortune", "year": 2007,
-			"metacritic": "uncharted-drakes-fortune", "steam": [], "psn": ["drake's fortune", "nathan drake collection"],
-			"awards": []
-		},
-		{
-			"slug": "uncharted-2", "titleEn": "Uncharted 2: Among Thieves", "year": 2009,
-			"metacritic": "uncharted-2-among-thieves", "steam": [], "psn": ["among thieves", "nathan drake collection"],
-			"awards": []
-		},
-		{
-			"slug": "uncharted-3", "titleEn": "Uncharted 3: Drake's Deception", "year": 2011,
-			"metacritic": "uncharted-3-drakes-deception", "steam": [], "psn": ["drake's deception", "nathan drake collection"],
-			"awards": []
-		},
-		{
-			"slug": "uncharted-4", "titleEn": "Uncharted 4: A Thief's End", "year": 2016,
-			"metacritic": "uncharted-4-a-thiefs-end", "steam": [1659420], "psn": ["a thief's end", "legacy of thieves"],
-			"awards": [
-				{ "show": "TGA", "year": 2016, "category": "最佳叙事" },
-				{ "show": "TGA", "year": 2016, "category": "最佳表演（Nolan North）" },
-				{ "show": "GJ", "year": 2016, "category": "年度 PlayStation 游戏" }
+			"slug": "honkai-star-rail",
+			"titleEn": "Honkai: Star Rail",
+			"year": 2023,
+			"metacritic": "honkai-star-rail",
+			"steam": [],
+			"psn": [
+				"honkai: star rail",
+				"honkai star rail"
 			]
 		},
 		{
-			"slug": "marvels-spider-man", "titleEn": "Marvel's Spider-Man", "year": 2018,
-			"metacritic": "marvels-spider-man", "steam": [1817070], "psn": ["marvel's spider-man", "marvel’s spider-man"], "psnExclude": ["miles", "spider-man 2"],
-			"awards": []
-		},
-		{
-			"slug": "spider-man-miles-morales", "titleEn": "Marvel's Spider-Man: Miles Morales", "year": 2020,
-			"metacritic": "marvels-spider-man-miles-morales", "steam": [1817190], "psn": ["miles morales"],
-			"awards": []
-		},
-		{
-			"slug": "red-dead-redemption-2", "titleEn": "Red Dead Redemption 2", "year": 2018,
-			"metacritic": "red-dead-redemption-2", "steam": [1174180], "psn": ["red dead redemption 2"],
-			"awards": [
-				{ "show": "TGA", "year": 2018, "category": "最佳叙事" },
-				{ "show": "TGA", "year": 2018, "category": "最佳配乐" },
-				{ "show": "TGA", "year": 2018, "category": "最佳音效设计" },
-				{ "show": "TGA", "year": 2018, "category": "最佳表演（Roger Clark）" },
-				{ "show": "GJ", "year": 2018, "category": "评论家选择奖" }
+			"slug": "god-of-war-2018",
+			"titleEn": "God of War",
+			"year": 2018,
+			"metacritic": "god-of-war",
+			"steam": [
+				1593500
+			],
+			"psn": [
+				"=god of war"
 			]
 		},
 		{
-			"slug": "death-stranding", "titleEn": "Death Stranding", "year": 2019,
-			"metacritic": "death-stranding", "steam": [1190460, 1850570], "psn": ["death stranding"], "psnExclude": ["death stranding 2"],
-			"awards": [
-				{ "show": "TGA", "year": 2019, "category": "最佳游戏指导" },
-				{ "show": "TGA", "year": 2019, "category": "最佳配乐" },
-				{ "show": "TGA", "year": 2019, "category": "最佳表演（Mads Mikkelsen）" },
-				{ "show": "GJ", "year": 2020, "category": "年度 PC 游戏" }
+			"slug": "god-of-war-ragnarok",
+			"titleEn": "God of War Ragnarök",
+			"year": 2022,
+			"metacritic": "god-of-war-ragnarok",
+			"steam": [
+				2322010
+			],
+			"psn": [
+				"ragnar"
 			]
 		},
 		{
-			"slug": "star-wars-battlefront-2", "titleEn": "Star Wars Battlefront II", "year": 2017,
-			"metacritic": "star-wars-battlefront-ii", "steam": [1237950], "psn": ["battlefront ii", "battlefront 2"],
-			"awards": []
-		},
-		{
-			"slug": "what-remains-of-edith-finch", "titleEn": "What Remains of Edith Finch", "year": 2017,
-			"metacritic": "what-remains-of-edith-finch", "steam": [501300], "psn": ["edith finch"],
-			"awards": [
-				{ "show": "TGA", "year": 2017, "category": "最佳叙事" }
+			"slug": "the-last-of-us",
+			"titleEn": "The Last of Us",
+			"year": 2013,
+			"metacritic": "the-last-of-us",
+			"steam": [
+				1888930
+			],
+			"psn": [
+				"the last of us remastered",
+				"the last of us part i",
+				"the last of us™"
+			],
+			"psnExclude": [
+				"part ii",
+				"part 2"
 			]
 		},
 		{
-			"slug": "it-takes-two", "titleEn": "It Takes Two", "year": 2021,
-			"metacritic": "it-takes-two", "steam": [1426210], "psn": ["it takes two"],
-			"awards": [
-				{ "show": "TGA", "year": 2021, "category": "年度游戏", "grand": true },
-				{ "show": "TGA", "year": 2021, "category": "最佳家庭游戏" },
-				{ "show": "TGA", "year": 2021, "category": "最佳多人游戏" },
-				{ "show": "GJ", "year": 2021, "category": "最佳多人游戏" }
+			"slug": "the-last-of-us-part-2",
+			"titleEn": "The Last of Us Part II",
+			"year": 2020,
+			"metacritic": "the-last-of-us-part-ii",
+			"steam": [
+				2531310
+			],
+			"psn": [
+				"the last of us part ii",
+				"the last of us part 2"
 			]
 		},
 		{
-			"slug": "gris", "titleEn": "GRIS", "year": 2018,
-			"metacritic": "gris", "steam": [683320], "psn": ["gris"],
-			"awards": [
-				{ "show": "TGA", "year": 2019, "category": "最具影响力游戏" }
+			"slug": "uncharted",
+			"titleEn": "Uncharted: Drake's Fortune",
+			"year": 2007,
+			"metacritic": "uncharted-drakes-fortune",
+			"steam": [],
+			"psn": [
+				"drake's fortune",
+				"nathan drake collection"
 			]
 		},
 		{
-			"slug": "how-to-fish", "titleEn": "How to Fish", "year": 2026,
-			"metacritic": "how-to-fish", "steam": [4001890], "psn": [],
-			"awards": []
+			"slug": "uncharted-2",
+			"titleEn": "Uncharted 2: Among Thieves",
+			"year": 2009,
+			"metacritic": "uncharted-2-among-thieves",
+			"steam": [],
+			"psn": [
+				"among thieves",
+				"nathan drake collection"
+			]
 		},
 		{
-			"slug": "the-roottrees-are-dead", "titleEn": "The Roottrees are Dead", "year": 2025,
-			"metacritic": "the-roottrees-are-dead", "steam": [2754380], "psn": [],
-			"awards": []
+			"slug": "uncharted-3",
+			"titleEn": "Uncharted 3: Drake's Deception",
+			"year": 2011,
+			"metacritic": "uncharted-3-drakes-deception",
+			"steam": [],
+			"psn": [
+				"drake's deception",
+				"nathan drake collection"
+			]
+		},
+		{
+			"slug": "uncharted-4",
+			"titleEn": "Uncharted 4: A Thief's End",
+			"year": 2016,
+			"metacritic": "uncharted-4-a-thiefs-end",
+			"steam": [
+				1659420
+			],
+			"psn": [
+				"a thief's end",
+				"legacy of thieves"
+			]
+		},
+		{
+			"slug": "marvels-spider-man",
+			"titleEn": "Marvel's Spider-Man",
+			"year": 2018,
+			"metacritic": "marvels-spider-man",
+			"steam": [
+				1817070
+			],
+			"psn": [
+				"marvel's spider-man",
+				"marvel’s spider-man"
+			],
+			"psnExclude": [
+				"miles",
+				"spider-man 2"
+			]
+		},
+		{
+			"slug": "spider-man-miles-morales",
+			"titleEn": "Marvel's Spider-Man: Miles Morales",
+			"year": 2020,
+			"metacritic": "marvels-spider-man-miles-morales",
+			"steam": [
+				1817190
+			],
+			"psn": [
+				"miles morales"
+			]
+		},
+		{
+			"slug": "red-dead-redemption-2",
+			"titleEn": "Red Dead Redemption 2",
+			"year": 2018,
+			"metacritic": "red-dead-redemption-2",
+			"steam": [
+				1174180
+			],
+			"psn": [
+				"red dead redemption 2"
+			]
+		},
+		{
+			"slug": "death-stranding",
+			"titleEn": "Death Stranding",
+			"year": 2019,
+			"metacritic": "death-stranding",
+			"steam": [
+				1190460,
+				1850570
+			],
+			"psn": [
+				"death stranding"
+			],
+			"psnExclude": [
+				"death stranding 2"
+			]
+		},
+		{
+			"slug": "star-wars-battlefront-2",
+			"titleEn": "Star Wars Battlefront II",
+			"year": 2017,
+			"metacritic": "star-wars-battlefront-ii",
+			"steam": [
+				1237950
+			],
+			"psn": [
+				"battlefront ii",
+				"battlefront 2"
+			]
+		},
+		{
+			"slug": "what-remains-of-edith-finch",
+			"titleEn": "What Remains of Edith Finch",
+			"year": 2017,
+			"metacritic": "what-remains-of-edith-finch",
+			"steam": [
+				501300
+			],
+			"psn": [
+				"edith finch"
+			]
+		},
+		{
+			"slug": "it-takes-two",
+			"titleEn": "It Takes Two",
+			"year": 2021,
+			"metacritic": "it-takes-two",
+			"steam": [
+				1426210
+			],
+			"psn": [
+				"it takes two"
+			]
+		},
+		{
+			"slug": "gris",
+			"titleEn": "GRIS",
+			"year": 2018,
+			"metacritic": "gris",
+			"steam": [
+				683320
+			],
+			"psn": [
+				"gris"
+			]
+		},
+		{
+			"slug": "how-to-fish",
+			"titleEn": "How to Fish",
+			"year": 2026,
+			"metacritic": "how-to-fish",
+			"steam": [
+				4001890
+			],
+			"psn": []
+		},
+		{
+			"slug": "the-roottrees-are-dead",
+			"titleEn": "The Roottrees are Dead",
+			"year": 2025,
+			"metacritic": "the-roottrees-are-dead",
+			"steam": [
+				2754380
+			],
+			"psn": []
 		}
 	]
 }

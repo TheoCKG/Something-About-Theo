@@ -1,12 +1,12 @@
 ---
 // 拆解文章顶部的“游戏档案”头：封面（与小卡共享过渡名，点击小卡时封面会飞过来）+ MC + 时长 + 奖项。
 import McBadge from './McBadge.astro';
-import { AWARD_FULL, AWARD_LABEL, CATEGORY_HUE, formatHours, sourceLabel, type GameCard } from '../../data/gameCards';
+import { AWARD_FULL, AWARD_LABEL, CATEGORY_HUE, awardText, formatHours, sourceLabel, type GameCard } from '../../data/gameCards';
 
 interface Props { game: GameCard }
 const { game } = Astro.props;
 const hours = formatHours(game.hours);
-const hue = CATEGORY_HUE[game.category] ?? '#d7ff3f';
+const hue = (game.category && CATEGORY_HUE[game.category]) || '#d7ff3f';
 const groups = (['TGA', 'GJ'] as const).map((show) => ({ show, items: game.awards.filter((a) => a.show === show) })).filter((g) => g.items.length);
 ---
 
@@ -36,7 +36,7 @@ const groups = (['TGA', 'GJ'] as const).map((show) => ({ show, items: game.award
 					<div>
 						<p class:list={['gah-show', `show-${g.show}`]} title={AWARD_FULL[g.show]}>{AWARD_LABEL[g.show]} <b>×{g.items.length}</b></p>
 						<ul>
-							{g.items.map((a) => <li class:list={[a.grand && 'is-grand']}><span>{a.year}</span>{a.category}</li>)}
+							{g.items.map((a) => <li class:list={[a.grand && 'is-grand']}><span>{a.year}</span>{awardText(a)}</li>)}
 						</ul>
 					</div>
 				))}

@@ -1,6 +1,6 @@
 {
-	"$comment": "由 scripts/sync-games.mjs 生成，请勿手改；要改数据请编辑 games.manual.json 后重新运行 npm run sync:games",
-	"syncedAt": "2026-11-05T06:27:23.146Z",
+	"$comment": "由 scripts/sync-games.mjs 生成，请勿手改；要改数据请编辑 games.manual.json / awards.json 后重新运行 npm run sync:games",
+	"syncedAt": "2026-11-05T10:00:34.591Z",
 	"sources": {
 		"steam": "api",
 		"psn": "api"
@@ -8,6 +8,7 @@
 	"games": [
 		{
 			"slug": "monster-hunter-world",
+			"written": true,
 			"titleEn": "Monster Hunter: World",
 			"year": 2018,
 			"steam": [
@@ -22,7 +23,7 @@
 				{
 					"show": "GJ",
 					"year": 2018,
-					"category": "最佳多人游戏"
+					"category": "最佳合作游戏"
 				}
 			],
 			"metacritic": {
@@ -33,6 +34,7 @@
 				"url": "https://www.metacritic.com/game/monster-hunter-world/",
 				"source": "metacritic"
 			},
+			"mcSlug": "monster-hunter-world",
 			"playtime": {
 				"hours": 1168.5,
 				"sources": {
@@ -45,6 +47,7 @@
 		},
 		{
 			"slug": "bloodborne",
+			"written": true,
 			"titleEn": "Bloodborne",
 			"year": 2015,
 			"steam": [],
@@ -68,6 +71,7 @@
 				"url": "https://www.metacritic.com/game/bloodborne/",
 				"source": "metacritic"
 			},
+			"mcSlug": "bloodborne",
 			"playtime": {
 				"hours": 66.8,
 				"sources": {
@@ -79,6 +83,7 @@
 		},
 		{
 			"slug": "black-myth-wukong",
+			"written": true,
 			"titleEn": "Black Myth: Wukong",
 			"year": 2024,
 			"steam": [
@@ -115,6 +120,7 @@
 				"url": "https://www.metacritic.com/game/black-myth-wukong/",
 				"source": "metacritic"
 			},
+			"mcSlug": "black-myth-wukong",
 			"playtime": {
 				"hours": 89.9,
 				"sources": {
@@ -126,6 +132,7 @@
 		},
 		{
 			"slug": "sekiro",
+			"written": true,
 			"titleEn": "Sekiro: Shadows Die Twice",
 			"year": 2019,
 			"steam": [
@@ -152,6 +159,7 @@
 				"url": "https://www.metacritic.com/game/sekiro-shadows-die-twice/",
 				"source": "metacritic"
 			},
+			"mcSlug": "sekiro-shadows-die-twice",
 			"playtime": {
 				"hours": 54.9,
 				"sources": {
@@ -163,6 +171,7 @@
 		},
 		{
 			"slug": "the-witcher-3",
+			"written": true,
 			"titleEn": "The Witcher 3: Wild Hunt",
 			"year": 2015,
 			"steam": [
@@ -199,27 +208,32 @@
 				{
 					"show": "GJ",
 					"year": 2015,
-					"category": "最佳游戏时刻（血腥男爵）"
+					"category": "最佳游戏时刻",
+					"note": "血腥男爵"
 				},
 				{
 					"show": "TGA",
 					"year": 2016,
-					"category": "最佳角色扮演游戏（血与酒）"
+					"category": "最佳角色扮演游戏",
+					"note": "血与酒"
 				},
 				{
 					"show": "GJ",
 					"year": 2016,
-					"category": "最佳叙事（血与酒）"
+					"category": "最佳叙事",
+					"note": "血与酒"
 				},
 				{
 					"show": "GJ",
 					"year": 2016,
-					"category": "最佳视觉设计（血与酒）"
+					"category": "最佳视觉设计",
+					"note": "血与酒"
 				},
 				{
 					"show": "GJ",
 					"year": 2016,
-					"category": "最佳表演（Doug Cockle）"
+					"category": "最佳表演",
+					"note": "Doug Cockle"
 				}
 			],
 			"metacritic": {
@@ -230,6 +244,7 @@
 				"url": "https://www.metacritic.com/game/the-witcher-3-wild-hunt/",
 				"source": "metacritic"
 			},
+			"mcSlug": "the-witcher-3-wild-hunt",
 			"playtime": {
 				"hours": 199.2,
 				"sources": {
@@ -241,6 +256,7 @@
 		},
 		{
 			"slug": "gta-v",
+			"written": true,
 			"titleEn": "Grand Theft Auto V",
 			"year": 2013,
 			"steam": [
@@ -255,14 +271,21 @@
 					"grand": true
 				},
 				{
-					"show": "GJ",
-					"year": 2015,
-					"category": "最佳多人游戏（GTA Online）"
+					"show": "TGA",
+					"year": 2014,
+					"category": "最佳重制"
 				},
 				{
 					"show": "GJ",
 					"year": 2015,
-					"category": "年度创新（第一人称模式）"
+					"category": "最佳多人游戏",
+					"note": "GTA Online"
+				},
+				{
+					"show": "GJ",
+					"year": 2015,
+					"category": "年度创新",
+					"note": "第一人称模式"
 				},
 				{
 					"show": "GJ",
@@ -273,6 +296,12 @@
 					"show": "GJ",
 					"year": 2015,
 					"category": "年度最多游玩"
+				},
+				{
+					"show": "GJ",
+					"year": 2019,
+					"category": "最佳资料片",
+					"note": "GTA Online：钻石赌场"
 				}
 			],
 			"metacritic": {
@@ -283,6 +312,7 @@
 				"url": "https://www.metacritic.com/game/grand-theft-auto-v/",
 				"source": "metacritic"
 			},
+			"mcSlug": "grand-theft-auto-v",
 			"playtime": {
 				"hours": 647.9,
 				"sources": {
@@ -294,6 +324,7 @@
 		},
 		{
 			"slug": "god-of-war-3",
+			"written": true,
 			"titleEn": "God of War III",
 			"year": 2010,
 			"steam": [],
@@ -306,6 +337,7 @@
 				"url": "https://www.metacritic.com/game/god-of-war-iii/",
 				"source": "metacritic"
 			},
+			"mcSlug": "god-of-war-iii",
 			"playtime": {
 				"hours": 26.3,
 				"sources": {
@@ -317,6 +349,7 @@
 		},
 		{
 			"slug": "nioh",
+			"written": true,
 			"titleEn": "Nioh",
 			"year": 2017,
 			"steam": [
@@ -331,6 +364,7 @@
 				"url": "https://www.metacritic.com/game/nioh/",
 				"source": "metacritic"
 			},
+			"mcSlug": "nioh",
 			"playtime": {
 				"hours": 57.7,
 				"sources": {
@@ -342,6 +376,7 @@
 		},
 		{
 			"slug": "nioh-2",
+			"written": true,
 			"titleEn": "Nioh 2",
 			"year": 2020,
 			"steam": [
@@ -356,6 +391,7 @@
 				"url": "https://www.metacritic.com/game/nioh-2/",
 				"source": "metacritic"
 			},
+			"mcSlug": "nioh-2",
 			"playtime": {
 				"hours": 162,
 				"sources": {
@@ -367,6 +403,7 @@
 		},
 		{
 			"slug": "monster-hunter-rise",
+			"written": true,
 			"titleEn": "Monster Hunter Rise",
 			"year": 2021,
 			"steam": [
@@ -381,6 +418,7 @@
 				"url": "https://www.metacritic.com/game/monster-hunter-rise/",
 				"source": "metacritic"
 			},
+			"mcSlug": "monster-hunter-rise",
 			"playtime": {
 				"hours": 89.2,
 				"sources": {
@@ -392,6 +430,7 @@
 		},
 		{
 			"slug": "apex-legends",
+			"written": true,
 			"titleEn": "Apex Legends",
 			"year": 2019,
 			"steam": [
@@ -417,6 +456,7 @@
 				"url": "https://www.metacritic.com/game/apex-legends/",
 				"source": "metacritic"
 			},
+			"mcSlug": "apex-legends",
 			"playtime": {
 				"hours": 1050.8,
 				"sources": {
@@ -429,6 +469,7 @@
 		},
 		{
 			"slug": "valorant",
+			"written": true,
 			"titleEn": "VALORANT",
 			"year": 2020,
 			"steam": [],
@@ -457,15 +498,19 @@
 				"url": "https://www.metacritic.com/game/valorant/",
 				"source": "metacritic"
 			},
+			"mcSlug": "valorant",
 			"playtime": {
-				"hours": null,
-				"sources": {},
+				"hours": 1227,
+				"sources": {
+					"manual": 1227
+				},
 				"shared": false
 			},
 			"cover": null
 		},
 		{
 			"slug": "overwatch",
+			"written": true,
 			"titleEn": "Overwatch",
 			"year": 2016,
 			"steam": [
@@ -506,7 +551,8 @@
 				{
 					"show": "GJ",
 					"year": 2016,
-					"category": "最佳游戏时刻"
+					"category": "最佳游戏时刻",
+					"note": "全场最佳"
 				},
 				{
 					"show": "GJ",
@@ -552,15 +598,19 @@
 				"url": "https://www.metacritic.com/game/overwatch-2016/",
 				"source": "metacritic"
 			},
+			"mcSlug": "overwatch-2016",
 			"playtime": {
-				"hours": null,
-				"sources": {},
+				"hours": 436,
+				"sources": {
+					"manual": 436
+				},
 				"shared": false
 			},
 			"cover": "/media/covers/overwatch.jpg"
 		},
 		{
 			"slug": "the-division",
+			"written": true,
 			"titleEn": "Tom Clancy's The Division",
 			"year": 2016,
 			"steam": [
@@ -575,6 +625,7 @@
 				"url": "https://www.metacritic.com/game/tom-clancys-the-division/",
 				"source": "metacritic"
 			},
+			"mcSlug": "tom-clancys-the-division",
 			"playtime": {
 				"hours": 65.8,
 				"sources": {
@@ -586,6 +637,7 @@
 		},
 		{
 			"slug": "the-division-2",
+			"written": true,
 			"titleEn": "Tom Clancy's The Division 2",
 			"year": 2019,
 			"steam": [
@@ -600,6 +652,7 @@
 				"url": "https://www.metacritic.com/game/tom-clancys-the-division-2/",
 				"source": "metacritic"
 			},
+			"mcSlug": "tom-clancys-the-division-2",
 			"playtime": {
 				"hours": 494.2,
 				"sources": {
@@ -611,6 +664,7 @@
 		},
 		{
 			"slug": "ghost-of-tsushima",
+			"written": true,
 			"titleEn": "Ghost of Tsushima",
 			"year": 2020,
 			"steam": [
@@ -630,7 +684,8 @@
 				{
 					"show": "GJ",
 					"year": 2021,
-					"category": "最佳资料片（壹岐岛）"
+					"category": "最佳资料片",
+					"note": "壹岐岛"
 				}
 			],
 			"metacritic": {
@@ -641,6 +696,7 @@
 				"url": "https://www.metacritic.com/game/ghost-of-tsushima/",
 				"source": "metacritic"
 			},
+			"mcSlug": "ghost-of-tsushima",
 			"playtime": {
 				"hours": 133.2,
 				"sources": {
@@ -652,6 +708,7 @@
 		},
 		{
 			"slug": "genshin-impact",
+			"written": true,
 			"titleEn": "Genshin Impact",
 			"year": 2020,
 			"steam": [],
@@ -680,6 +737,7 @@
 				"url": "https://www.metacritic.com/game/genshin-impact/",
 				"source": "metacritic"
 			},
+			"mcSlug": "genshin-impact",
 			"playtime": {
 				"hours": 191.1,
 				"sources": {
@@ -691,6 +749,7 @@
 		},
 		{
 			"slug": "zenless-zone-zero",
+			"written": true,
 			"titleEn": "Zenless Zone Zero",
 			"year": 2024,
 			"steam": [],
@@ -703,6 +762,7 @@
 				"url": "https://www.metacritic.com/game/zenless-zone-zero/",
 				"source": "metacritic"
 			},
+			"mcSlug": "zenless-zone-zero",
 			"playtime": {
 				"hours": 9.9,
 				"sources": {
@@ -714,6 +774,7 @@
 		},
 		{
 			"slug": "honkai-star-rail",
+			"written": true,
 			"titleEn": "Honkai: Star Rail",
 			"year": 2023,
 			"steam": [],
@@ -737,6 +798,7 @@
 				"url": "https://www.metacritic.com/game/honkai-star-rail/",
 				"source": "metacritic"
 			},
+			"mcSlug": "honkai-star-rail",
 			"playtime": {
 				"hours": 54.4,
 				"sources": {
@@ -748,6 +810,7 @@
 		},
 		{
 			"slug": "god-of-war-2018",
+			"written": true,
 			"titleEn": "God of War",
 			"year": 2018,
 			"steam": [
@@ -799,6 +862,7 @@
 				"url": "https://www.metacritic.com/game/god-of-war/",
 				"source": "metacritic"
 			},
+			"mcSlug": "god-of-war",
 			"playtime": {
 				"hours": 45.4,
 				"sources": {
@@ -810,6 +874,7 @@
 		},
 		{
 			"slug": "god-of-war-ragnarok",
+			"written": true,
 			"titleEn": "God of War Ragnarök",
 			"year": 2022,
 			"steam": [
@@ -819,12 +884,18 @@
 				{
 					"show": "TGA",
 					"year": 2022,
+					"category": "最佳动作冒险游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2022,
 					"category": "无障碍创新"
 				},
 				{
 					"show": "TGA",
 					"year": 2022,
-					"category": "最佳表演（Christopher Judge）"
+					"category": "最佳表演",
+					"note": "Christopher Judge"
 				},
 				{
 					"show": "TGA",
@@ -835,11 +906,6 @@
 					"show": "TGA",
 					"year": 2022,
 					"category": "最佳配乐"
-				},
-				{
-					"show": "TGA",
-					"year": 2022,
-					"category": "最佳动作冒险游戏"
 				},
 				{
 					"show": "TGA",
@@ -855,6 +921,7 @@
 				"url": "https://www.metacritic.com/game/god-of-war-ragnarok/",
 				"source": "metacritic"
 			},
+			"mcSlug": "god-of-war-ragnarok",
 			"playtime": {
 				"hours": 86.9,
 				"sources": {
@@ -866,6 +933,7 @@
 		},
 		{
 			"slug": "the-last-of-us",
+			"written": true,
 			"titleEn": "The Last of Us",
 			"year": 2013,
 			"steam": [
@@ -875,22 +943,24 @@
 				{
 					"show": "GJ",
 					"year": 2013,
-					"category": "最佳叙事"
-				},
-				{
-					"show": "GJ",
-					"year": 2013,
 					"category": "最佳新作"
 				},
 				{
 					"show": "GJ",
-					"year": 2014,
-					"category": "最佳叙事（遗落之物）"
+					"year": 2013,
+					"category": "最佳叙事"
 				},
 				{
 					"show": "GJ",
 					"year": 2014,
-					"category": "最佳游戏时刻（遗落之物）"
+					"category": "最佳叙事",
+					"note": "遗落之物"
+				},
+				{
+					"show": "GJ",
+					"year": 2014,
+					"category": "最佳游戏时刻",
+					"note": "遗落之物"
 				}
 			],
 			"metacritic": {
@@ -901,6 +971,7 @@
 				"url": "https://www.metacritic.com/game/the-last-of-us/",
 				"source": "metacritic"
 			},
+			"mcSlug": "the-last-of-us",
 			"playtime": {
 				"hours": 69.4,
 				"sources": {
@@ -912,6 +983,7 @@
 		},
 		{
 			"slug": "the-last-of-us-part-2",
+			"written": true,
 			"titleEn": "The Last of Us Part II",
 			"year": 2020,
 			"steam": [
@@ -933,17 +1005,18 @@
 				{
 					"show": "TGA",
 					"year": 2020,
-					"category": "无障碍创新"
-				},
-				{
-					"show": "TGA",
-					"year": 2020,
 					"category": "最佳动作冒险游戏"
 				},
 				{
 					"show": "TGA",
 					"year": 2020,
-					"category": "最佳表演（Laura Bailey）"
+					"category": "无障碍创新"
+				},
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳表演",
+					"note": "Laura Bailey"
 				},
 				{
 					"show": "TGA",
@@ -989,6 +1062,7 @@
 				"url": "https://www.metacritic.com/game/the-last-of-us-part-ii/",
 				"source": "metacritic"
 			},
+			"mcSlug": "the-last-of-us-part-ii",
 			"playtime": {
 				"hours": 45.6,
 				"sources": {
@@ -1000,6 +1074,7 @@
 		},
 		{
 			"slug": "uncharted",
+			"written": true,
 			"titleEn": "Uncharted: Drake's Fortune",
 			"year": 2007,
 			"steam": [],
@@ -1012,6 +1087,7 @@
 				"url": "https://www.metacritic.com/game/uncharted-drakes-fortune/",
 				"source": "metacritic"
 			},
+			"mcSlug": "uncharted-drakes-fortune",
 			"playtime": {
 				"hours": 79.2,
 				"sources": {
@@ -1023,6 +1099,7 @@
 		},
 		{
 			"slug": "uncharted-2",
+			"written": true,
 			"titleEn": "Uncharted 2: Among Thieves",
 			"year": 2009,
 			"steam": [],
@@ -1035,6 +1112,7 @@
 				"url": "https://www.metacritic.com/game/uncharted-2-among-thieves/",
 				"source": "metacritic"
 			},
+			"mcSlug": "uncharted-2-among-thieves",
 			"playtime": {
 				"hours": 79.2,
 				"sources": {
@@ -1046,6 +1124,7 @@
 		},
 		{
 			"slug": "uncharted-3",
+			"written": true,
 			"titleEn": "Uncharted 3: Drake's Deception",
 			"year": 2011,
 			"steam": [],
@@ -1058,6 +1137,7 @@
 				"url": "https://www.metacritic.com/game/uncharted-3-drakes-deception/",
 				"source": "metacritic"
 			},
+			"mcSlug": "uncharted-3-drakes-deception",
 			"playtime": {
 				"hours": 79.2,
 				"sources": {
@@ -1069,6 +1149,7 @@
 		},
 		{
 			"slug": "uncharted-4",
+			"written": true,
 			"titleEn": "Uncharted 4: A Thief's End",
 			"year": 2016,
 			"steam": [
@@ -1078,7 +1159,8 @@
 				{
 					"show": "TGA",
 					"year": 2016,
-					"category": "最佳表演（Nolan North）"
+					"category": "最佳表演",
+					"note": "Nolan North"
 				},
 				{
 					"show": "TGA",
@@ -1099,6 +1181,7 @@
 				"url": "https://www.metacritic.com/game/uncharted-4-a-thiefs-end/",
 				"source": "metacritic"
 			},
+			"mcSlug": "uncharted-4-a-thiefs-end",
 			"playtime": {
 				"hours": 58.8,
 				"sources": {
@@ -1110,6 +1193,7 @@
 		},
 		{
 			"slug": "marvels-spider-man",
+			"written": true,
 			"titleEn": "Marvel's Spider-Man",
 			"year": 2018,
 			"steam": [
@@ -1124,6 +1208,7 @@
 				"url": "https://www.metacritic.com/game/marvels-spider-man/",
 				"source": "metacritic"
 			},
+			"mcSlug": "marvels-spider-man",
 			"playtime": {
 				"hours": 55.1,
 				"sources": {
@@ -1135,6 +1220,7 @@
 		},
 		{
 			"slug": "spider-man-miles-morales",
+			"written": true,
 			"titleEn": "Marvel's Spider-Man: Miles Morales",
 			"year": 2020,
 			"steam": [
@@ -1149,6 +1235,7 @@
 				"url": "https://www.metacritic.com/game/marvels-spider-man-miles-morales/",
 				"source": "metacritic"
 			},
+			"mcSlug": "marvels-spider-man-miles-morales",
 			"playtime": {
 				"hours": 32.1,
 				"sources": {
@@ -1160,6 +1247,7 @@
 		},
 		{
 			"slug": "red-dead-redemption-2",
+			"written": true,
 			"titleEn": "Red Dead Redemption 2",
 			"year": 2018,
 			"steam": [
@@ -1169,7 +1257,8 @@
 				{
 					"show": "TGA",
 					"year": 2018,
-					"category": "最佳表演（Roger Clark）"
+					"category": "最佳表演",
+					"note": "Roger Clark"
 				},
 				{
 					"show": "TGA",
@@ -1200,6 +1289,7 @@
 				"url": "https://www.metacritic.com/game/red-dead-redemption-2/",
 				"source": "metacritic"
 			},
+			"mcSlug": "red-dead-redemption-2",
 			"playtime": {
 				"hours": 254.5,
 				"sources": {
@@ -1211,6 +1301,7 @@
 		},
 		{
 			"slug": "death-stranding",
+			"written": true,
 			"titleEn": "Death Stranding",
 			"year": 2019,
 			"steam": [
@@ -1221,7 +1312,8 @@
 				{
 					"show": "TGA",
 					"year": 2019,
-					"category": "最佳表演（Mads Mikkelsen）"
+					"category": "最佳表演",
+					"note": "Mads Mikkelsen"
 				},
 				{
 					"show": "TGA",
@@ -1247,6 +1339,7 @@
 				"url": "https://www.metacritic.com/game/death-stranding/",
 				"source": "metacritic"
 			},
+			"mcSlug": "death-stranding",
 			"playtime": {
 				"hours": 105.9,
 				"sources": {
@@ -1258,6 +1351,7 @@
 		},
 		{
 			"slug": "star-wars-battlefront-2",
+			"written": true,
 			"titleEn": "Star Wars Battlefront II",
 			"year": 2017,
 			"steam": [
@@ -1272,6 +1366,7 @@
 				"url": "https://www.metacritic.com/game/star-wars-battlefront-ii/",
 				"source": "metacritic"
 			},
+			"mcSlug": "star-wars-battlefront-ii",
 			"playtime": {
 				"hours": 41.8,
 				"sources": {
@@ -1283,6 +1378,7 @@
 		},
 		{
 			"slug": "what-remains-of-edith-finch",
+			"written": true,
 			"titleEn": "What Remains of Edith Finch",
 			"year": 2017,
 			"steam": [
@@ -1303,6 +1399,7 @@
 				"url": "https://www.metacritic.com/game/what-remains-of-edith-finch/",
 				"source": "metacritic"
 			},
+			"mcSlug": "what-remains-of-edith-finch",
 			"playtime": {
 				"hours": 2.7,
 				"sources": {
@@ -1314,6 +1411,7 @@
 		},
 		{
 			"slug": "it-takes-two",
+			"written": true,
 			"titleEn": "It Takes Two",
 			"year": 2021,
 			"steam": [
@@ -1350,6 +1448,7 @@
 				"url": "https://www.metacritic.com/game/it-takes-two/",
 				"source": "metacritic"
 			},
+			"mcSlug": "it-takes-two",
 			"playtime": {
 				"hours": 28.8,
 				"sources": {
@@ -1361,6 +1460,7 @@
 		},
 		{
 			"slug": "gris",
+			"written": true,
 			"titleEn": "GRIS",
 			"year": 2018,
 			"steam": [
@@ -1381,6 +1481,7 @@
 				"url": "https://www.metacritic.com/game/gris/",
 				"source": "metacritic"
 			},
+			"mcSlug": "gris",
 			"playtime": {
 				"hours": 6.6,
 				"sources": {
@@ -1392,6 +1493,7 @@
 		},
 		{
 			"slug": "how-to-fish",
+			"written": true,
 			"titleEn": "How to Fish",
 			"year": 2026,
 			"steam": [
@@ -1406,6 +1508,7 @@
 				"url": "https://www.metacritic.com/game/how-to-fish/",
 				"source": "metacritic"
 			},
+			"mcSlug": "how-to-fish",
 			"playtime": {
 				"hours": 7.6,
 				"sources": {
@@ -1413,10 +1516,11 @@
 				},
 				"shared": false
 			},
-			"cover": null
+			"cover": "/media/covers/how-to-fish.jpg"
 		},
 		{
 			"slug": "the-roottrees-are-dead",
+			"written": true,
 			"titleEn": "The Roottrees are Dead",
 			"year": 2025,
 			"steam": [
@@ -1431,6 +1535,7 @@
 				"url": "https://www.metacritic.com/game/the-roottrees-are-dead/",
 				"source": "metacritic"
 			},
+			"mcSlug": "the-roottrees-are-dead",
 			"playtime": {
 				"hours": 7.1,
 				"sources": {
@@ -1439,6 +1544,2271 @@
 				"shared": false
 			},
 			"cover": "/media/covers/the-roottrees-are-dead.jpg"
+		},
+		{
+			"slug": "g-star-wars-battlefront",
+			"written": false,
+			"titleEn": "STAR WARS Battlefront",
+			"nameZh": null,
+			"year": 2015,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 73,
+				"reviews": 60,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/star-wars-battlefront/",
+				"source": "metacritic"
+			},
+			"mcSlug": "star-wars-battlefront",
+			"playtime": {
+				"hours": 99.5,
+				"sources": {
+					"psn": 99.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-star-wars-battlefront.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-fall-guys-ultimate-knockout",
+			"written": false,
+			"titleEn": "Fall Guys: Ultimate Knockout",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2020,
+					"category": "最佳社区支持"
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2020,
+					"category": "最佳家庭游戏"
+				}
+			],
+			"metacritic": {
+				"score": 81,
+				"reviews": 53,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/fall-guys/",
+				"source": "metacritic"
+			},
+			"mcSlug": "fall-guys",
+			"playtime": {
+				"hours": 96.8,
+				"sources": {
+					"psn": 96.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-fall-guys-ultimate-knockout.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-thronebreaker-the-witcher-tales",
+			"written": false,
+			"titleEn": "Thronebreaker: The Witcher Tales",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 85,
+				"reviews": 55,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/thronebreaker-the-witcher-tales/",
+				"source": "metacritic"
+			},
+			"mcSlug": "thronebreaker-the-witcher-tales",
+			"playtime": {
+				"hours": 94.8,
+				"sources": {
+					"psn": 94.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-thronebreaker-the-witcher-tales.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-gran-turismo-sport",
+			"written": false,
+			"titleEn": "Gran Turismo SPORT",
+			"nameZh": null,
+			"year": 2017,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 75,
+				"reviews": 86,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/gran-turismo-sport/",
+				"source": "metacritic"
+			},
+			"mcSlug": "gran-turismo-sport",
+			"playtime": {
+				"hours": 65.2,
+				"sources": {
+					"psn": 65.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-gran-turismo-sport.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-horizon-zero-dawn",
+			"written": false,
+			"titleEn": "Horizon Zero Dawn",
+			"nameZh": null,
+			"year": 2017,
+			"steam": [],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "最佳叙事"
+				},
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "最佳表演",
+					"note": "Ashly Burch"
+				},
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "年度 PlayStation 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 89,
+				"reviews": 124,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/horizon-zero-dawn/",
+				"source": "metacritic"
+			},
+			"mcSlug": "horizon-zero-dawn",
+			"playtime": {
+				"hours": 56.8,
+				"sources": {
+					"psn": 56.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-horizon-zero-dawn.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-far-cry-3",
+			"written": false,
+			"titleEn": "Far Cry 3 Classic Edition",
+			"nameZh": null,
+			"year": null,
+			"steam": [],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2013,
+					"category": "最佳游戏时刻",
+					"note": "The Definition of Insanity"
+				}
+			],
+			"metacritic": {
+				"score": null,
+				"reviews": null,
+				"platform": "Nintendo Switch 2",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/far-cry-3-classic-edition/",
+				"source": "metacritic"
+			},
+			"mcSlug": "far-cry-3-classic-edition",
+			"playtime": {
+				"hours": 52.3,
+				"sources": {
+					"psn": 52.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-far-cry-3.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-phantom-blade-zero",
+			"written": false,
+			"titleEn": "Phantom Blade Zero",
+			"nameZh": null,
+			"year": 2026,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 88,
+				"reviews": 47,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/phantom-blade-zero/",
+				"source": "metacritic"
+			},
+			"mcSlug": "phantom-blade-zero",
+			"playtime": {
+				"hours": 51.9,
+				"sources": {
+					"psn": 51.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-phantom-blade-zero.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-umbrella-corps",
+			"written": false,
+			"titleEn": "Umbrella Corps",
+			"nameZh": null,
+			"year": 2016,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 38,
+				"reviews": 55,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/umbrella-corps/",
+				"source": "metacritic"
+			},
+			"mcSlug": "umbrella-corps",
+			"playtime": {
+				"hours": 48.1,
+				"sources": {
+					"psn": 48.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-umbrella-corps.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-assassins-creed-iv-black-flag",
+			"written": false,
+			"titleEn": "Assassin's Creed IV Black Flag",
+			"nameZh": null,
+			"year": 2013,
+			"steam": [],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2014,
+					"category": "最佳视觉设计"
+				},
+				{
+					"show": "GJ",
+					"year": 2014,
+					"category": "最佳音效"
+				}
+			],
+			"metacritic": {
+				"score": 88,
+				"reviews": 36,
+				"platform": "PlayStation 3",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/assassins-creed-iv-black-flag/",
+				"source": "metacritic"
+			},
+			"mcSlug": "assassins-creed-iv-black-flag",
+			"playtime": {
+				"hours": 46.8,
+				"sources": {
+					"psn": 46.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-assassins-creed-iv-black-flag.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-detroit-become-human",
+			"written": false,
+			"titleEn": "Detroit: Become Human",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2018,
+					"category": "最佳表演",
+					"note": "Bryan Dechart"
+				}
+			],
+			"metacritic": {
+				"score": 78,
+				"reviews": 117,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/detroit-become-human/",
+				"source": "metacritic"
+			},
+			"mcSlug": "detroit-become-human",
+			"playtime": {
+				"hours": 44.7,
+				"sources": {
+					"psn": 44.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-detroit-become-human.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-resident-evil-0",
+			"written": false,
+			"titleEn": "Resident Evil 0",
+			"nameZh": null,
+			"year": 2002,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 83,
+				"reviews": 36,
+				"platform": "GameCube",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/resident-evil-0/",
+				"source": "metacritic"
+			},
+			"mcSlug": "resident-evil-0",
+			"playtime": {
+				"hours": 43.9,
+				"sources": {
+					"psn": 43.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-resident-evil-0.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-watch-dogs",
+			"written": false,
+			"titleEn": "Watch_Dogs",
+			"nameZh": null,
+			"year": 2014,
+			"steam": [
+				243470
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 80,
+				"reviews": 80,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/watch-dogs/",
+				"source": "metacritic"
+			},
+			"mcSlug": "watch-dogs",
+			"playtime": {
+				"hours": 42.8,
+				"sources": {
+					"steam": 27.6,
+					"psn": 15.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-watch-dogs.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-13-sentinels-aegis-rim",
+			"written": false,
+			"titleEn": "13 Sentinels: Aegis Rim",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 85,
+				"reviews": 70,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/13-sentinels-aegis-rim/",
+				"source": "metacritic"
+			},
+			"mcSlug": "13-sentinels-aegis-rim",
+			"playtime": {
+				"hours": 42,
+				"sources": {
+					"psn": 42
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-13-sentinels-aegis-rim.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-playerunknowns-battlegrounds",
+			"written": false,
+			"titleEn": "PUBG: BATTLEGROUNDS",
+			"nameZh": null,
+			"year": 2017,
+			"steam": [
+				578080
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2017,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "年度 PC 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 86,
+				"reviews": 52,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/playerunknowns-battlegrounds/",
+				"source": "metacritic"
+			},
+			"mcSlug": "playerunknowns-battlegrounds",
+			"playtime": {
+				"hours": 41.8,
+				"sources": {
+					"steam": 41.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-playerunknowns-battlegrounds.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-cuphead",
+			"written": false,
+			"titleEn": "Cuphead",
+			"nameZh": null,
+			"year": 2017,
+			"steam": [],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2017,
+					"category": "最佳独立首作"
+				},
+				{
+					"show": "TGA",
+					"year": 2017,
+					"category": "最佳独立游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2017,
+					"category": "最佳艺术指导"
+				},
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "最佳视觉设计"
+				},
+				{
+					"show": "GJ",
+					"year": 2017,
+					"category": "年度 Xbox 游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2022,
+					"category": "最佳资料片",
+					"note": "The Delicious Last Course"
+				}
+			],
+			"metacritic": {
+				"score": 86,
+				"reviews": 76,
+				"platform": "Xbox One",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/cuphead/",
+				"source": "metacritic"
+			},
+			"mcSlug": "cuphead",
+			"playtime": {
+				"hours": 40.3,
+				"sources": {
+					"psn": 40.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-cuphead.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-dinkum",
+			"written": false,
+			"titleEn": "Dinkum",
+			"nameZh": null,
+			"year": 2025,
+			"steam": [
+				1062520
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": 3,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/dinkum/",
+				"source": "metacritic"
+			},
+			"mcSlug": "dinkum",
+			"playtime": {
+				"hours": 36.5,
+				"sources": {
+					"steam": 36.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-dinkum.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-nine-parchments",
+			"written": false,
+			"titleEn": "Nine Parchments",
+			"nameZh": null,
+			"year": 2017,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 66,
+				"reviews": 15,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/nine-parchments/",
+				"source": "metacritic"
+			},
+			"mcSlug": "nine-parchments",
+			"playtime": {
+				"hours": 32.5,
+				"sources": {
+					"psn": 32.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-nine-parchments.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-gremlins-inc",
+			"written": false,
+			"titleEn": "Gremlins, Inc.",
+			"nameZh": null,
+			"year": 2015,
+			"steam": [
+				369990
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 75,
+				"reviews": 16,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/gremlins-inc/",
+				"source": "metacritic"
+			},
+			"mcSlug": "gremlins-inc",
+			"playtime": {
+				"hours": 32,
+				"sources": {
+					"steam": 32
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-gremlins-inc.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-overcooked-2",
+			"written": false,
+			"titleEn": "Overcooked! 2",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [
+				728880
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2018,
+					"category": "最佳家庭游戏"
+				}
+			],
+			"metacritic": {
+				"score": 81,
+				"reviews": 40,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/overcooked-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "overcooked-2",
+			"playtime": {
+				"hours": 31.6,
+				"sources": {
+					"steam": 5.9,
+					"psn": 25.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-overcooked-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-battlefield-v",
+			"written": false,
+			"titleEn": "Battlefield V",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 81,
+				"reviews": 57,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/battlefield-v/",
+				"source": "metacritic"
+			},
+			"mcSlug": "battlefield-v",
+			"playtime": {
+				"hours": 27.3,
+				"sources": {
+					"psn": 27.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-battlefield-v.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-battlefield-6",
+			"written": false,
+			"titleEn": "Battlefield 6",
+			"nameZh": null,
+			"year": 2025,
+			"steam": [
+				2807960,
+				3081410
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2025,
+					"category": "最佳音效设计"
+				}
+			],
+			"metacritic": {
+				"score": 83,
+				"reviews": 74,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/battlefield-6/",
+				"source": "metacritic"
+			},
+			"mcSlug": "battlefield-6",
+			"playtime": {
+				"hours": 23,
+				"sources": {
+					"steam": 23
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-battlefield-6.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-the-order-1886",
+			"written": false,
+			"titleEn": "The Order: 1886",
+			"nameZh": null,
+			"year": 2015,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 63,
+				"reviews": 95,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/the-order-1886/",
+				"source": "metacritic"
+			},
+			"mcSlug": "the-order-1886",
+			"playtime": {
+				"hours": 21.7,
+				"sources": {
+					"psn": 21.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-the-order-1886.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-pc-building-simulator",
+			"written": false,
+			"titleEn": "PC Building Simulator",
+			"nameZh": null,
+			"year": 2019,
+			"steam": [
+				621060
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": 3,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/pc-building-simulator/",
+				"source": "metacritic"
+			},
+			"mcSlug": "pc-building-simulator",
+			"playtime": {
+				"hours": 21.5,
+				"sources": {
+					"steam": 21.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-pc-building-simulator.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-beyond-two-souls",
+			"written": false,
+			"titleEn": "Beyond: Two Souls",
+			"nameZh": null,
+			"year": 2013,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 70,
+				"reviews": 98,
+				"platform": "PlayStation 3",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/beyond-two-souls/",
+				"source": "metacritic"
+			},
+			"mcSlug": "beyond-two-souls",
+			"playtime": {
+				"hours": 20.1,
+				"sources": {
+					"psn": 20.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-beyond-two-souls.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-slay-the-spire-2",
+			"written": false,
+			"titleEn": "Slay the Spire 2",
+			"nameZh": null,
+			"year": null,
+			"steam": [
+				2868840
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": 9,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/slay-the-spire-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "slay-the-spire-2",
+			"playtime": {
+				"hours": 20,
+				"sources": {
+					"steam": 20
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-slay-the-spire-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-first-class-trouble",
+			"written": false,
+			"titleEn": "First Class Trouble",
+			"nameZh": null,
+			"year": 2021,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": 2,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/first-class-trouble/",
+				"source": "metacritic"
+			},
+			"mcSlug": "first-class-trouble",
+			"playtime": {
+				"hours": 19.6,
+				"sources": {
+					"psn": 19.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-first-class-trouble.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-heavy-rain",
+			"written": false,
+			"titleEn": "HEAVY RAIN",
+			"nameZh": null,
+			"year": 2010,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 87,
+				"reviews": 107,
+				"platform": "PlayStation 3",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/heavy-rain/",
+				"source": "metacritic"
+			},
+			"mcSlug": "heavy-rain",
+			"playtime": {
+				"hours": 18.3,
+				"sources": {
+					"psn": 18.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-heavy-rain.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-tabletop-simulator",
+			"written": false,
+			"titleEn": "Tabletop Simulator",
+			"nameZh": null,
+			"year": 2014,
+			"steam": [
+				286160
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": null,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/tabletop-simulator/",
+				"source": "metacritic"
+			},
+			"mcSlug": "tabletop-simulator",
+			"playtime": {
+				"hours": 17.1,
+				"sources": {
+					"steam": 17.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-tabletop-simulator.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-split-fiction",
+			"written": false,
+			"titleEn": "Split Fiction",
+			"nameZh": null,
+			"year": 2025,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 91,
+				"reviews": 116,
+				"platform": "PlayStation 5",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/split-fiction/",
+				"source": "metacritic"
+			},
+			"mcSlug": "split-fiction",
+			"playtime": {
+				"hours": 16.7,
+				"sources": {
+					"psn": 16.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-split-fiction.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-remnant-from-the-ashes",
+			"written": false,
+			"titleEn": "Remnant: From the Ashes",
+			"nameZh": null,
+			"year": 2019,
+			"steam": [
+				617290
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 78,
+				"reviews": 45,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/remnant-from-the-ashes/",
+				"source": "metacritic"
+			},
+			"mcSlug": "remnant-from-the-ashes",
+			"playtime": {
+				"hours": 15.6,
+				"sources": {
+					"steam": 15.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-remnant-from-the-ashes.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-absolum",
+			"written": false,
+			"titleEn": "Absolum",
+			"nameZh": null,
+			"year": 2025,
+			"steam": [
+				1904480
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 87,
+				"reviews": 55,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/absolum/",
+				"source": "metacritic"
+			},
+			"mcSlug": "absolum",
+			"playtime": {
+				"hours": 15.1,
+				"sources": {
+					"steam": 15.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-absolum.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-super-bunny-man",
+			"written": false,
+			"titleEn": "Super Bunny Man",
+			"nameZh": null,
+			"year": 2023,
+			"steam": [
+				673750
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": null,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/super-bunny-man/",
+				"source": "metacritic"
+			},
+			"mcSlug": "super-bunny-man",
+			"playtime": {
+				"hours": 14.8,
+				"sources": {
+					"steam": 14.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-super-bunny-man.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-chinese-parents",
+			"written": false,
+			"titleEn": "Chinese Parents",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [
+				736190
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": 2,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/chinese-parents/",
+				"source": "metacritic"
+			},
+			"mcSlug": "chinese-parents",
+			"playtime": {
+				"hours": 14.2,
+				"sources": {
+					"steam": 14.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-chinese-parents.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-fat-princess-adventures",
+			"written": false,
+			"titleEn": "Fat Princess Adventures",
+			"nameZh": null,
+			"year": 2015,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 63,
+				"reviews": 36,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/fat-princess-adventures/",
+				"source": "metacritic"
+			},
+			"mcSlug": "fat-princess-adventures",
+			"playtime": {
+				"hours": 13.9,
+				"sources": {
+					"psn": 13.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-fat-princess-adventures.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-counter-strike-2",
+			"written": false,
+			"titleEn": "Counter-Strike 2",
+			"nameZh": null,
+			"year": 2023,
+			"steam": [
+				730
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2025,
+					"category": "最佳电竞游戏"
+				}
+			],
+			"metacritic": {
+				"score": 82,
+				"reviews": 16,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/counter-strike-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "counter-strike-2",
+			"playtime": {
+				"hours": 13.3,
+				"sources": {
+					"steam": 13.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-counter-strike-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-erica",
+			"written": false,
+			"titleEn": "Erica",
+			"nameZh": null,
+			"year": 2019,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 69,
+				"reviews": 43,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/erica/",
+				"source": "metacritic"
+			},
+			"mcSlug": "erica",
+			"playtime": {
+				"hours": 12.4,
+				"sources": {
+					"psn": 12.4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-erica.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-rise-of-the-tomb-raider",
+			"written": false,
+			"titleEn": "Rise of the Tomb Raider",
+			"nameZh": null,
+			"year": 2015,
+			"steam": [
+				391220
+			],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "年度 Xbox 游戏"
+				}
+			],
+			"metacritic": {
+				"score": 86,
+				"reviews": 103,
+				"platform": "Xbox One",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/rise-of-the-tomb-raider/",
+				"source": "metacritic"
+			},
+			"mcSlug": "rise-of-the-tomb-raider",
+			"playtime": {
+				"hours": 11.7,
+				"sources": {
+					"psn": 11.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-rise-of-the-tomb-raider.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-balatro",
+			"written": false,
+			"titleEn": "Balatro",
+			"nameZh": null,
+			"year": 2024,
+			"steam": [
+				2379780
+			],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2024,
+					"category": "最佳移动游戏"
+				},
+				{
+					"show": "TGA",
+					"year": 2024,
+					"category": "最佳独立首作"
+				},
+				{
+					"show": "TGA",
+					"year": 2024,
+					"category": "最佳独立游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2024,
+					"category": "最佳独立游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2024,
+					"category": "突破奖"
+				}
+			],
+			"metacritic": {
+				"score": 90,
+				"reviews": 35,
+				"platform": "PC",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/balatro/",
+				"source": "metacritic"
+			},
+			"mcSlug": "balatro",
+			"playtime": {
+				"hours": 10.6,
+				"sources": {
+					"steam": 10.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-balatro.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-journey",
+			"written": false,
+			"titleEn": "Journey",
+			"nameZh": null,
+			"year": 2012,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 92,
+				"reviews": 78,
+				"platform": "PlayStation 3",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/journey/",
+				"source": "metacritic"
+			},
+			"mcSlug": "journey",
+			"playtime": {
+				"hours": 10.6,
+				"sources": {
+					"psn": 10.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-journey.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-chained-together",
+			"written": false,
+			"titleEn": "Chained Together",
+			"nameZh": null,
+			"year": 2024,
+			"steam": [
+				2567870
+			],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2024,
+					"category": "主播选择奖"
+				}
+			],
+			"metacritic": {
+				"score": null,
+				"reviews": null,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/chained-together/",
+				"source": "metacritic"
+			},
+			"mcSlug": "chained-together",
+			"playtime": {
+				"hours": 10.3,
+				"sources": {
+					"steam": 10.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-chained-together.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-we-were-here-together",
+			"written": false,
+			"titleEn": "We Were Here Together",
+			"nameZh": null,
+			"year": 2019,
+			"steam": [
+				865360
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 77,
+				"reviews": 6,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/we-were-here-together/",
+				"source": "metacritic"
+			},
+			"mcSlug": "we-were-here-together",
+			"playtime": {
+				"hours": 9.9,
+				"sources": {
+					"steam": 9.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-we-were-here-together.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-overcooked-all-you-can-eat",
+			"written": false,
+			"titleEn": "Overcooked! All You Can Eat",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [
+				1243830
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 84,
+				"reviews": 13,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/overcooked-all-you-can-eat/",
+				"source": "metacritic"
+			},
+			"mcSlug": "overcooked-all-you-can-eat",
+			"playtime": {
+				"hours": 9.8,
+				"sources": {
+					"steam": 9.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-overcooked-all-you-can-eat.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-peak",
+			"written": false,
+			"titleEn": "PEAK",
+			"nameZh": null,
+			"year": 2025,
+			"steam": [
+				3527290
+			],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2025,
+					"category": "最佳多人游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2025,
+					"category": "主播选择奖"
+				}
+			],
+			"metacritic": {
+				"score": 82,
+				"reviews": 11,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/peak/",
+				"source": "metacritic"
+			},
+			"mcSlug": "peak",
+			"playtime": {
+				"hours": 9.1,
+				"sources": {
+					"steam": 9.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-peak.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-naraka-bladepoint",
+			"written": false,
+			"titleEn": "NARAKA: BLADEPOINT",
+			"nameZh": null,
+			"year": 2021,
+			"steam": [
+				1203220
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 71,
+				"reviews": 23,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/naraka-bladepoint/",
+				"source": "metacritic"
+			},
+			"mcSlug": "naraka-bladepoint",
+			"playtime": {
+				"hours": 8.2,
+				"sources": {
+					"steam": 8.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-naraka-bladepoint.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-watch-dogs-2",
+			"written": false,
+			"titleEn": "Watch_Dogs 2",
+			"nameZh": null,
+			"year": 2016,
+			"steam": [
+				447040
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 82,
+				"reviews": 99,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/watch-dogs-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "watch-dogs-2",
+			"playtime": {
+				"hours": 8,
+				"sources": {
+					"steam": 4,
+					"psn": 4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-watch-dogs-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-project-winter",
+			"written": false,
+			"titleEn": "Project Winter",
+			"nameZh": null,
+			"year": 2021,
+			"steam": [
+				774861
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 75,
+				"reviews": 6,
+				"platform": "Xbox One",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/project-winter/",
+				"source": "metacritic"
+			},
+			"mcSlug": "project-winter",
+			"playtime": {
+				"hours": 7.9,
+				"sources": {
+					"steam": 7.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-project-winter.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-a-way-out",
+			"written": false,
+			"titleEn": "A Way Out",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 78,
+				"reviews": 66,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/a-way-out/",
+				"source": "metacritic"
+			},
+			"mcSlug": "a-way-out",
+			"playtime": {
+				"hours": 7.9,
+				"sources": {
+					"psn": 7.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-a-way-out.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-dota-2",
+			"written": false,
+			"titleEn": "Dota 2",
+			"nameZh": null,
+			"year": 2013,
+			"steam": [
+				570
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 90,
+				"reviews": 33,
+				"platform": "PC",
+				"mustPlay": true,
+				"url": "https://www.metacritic.com/game/dota-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "dota-2",
+			"playtime": {
+				"hours": 6.9,
+				"sources": {
+					"steam": 6.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-dota-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-assassins-creed-odyssey",
+			"written": false,
+			"titleEn": "Assassin's Creed Odyssey",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 83,
+				"reviews": 95,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/assassins-creed-odyssey/",
+				"source": "metacritic"
+			},
+			"mcSlug": "assassins-creed-odyssey",
+			"playtime": {
+				"hours": 6.4,
+				"sources": {
+					"psn": 6.4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-assassins-creed-odyssey.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-human-fall-flat",
+			"written": false,
+			"titleEn": "Human Fall Flat",
+			"nameZh": null,
+			"year": 2016,
+			"steam": [
+				477160
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 70,
+				"reviews": 22,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/human-fall-flat/",
+				"source": "metacritic"
+			},
+			"mcSlug": "human-fall-flat",
+			"playtime": {
+				"hours": 6.3,
+				"sources": {
+					"steam": 6.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-human-fall-flat.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-titanfall-2",
+			"written": false,
+			"titleEn": "Titanfall 2",
+			"nameZh": null,
+			"year": 2016,
+			"steam": [],
+			"awards": [
+				{
+					"show": "GJ",
+					"year": 2016,
+					"category": "评论家选择奖"
+				}
+			],
+			"metacritic": {
+				"score": 89,
+				"reviews": 64,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/titanfall-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "titanfall-2",
+			"playtime": {
+				"hours": 6,
+				"sources": {
+					"psn": 6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-titanfall-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-astros-playroom",
+			"written": false,
+			"titleEn": "ASTRO's PLAYROOM",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 83,
+				"reviews": 72,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/astros-playroom/",
+				"source": "metacritic"
+			},
+			"mcSlug": "astros-playroom",
+			"playtime": {
+				"hours": 5.6,
+				"sources": {
+					"psn": 5.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-astros-playroom.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-liars-bar",
+			"written": false,
+			"titleEn": "Liar's Bar",
+			"nameZh": null,
+			"year": null,
+			"steam": [
+				3097560
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": null,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/liars-bar/",
+				"source": "metacritic"
+			},
+			"mcSlug": "liars-bar",
+			"playtime": {
+				"hours": 4.9,
+				"sources": {
+					"steam": 4.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-liars-bar.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-wo-long-fallen-dynasty",
+			"written": false,
+			"titleEn": "Wo Long: Fallen Dynasty",
+			"nameZh": null,
+			"year": 2023,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 80,
+				"reviews": 76,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/wo-long-fallen-dynasty/",
+				"source": "metacritic"
+			},
+			"mcSlug": "wo-long-fallen-dynasty",
+			"playtime": {
+				"hours": 4.8,
+				"sources": {
+					"psn": 4.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-wo-long-fallen-dynasty.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-risk-of-rain-2",
+			"written": false,
+			"titleEn": "Risk of Rain 2",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [
+				632360
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 85,
+				"reviews": 20,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/risk-of-rain-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "risk-of-rain-2",
+			"playtime": {
+				"hours": 4.7,
+				"sources": {
+					"steam": 4.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-risk-of-rain-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-pummel-party",
+			"written": false,
+			"titleEn": "Pummel Party",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [
+				880940
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": null,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/pummel-party/",
+				"source": "metacritic"
+			},
+			"mcSlug": "pummel-party",
+			"playtime": {
+				"hours": 4.6,
+				"sources": {
+					"steam": 4.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-pummel-party.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-we-were-here",
+			"written": false,
+			"titleEn": "We Were Here",
+			"nameZh": null,
+			"year": 2021,
+			"steam": [
+				582500
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 63,
+				"reviews": 4,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/we-were-here/",
+				"source": "metacritic"
+			},
+			"mcSlug": "we-were-here",
+			"playtime": {
+				"hours": 4.2,
+				"sources": {
+					"steam": 2.7,
+					"psn": 1.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-we-were-here.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-to-the-moon",
+			"written": false,
+			"titleEn": "To the Moon",
+			"nameZh": null,
+			"year": 2011,
+			"steam": [
+				206440
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 81,
+				"reviews": 26,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/to-the-moon/",
+				"source": "metacritic"
+			},
+			"mcSlug": "to-the-moon",
+			"playtime": {
+				"hours": 4.1,
+				"sources": {
+					"steam": 4.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-to-the-moon.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-late-shift",
+			"written": false,
+			"titleEn": "Late Shift",
+			"nameZh": null,
+			"year": 2017,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 72,
+				"reviews": 16,
+				"platform": "Xbox One",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/late-shift/",
+				"source": "metacritic"
+			},
+			"mcSlug": "late-shift",
+			"playtime": {
+				"hours": 3.9,
+				"sources": {
+					"psn": 3.9
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-late-shift.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-reanimal",
+			"written": false,
+			"titleEn": "REANIMAL",
+			"nameZh": null,
+			"year": 2026,
+			"steam": [
+				2129530
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 80,
+				"reviews": 67,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/reanimal/",
+				"source": "metacritic"
+			},
+			"mcSlug": "reanimal",
+			"playtime": {
+				"hours": 3.8,
+				"sources": {
+					"steam": 3.8
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-reanimal.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-cities-skylines",
+			"written": false,
+			"titleEn": "Cities: Skylines",
+			"nameZh": null,
+			"year": 2015,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 85,
+				"reviews": 60,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/cities-skylines/",
+				"source": "metacritic"
+			},
+			"mcSlug": "cities-skylines",
+			"playtime": {
+				"hours": 3.7,
+				"sources": {
+					"psn": 3.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-cities-skylines.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-tom-clancys-rainbow-six-siege",
+			"written": false,
+			"titleEn": "Tom Clancy's Rainbow Six Siege",
+			"nameZh": null,
+			"year": 2015,
+			"steam": [
+				359550
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 73,
+				"reviews": 40,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/tom-clancys-rainbow-six-siege/",
+				"source": "metacritic"
+			},
+			"mcSlug": "tom-clancys-rainbow-six-siege",
+			"playtime": {
+				"hours": 3.5,
+				"sources": {
+					"steam": 3.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-tom-clancys-rainbow-six-siege.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-tomb-raider",
+			"written": false,
+			"titleEn": "Tomb Raider",
+			"nameZh": null,
+			"year": 2013,
+			"steam": [
+				203160
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 86,
+				"reviews": 70,
+				"platform": "Xbox 360",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/tomb-raider/",
+				"source": "metacritic"
+			},
+			"mcSlug": "tomb-raider",
+			"playtime": {
+				"hours": 3.4,
+				"sources": {
+					"psn": 3.4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-tomb-raider.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-assassins-creed-the-ezio-collection",
+			"written": false,
+			"titleEn": "Assassin's Creed The Ezio Collection",
+			"nameZh": null,
+			"year": 2016,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 72,
+				"reviews": 33,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/assassins-creed-the-ezio-collection/",
+				"source": "metacritic"
+			},
+			"mcSlug": "assassins-creed-the-ezio-collection",
+			"playtime": {
+				"hours": 3.2,
+				"sources": {
+					"psn": 3.2
+				},
+				"shared": true
+			},
+			"cover": "/media/covers/g-assassins-creed-the-ezio-collection.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-watch-dogs-legion",
+			"written": false,
+			"titleEn": "Watch Dogs: Legion",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 76,
+				"reviews": 52,
+				"platform": "Xbox One",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/watch-dogs-legion/",
+				"source": "metacritic"
+			},
+			"mcSlug": "watch-dogs-legion",
+			"playtime": {
+				"hours": 3.1,
+				"sources": {
+					"psn": 3.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-watch-dogs-legion.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-cyberpunk-2077",
+			"written": false,
+			"titleEn": "Cyberpunk 2077",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [],
+			"awards": [
+				{
+					"show": "TGA",
+					"year": 2023,
+					"category": "最佳持续运营游戏"
+				},
+				{
+					"show": "GJ",
+					"year": 2023,
+					"category": "最佳资料片",
+					"note": "往日之影"
+				}
+			],
+			"metacritic": {
+				"score": 86,
+				"reviews": 106,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/cyberpunk-2077/",
+				"source": "metacritic"
+			},
+			"mcSlug": "cyberpunk-2077",
+			"playtime": {
+				"hours": 3,
+				"sources": {
+					"psn": 3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-cyberpunk-2077.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-resident-evil-resistance",
+			"written": false,
+			"titleEn": "RESIDENT EVIL RESISTANCE",
+			"nameZh": null,
+			"year": 2020,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 64,
+				"reviews": 16,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/resident-evil-resistance/",
+				"source": "metacritic"
+			},
+			"mcSlug": "resident-evil-resistance",
+			"playtime": {
+				"hours": 2.7,
+				"sources": {
+					"psn": 2.7
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-resident-evil-resistance.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-stick-fight-the-game",
+			"written": false,
+			"titleEn": "Stick Fight: The Game",
+			"nameZh": null,
+			"year": 2021,
+			"steam": [
+				674940
+			],
+			"awards": [],
+			"metacritic": {
+				"score": null,
+				"reviews": 2,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/stick-fight-the-game/",
+				"source": "metacritic"
+			},
+			"mcSlug": "stick-fight-the-game",
+			"playtime": {
+				"hours": 2.6,
+				"sources": {
+					"steam": 2.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-stick-fight-the-game.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-fast-food-simulator",
+			"written": false,
+			"titleEn": "Fast Food Simulator",
+			"nameZh": null,
+			"year": null,
+			"steam": [
+				2916430
+			],
+			"awards": [],
+			"metacritic": null,
+			"mcSlug": null,
+			"playtime": {
+				"hours": 2.6,
+				"sources": {
+					"steam": 2.6
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-fast-food-simulator.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-hover",
+			"written": false,
+			"titleEn": "Hover",
+			"nameZh": null,
+			"year": 2018,
+			"steam": [
+				280180
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 53,
+				"reviews": 9,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/hover/",
+				"source": "metacritic"
+			},
+			"mcSlug": "hover",
+			"playtime": {
+				"hours": 2.5,
+				"sources": {
+					"steam": 2.5
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-hover.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-hitman",
+			"written": false,
+			"titleEn": "HITMAN",
+			"nameZh": null,
+			"year": 2016,
+			"steam": [
+				236870
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 84,
+				"reviews": 41,
+				"platform": "PlayStation 4",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/hitman/",
+				"source": "metacritic"
+			},
+			"mcSlug": "hitman",
+			"playtime": {
+				"hours": 2.4,
+				"sources": {
+					"steam": 2.4
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-hitman.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-party-animals",
+			"written": false,
+			"titleEn": "Party Animals",
+			"nameZh": null,
+			"year": 2023,
+			"steam": [
+				1260320
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 76,
+				"reviews": 22,
+				"platform": "PC",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/party-animals/",
+				"source": "metacritic"
+			},
+			"mcSlug": "party-animals",
+			"playtime": {
+				"hours": 2.3,
+				"sources": {
+					"steam": 2.3
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-party-animals.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-moving-out-2",
+			"written": false,
+			"titleEn": "Moving Out 2",
+			"nameZh": null,
+			"year": 2023,
+			"steam": [
+				1641700
+			],
+			"awards": [],
+			"metacritic": {
+				"score": 80,
+				"reviews": 17,
+				"platform": "PlayStation 5",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/moving-out-2/",
+				"source": "metacritic"
+			},
+			"mcSlug": "moving-out-2",
+			"playtime": {
+				"hours": 2.2,
+				"sources": {
+					"steam": 2.2
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-moving-out-2.jpg",
+			"article": null
+		},
+		{
+			"slug": "g-one-night-stand",
+			"written": false,
+			"titleEn": "One Night Stand",
+			"nameZh": null,
+			"year": 2019,
+			"steam": [],
+			"awards": [],
+			"metacritic": {
+				"score": 71,
+				"reviews": 7,
+				"platform": "Nintendo Switch",
+				"mustPlay": false,
+				"url": "https://www.metacritic.com/game/one-night-stand/",
+				"source": "metacritic"
+			},
+			"mcSlug": "one-night-stand",
+			"playtime": {
+				"hours": 2.1,
+				"sources": {
+					"psn": 2.1
+				},
+				"shared": false
+			},
+			"cover": "/media/covers/g-one-night-stand.jpg",
+			"article": null
 		}
 	]
 }

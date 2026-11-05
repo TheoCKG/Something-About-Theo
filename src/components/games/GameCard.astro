@@ -3,7 +3,7 @@
 // 稀有度：拿过年度游戏 = grand（镭射金卡），拿过单项奖 = award（银色反光），其余 = none。
 // 交互（倾斜、镭射跟随、点击 hit-stop、封面过渡）统一在本文件底部的 <script> 里处理，组件被用多少次脚本都只打包一份。
 import McBadge from './McBadge.astro';
-import { AWARD_LABEL, CATEGORY_HUE, formatHours, type GameCard } from '../../data/gameCards';
+import { AWARD_LABEL, CATEGORY_HUE, UNWRITTEN_HUE, awardText, formatHours, type GameCard } from '../../data/gameCards';
 
 interface Props {
 	game: GameCard;
@@ -13,18 +13,22 @@ interface Props {
 }
 const { game, index = 0, compact = false, english = false } = Astro.props;
 const hours = formatHours(game.hours);
-const hue = CATEGORY_HUE[game.category] ?? '#d7ff3f';
+const hue = game.category ? CATEGORY_HUE[game.category] ?? '#d7ff3f' : UNWRITTEN_HUE;
+// 没写拆解的游戏不是链接，只是一张可以悬停查看的卡
+const Tag = game.href ? 'a' : 'div';
+const status = game.written ? game.category : english ? 'NOT YET WRITTEN' : '待拆解';
 const grandLabel = game.grandAwards.length > 1 ? `年度游戏 ×${game.grandAwards.length}` : game.grandAwards.length ? `${AWARD_LABEL[game.grandAwards[0].show]} 年度游戏` : '';
 const shown = game.awards.slice(0, 4);
 const more = game.awards.length - shown.length;
-const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.category} ${game.summary}`.toLocaleLowerCase();
+const searchText = [game.game, game.titleEn, game.articleTitle, game.category, game.summary].filter(Boolean).join(' ').toLocaleLowerCase();
 ---
 
 <article
-	class:list={['gw-card', `tier-${game.tier}`, compact && 'is-compact']}
+	class:list={['gw-card', `tier-${game.tier}`, compact && 'is-compact', !game.written && 'is-unwritten']}
 	style={`--i:${index};--hue:${hue}`}
 	data-slug={game.slug}
-	data-category={game.category}
+	data-category={game.category ?? ''}
+	data-written={game.written ? '1' : '0'}
 	data-index={index}
 	data-mc={game.mc?.score ?? -1}
 	data-hours={game.hours ?? -1}
@@ -33,7 +37,7 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 	data-awarded={game.awards.length > 0 ? '1' : '0'}
 	data-search={searchText}
 >
-	<a href={game.href} aria-label={`${game.game}：${game.articleTitle}`}>
+	<Tag href={game.href ?? undefined} tabindex={game.href ? undefined : 0} aria-label={game.articleTitle ? `${game.game}：${game.articleTitle}` : `${game.game}（${english ? 'not yet written' : '待拆解'}）`}>
 		<div class="gw-frame">
 			{game.cover ? (
 				<img class="gw-cover" src={game.cover} alt={`${game.titleEn} 封面`} width="600" height="900" loading={index < 8 ? 'eager' : 'lazy'} decoding="async" />
@@ -54,23 +58,23 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 			</div>
 
 			<div class="gw-caption">
-				<p class="gw-category">{game.category}</p>
+				<p class="gw-category">{status}</p>
 				<h2>{game.game}</h2>
 				<p class="gw-en">{game.titleEn}{game.year && <span> · {game.year}</span>}</p>
 			</div>
 
 			{!compact && (
 				<div class="gw-reveal" aria-hidden="true">
-					<p class="gw-summary">{game.summary}</p>
+					{game.summary ? <p class="gw-summary">{game.summary}</p> : <p class="gw-summary is-muted">{english ? 'Played, not written up yet.' : '玩过，还没写拆解。'}</p>}
 					{shown.length > 0 && (
 						<ul>
 							{shown.map((a) => (
-								<li class:list={[a.grand && 'is-grand']}><b class={`show-${a.show}`}>{AWARD_LABEL[a.show]}</b><span>{a.year} · {a.category}</span></li>
+								<li class:list={[a.grand && 'is-grand']}><b class={`show-${a.show}`}>{AWARD_LABEL[a.show]}</b><span>{a.year} · {awardText(a)}</span></li>
 							))}
 							{more > 0 && <li class="gw-more">另有 {more} 项</li>}
 						</ul>
 					)}
-					<p class="gw-read">{english ? 'Read the study ↗' : '阅读拆解 ↗'}</p>
+					{game.href && <p class="gw-read">{game.written ? (english ? 'Read the study ↗' : '阅读拆解 ↗') : english ? 'Read ↗' : '阅读文章 ↗'}</p>}
 				</div>
 			)}
 		</div>
@@ -86,7 +90,7 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 				{game.awards.length === 0 && <span class="chip is-none">{english ? 'NO MAJOR AWARD' : '无大奖'}</span>}
 			</p>
 		</div>
-	</a>
+	</Tag>
 </article>
 
 <script>
@@ -100,7 +104,7 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 	function bind(card: HTMLElement) {
 		if (card.dataset.bound) return;
 		card.dataset.bound = '1';
-		const link = card.querySelector('a')!;
+		const link = card.querySelector<HTMLAnchorElement>(':scope > a');
 		let raf = 0;
 
 		if (canTilt) {
@@ -128,7 +132,7 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 		}
 
 		// 点击：先来一下 hit-stop（短暂停顿 + 白闪），再跳转；封面挂上过渡名，进入文章时“飞”到头图
-		link.addEventListener('click', (e) => {
+		link?.addEventListener('click', (e) => {
 			if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 			e.preventDefault();
 			clearVt();
@@ -136,7 +140,7 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 			if (cover && 'startViewTransition' in document) cover.style.viewTransitionName = VT;
 			sessionStorage.setItem(KEY, card.dataset.slug ?? '');
 			card.classList.add('is-hit');
-			setTimeout(() => (location.href = link.href), matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 110);
+			setTimeout(() => (location.href = link!.href), matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 110);
 		});
 	}
 
@@ -172,8 +176,8 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 
 	.gw-card { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; --px: 50%; --py: 50%; --o: 0; --gold: #f6c453; position: relative; min-width: 0; perspective: 1000px; }
 	.gw-card[hidden] { display: none; }
-	.gw-card > a { display: block; color: inherit; text-decoration: none; transform: rotateX(var(--rx)) rotateY(var(--ry)); transform-style: preserve-3d; transition: transform .55s cubic-bezier(.2, .8, .2, 1); will-change: transform; }
-	.gw-card.is-active > a { transition: transform .08s linear; }
+	.gw-card > :is(a, div) { display: block; color: inherit; text-decoration: none; transform: rotateX(var(--rx)) rotateY(var(--ry)); transform-style: preserve-3d; transition: transform .55s cubic-bezier(.2, .8, .2, 1); will-change: transform; }
+	.gw-card.is-active > :is(a, div) { transition: transform .08s linear; }
 
 	/* ---------- 封面框 ---------- */
 	.gw-frame { position: relative; aspect-ratio: 2 / 3; overflow: hidden; background: #161915; isolation: isolate; outline: 1px solid #ffffff14; outline-offset: -1px; transition: outline-color .2s, box-shadow .3s; }
@@ -261,9 +265,13 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 	.gw-card.is-hit .gw-glare { opacity: 1; background: #ffffffcc; mix-blend-mode: normal; animation: gw-flash .11s steps(2) forwards; }
 	@keyframes gw-flash { to { opacity: 0; } }
 
+	.is-unwritten .gw-cover { filter: saturate(.55) brightness(.85); }
+	.is-unwritten:is(:hover, :focus-within) .gw-cover { filter: none; }
+	.is-unwritten > div { cursor: default; }
+	.gw-summary.is-muted { color: #8d9586; }
 	.gw-card:hover .gw-frame { box-shadow: 0 24px 50px -18px #000, 0 0 0 1px color-mix(in srgb, var(--hue) 55%, transparent); }
 	.tier-grand:hover .gw-frame { box-shadow: 0 24px 60px -16px #000, 0 0 46px -10px #f6c45399; }
-	.gw-card > a:focus-visible { outline: 2px solid var(--hue); outline-offset: 6px; }
+	.gw-card > :is(a, div):focus-visible { outline: 2px solid var(--hue); outline-offset: 6px; }
 
 	/* 入场 */
 	.gw-card.is-armed:not(.is-in) { opacity: 0; transform: translateY(28px); }
@@ -286,7 +294,7 @@ const searchText = `${game.game} ${game.titleEn} ${game.articleTitle} ${game.cat
 		.chip { font-size: 9px; padding: 2px 4px; }
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.gw-card > a, .gw-cover, .gw-reveal, .gw-caption { transition: none; }
+		.gw-card > :is(a, div), .gw-cover, .gw-reveal, .gw-caption { transition: none; }
 		.tier-grand .gw-frame::before { animation: none; }
 	}
 </style>

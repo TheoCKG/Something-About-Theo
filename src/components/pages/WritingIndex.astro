@@ -1,0 +1,53 @@
+---
+// 文章页：拆解以外的所有文字，按类型分组；空的分组不显示。游戏拆解归“游戏库”，这里只放一个入口。
+import { getCollection } from 'astro:content';
+import { WRITING_TYPES, isEnglishPath } from '../../data/site';
+import { gameCards } from '../../data/gameCards';
+
+interface Props { compact?: boolean; limit?: number }
+const { compact = false, limit } = Astro.props;
+const en = isEnglishPath(Astro.url.pathname);
+const docs = (await getCollection('docs')).filter((d) => !d.data.draft && !d.id.startsWith('en/'));
+const groups = WRITING_TYPES.map((t) => ({
+	...t,
+	items: docs
+		.filter((d) => d.id.startsWith(t.dir + '/') && !/\/index$|\/index\.mdx?$/.test(d.id))
+		.map((d) => ({ href: `/${d.id.replace(/\.mdx?$/, '')}/`, title: d.data.title, description: d.data.description ?? '' }))
+		.sort((a, b) => a.title.localeCompare(b.title)),
+})).filter((g) => g.items.length);
+const flat = groups.flatMap((g) => g.items.map((i) => ({ ...i, type: en ? g.en : g.zh })));
+const written = gameCards.filter((g) => g.written).length;
+---
+
+{compact ? (
+	<div class="writing-list">
+		{flat.slice(0, limit ?? flat.length).map((a) => (
+			<a class="writing-row" href={a.href}><span class="writing-type">{a.type}</span><span class="writing-title">{a.title}</span><span class="writing-desc">{a.description}</span><span class="writing-arrow" aria-hidden="true">↗</span></a>
+		))}
+	</div>
+) : (
+	<div class="landing not-content">
+		<header class="landing-head">
+			<p class="folio-kicker"><span class="signal-square"></span>WRITING / {en ? 'NOTES & ESSAYS' : '文章'}</p>
+			<h1>{en ? <>Notes on<br /><span>design.</span></> : <>想清楚，<br /><span>再写下来。</span></>}</h1>
+			<p class="landing-lead">{en ? 'Design notes and essays (in Chinese). Game breakdowns live in the game library.' : '设计笔记与随笔。游戏拆解按游戏归档在游戏库里。'}</p>
+		</header>
+
+		<a class="writing-promo" href="/blog/game-breakdown/">
+			<span class="folio-kicker">{en ? 'GAME LIBRARY · 中文' : '游戏库'}</span>
+			<strong>{en ? `${written} game breakdowns` : `${written} 篇游戏拆解`}</strong>
+			<span>{en ? 'Sorted by game, with playtime, Metacritic scores and awards' : '按游戏归档，附游玩时长、Metacritic 评分与获奖记录'} ↗</span>
+		</a>
+
+		{groups.map((g) => (
+			<section class="writing-group" aria-label={en ? g.en : g.zh}>
+				<div class="section-heading"><div><p class="folio-kicker">{en ? `${g.en.toUpperCase()} · ${g.items.length}` : `${g.zh} · ${g.items.length} 篇`}</p></div></div>
+				<div class="writing-list">
+					{g.items.map((a) => (
+						<a class="writing-row" href={a.href}><span class="writing-type">{en ? g.en : g.zh}</span><span class="writing-title">{a.title}</span><span class="writing-desc">{a.description}</span><span class="writing-arrow" aria-hidden="true">↗</span></a>
+					))}
+				</div>
+			</section>
+		))}
+	</div>
+)}

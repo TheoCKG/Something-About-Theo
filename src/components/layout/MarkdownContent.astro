@@ -1,6 +1,6 @@
 ---
-const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, '').replace(/\/+$/, '') || '/';
-const isLanding = path === '/' || path === '/blog/game-breakdown';
+import { isLanding } from '../../data/site';
+const landing = isLanding(Astro.url.pathname);
 ---
 
-{isLanding ? <slot /> : <div class="resume-markdown sl-markdown-content"><slot /></div>}
+{landing ? <slot /> : <div class="resume-markdown sl-markdown-content"><slot /></div>}

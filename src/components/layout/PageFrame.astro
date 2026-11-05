@@ -1,74 +1,68 @@
 ---
-// 全站外框：所有页面统一使用深色作品集外壳（2026-11 起不再使用浅蓝 Starlight 简历布局）。
+// 全站外框。导航只有四个一级栏目（见 src/data/site.ts），每个栏目一个落地页；
+// 落地页自己负责标题区，普通文章页由这里统一输出面包屑 + 标题。
 import '../../styles/portfolio.css';
 import GameArticleHeader from '../games/GameArticleHeader.astro';
 import { getGameCard } from '../../data/gameCards';
+import { NAV, WRITING_TYPES, isEnglishPath, isLanding, stripLocale } from '../../data/site';
+import { RESUME_HREF, GITHUB_HREF } from '../../data/profile';
 
 const route = Astro.locals.starlightRoute;
-const isEnglish = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/');
-const backToTopLabel = isEnglish ? 'Back to top' : '回到顶部';
-const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, '').replace(/\/+$/, '') || '/';
-const isLanding = path === '/' || path === '/blog/game-breakdown';
-const isBreakdownArticle = path.startsWith('/blog/game-breakdown/');
-const breakdownSlug = isBreakdownArticle ? path.split('/').pop()! : '';
-const game = breakdownSlug ? getGameCard(breakdownSlug) : undefined;
+const isEnglish = isEnglishPath(Astro.url.pathname);
+const path = stripLocale(Astro.url.pathname);
+const landing = isLanding(Astro.url.pathname);
+const isBreakdown = path.startsWith('/blog/game-breakdown/');
+const game = isBreakdown ? getGameCard(path.split('/').pop()!) : undefined;
+const writingType = !landing && !isBreakdown ? WRITING_TYPES.find((w) => path.startsWith('/' + w.dir + '/')) : undefined;
 const homeHref = isEnglish ? '/en/' : '/';
-const localize = (href: string) => (isEnglish ? `/en${href}` : href);
-const resumeHref = '/张文韬_战斗策划_清华大学_18523868820.pdf';
-const pageTitle = route?.entry?.data?.title ?? '';
-
-// 二级导航：经历页和博客页各自一组标签
-const experienceTabs = [
-	{ href: '/experience/work-experience', label: isEnglish ? 'Work' : '工作经历' },
-	{ href: '/experience/projects', label: isEnglish ? 'Projects' : '项目经历' },
-	{ href: '/experience/education', label: isEnglish ? 'Education' : '教育经历' },
-];
-const blogTabs = [
-	{ href: '/blog/blog-home', label: isEnglish ? 'Blog' : '博客导航' },
-	{ href: '/blog/game-breakdown', label: isEnglish ? 'Game studies' : '游戏拆解' },
-	{ href: '/blog/game-appreciation', label: isEnglish ? 'Game reviews' : '游戏鉴赏' },
-	{ href: '/blog/movie-critique', label: isEnglish ? 'Film' : '电影锐评' },
-	{ href: '/blog/study-notes', label: isEnglish ? 'Notes' : '学习笔记' },
-];
-const tabs = path.startsWith('/experience') ? experienceTabs : path.startsWith('/blog') && !path.startsWith('/blog/game-breakdown') ? blogTabs : null;
-const isTabActive = (href: string) => path === href || (href !== '/blog/blog-home' && path.startsWith(href + '/')) || (path === '/experience' && href === '/experience/work-experience');
-const kicker = path.startsWith('/experience') ? 'EXPERIENCE / 经历' : path.startsWith('/blog') ? 'JOURNAL / 博客' : '';
+const localize = (href: string) => (isEnglish ? `/en${href}/` : `${href}/`);
+const title = route?.entry?.data?.title ?? '';
+const description = route?.entry?.data?.description ?? '';
+const t = (zh: string, en: string) => (isEnglish ? en : zh);
+// 语言切换：游戏库和拆解只有中文，切英文时回英文首页
+const switchHref = isEnglish ? (path === '/' ? '/' : `${path}/`) : path === '/' || path.startsWith('/blog/') ? '/en/' : `/en${path}/`;
 ---
 
 <div class="portfolio-shell">
 	<div class="folio-progress" aria-hidden="true"></div>
 	<header class="folio-header not-content">
-		<a class="folio-logo" href={homeHref} aria-label="Theo 首页"><span class="folio-logo-mark" aria-hidden="true">t</span>THEO.</a>
-		<nav aria-label={isEnglish ? 'Main navigation' : '主导航'}>
-			<a href={`${homeHref}#work`}>{isEnglish ? 'Selected work' : '精选作品'}</a>
-			<a href="/blog/game-breakdown/" aria-current={path.startsWith('/blog/game-breakdown') ? 'page' : undefined}>{isEnglish ? 'Game studies' : '游戏拆解'}</a>
-			<a href={localize('/experience/work-experience/')} aria-current={path.startsWith('/experience') ? 'page' : undefined}>{isEnglish ? 'Experience' : '经历'}</a>
-			<a href={localize('/blog/blog-home/')} aria-current={tabs === blogTabs ? 'page' : undefined}>{isEnglish ? 'Journal' : '博客'}</a>
-			<a href={`${homeHref}#contact`}>{isEnglish ? 'Contact' : '联系'}</a>
+		<a class="folio-logo" href={homeHref} aria-label={t('Theo 首页', 'Theo home')}><span class="folio-logo-mark" aria-hidden="true">t</span>THEO.</a>
+		<nav aria-label={t('主导航', 'Main navigation')}>
+			{NAV.map((item) => (
+				<a href={item.zhOnly ? `${item.href}/` : localize(item.href)} aria-current={item.match(path) ? 'page' : undefined}>
+					{t(item.zh, item.en)}{isEnglish && item.zhOnly && <small> · 中文</small>}
+				</a>
+			))}
 		</nav>
-		<div class="folio-header-tools"><a href={isEnglish ? '/' : '/en/'} aria-label={isEnglish ? '切换到中文首页' : 'English homepage'}>{isEnglish ? '中文' : 'EN'}</a><a class="folio-header-cv" href={resumeHref} download>{isEnglish ? 'RÉSUMÉ' : '简历'} ↓</a></div>
+		<div class="folio-header-tools"><a href={switchHref} aria-label={t('English version', '切换到中文')}>{t('EN', '中文')}</a><a class="folio-header-cv" href={RESUME_HREF} download>{t('简历', 'RÉSUMÉ')} ↓</a></div>
 	</header>
-	<main id="_top" class:list={['folio-main', !isLanding && 'is-article', tabs && 'has-tabs', tabs === experienceTabs && 'is-experience']}>
-		{isBreakdownArticle && <a class="article-breadcrumb" href="/blog/game-breakdown/">← {isEnglish ? 'All game studies' : '返回游戏库'}</a>}
+
+	<main id="_top" class:list={['folio-main', !landing && 'is-article']}>
+		{isBreakdown && <a class="article-breadcrumb" href="/blog/game-breakdown/">← {t('游戏库', 'Game library')}</a>}
 		{game && <GameArticleHeader game={game} />}
-		{tabs && (
-			<div class="page-head not-content">
-				<p class="folio-kicker"><span class="signal-square"></span>{kicker}</p>
-				<h1 class="page-title">{pageTitle}</h1>
-				<nav class="section-tabs" aria-label={isEnglish ? 'Section' : '栏目'}>
-					{tabs.map((t) => <a href={localize(t.href + '/')} aria-current={isTabActive(t.href) ? 'page' : undefined}>{t.label}</a>)}
-				</nav>
-			</div>
+		{!landing && !isBreakdown && (
+			<header class="page-head not-content">
+				<a class="article-breadcrumb" href={localize('/blog')}>← {t('文章', 'Writing')}{writingType && <span> / {t(writingType.zh, writingType.en)}</span>}</a>
+				<h1 class="page-title">{title}</h1>
+				{description && <p class="page-desc">{description}</p>}
+			</header>
 		)}
 		<slot />
 	</main>
-	<footer class="folio-footer not-content"><span>THEO / COMBAT & TECHNICAL DESIGN</span><a href="#_top">{backToTopLabel} ↑</a></footer>
+
+	<footer class="folio-footer not-content">
+		<section id="contact" class:list={['contact-band', !landing && 'is-slim']} aria-label={t('联系', 'Contact')}>
+			<div><p class="folio-kicker">NEXT / LET’S CONNECT</p><p class="contact-title">LET’S MAKE<br />IT FEEL RIGHT.</p><p>{t('完整经历与联系方式，收录在我的简历中。', 'Find my experience and contact details in my résumé.')}</p></div>
+			<div class="contact-actions"><a class="folio-button" href={RESUME_HREF} download>{t('下载简历', 'Download résumé')} ↓</a><a href={GITHUB_HREF} target="_blank" rel="noreferrer">GITHUB ↗</a></div>
+		</section>
+		<div class="footer-bar"><span>THEO / COMBAT & TECHNICAL DESIGN</span><a href="#_top">{t('回到顶部', 'Back to top')} ↑</a></div>
+	</footer>
 </div>
 
 <script>
-	// 滚动进场：首页各区块、作品卡片、经历条目依次浮现（游戏小卡有自己的入场逻辑）
+	// 滚动进场：首页各区块、作品条目、经历条目依次浮现（游戏小卡有自己的入场逻辑）
 	if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-		const targets = document.querySelectorAll<HTMLElement>('.section-heading, .work-card, .experience-list > div, .about-intro, .contact-band, .is-article .resume-markdown > *:not(figure):not(details)');
+		const targets = document.querySelectorAll<HTMLElement>('.section-heading, .work-card, .work-row, .experience-list > div, .writing-row, .contact-band, .is-article .resume-markdown > *:not(figure):not(details)');
 		const io = new IntersectionObserver((entries) => {
 			for (const e of entries) {
 				if (!e.isIntersecting) continue;
@@ -77,8 +71,7 @@ const kicker = path.startsWith('/experience') ? 'EXPERIENCE / 经历' : path.sta
 			}
 		}, { rootMargin: '0px 0px -6% 0px' });
 		targets.forEach((el, i) => {
-			const r = el.getBoundingClientRect();
-			if (r.top < innerHeight) return; // 首屏内容直接显示，不闪
+			if (el.getBoundingClientRect().top < innerHeight) return; // 首屏内容直接显示，不闪
 			el.classList.add('reveal');
 			el.style.setProperty('--d', `${(i % 3) * 70}ms`);
 			io.observe(el);

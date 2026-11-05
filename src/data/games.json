@@ -1,6 +1,6 @@
 {
 	"$comment": "由 scripts/sync-games.mjs 生成，请勿手改；要改数据请编辑 games.manual.json / awards.json 后重新运行 npm run sync:games",
-	"syncedAt": "2026-11-05T10:00:34.591Z",
+	"syncedAt": "2026-11-05T10:20:08.093Z",
 	"sources": {
 		"steam": "api",
 		"psn": "api"
@@ -1548,8 +1548,8 @@
 		{
 			"slug": "g-star-wars-battlefront",
 			"written": false,
-			"titleEn": "STAR WARS Battlefront",
-			"nameZh": null,
+			"titleEn": "Star Wars Battlefront",
+			"nameZh": "星球大战：前线",
 			"year": 2015,
 			"steam": [],
 			"awards": [],
@@ -1576,7 +1576,7 @@
 			"slug": "g-fall-guys-ultimate-knockout",
 			"written": false,
 			"titleEn": "Fall Guys: Ultimate Knockout",
-			"nameZh": null,
+			"nameZh": "糖豆人：终极淘汰赛",
 			"year": 2020,
 			"steam": [],
 			"awards": [
@@ -1619,7 +1619,7 @@
 			"slug": "g-thronebreaker-the-witcher-tales",
 			"written": false,
 			"titleEn": "Thronebreaker: The Witcher Tales",
-			"nameZh": null,
+			"nameZh": "王权的陨落：巫师故事",
 			"year": 2018,
 			"steam": [],
 			"awards": [],
@@ -1645,8 +1645,8 @@
 		{
 			"slug": "g-gran-turismo-sport",
 			"written": false,
-			"titleEn": "Gran Turismo SPORT",
-			"nameZh": null,
+			"titleEn": "Gran Turismo Sport",
+			"nameZh": "GT Sport",
 			"year": 2017,
 			"steam": [],
 			"awards": [],
@@ -1673,7 +1673,7 @@
 			"slug": "g-horizon-zero-dawn",
 			"written": false,
 			"titleEn": "Horizon Zero Dawn",
-			"nameZh": null,
+			"nameZh": "地平线：零之曙光",
 			"year": 2017,
 			"steam": [],
 			"awards": [
@@ -1716,9 +1716,9 @@
 		{
 			"slug": "g-far-cry-3",
 			"written": false,
-			"titleEn": "Far Cry 3 Classic Edition",
-			"nameZh": null,
-			"year": null,
+			"titleEn": "Far Cry 3",
+			"nameZh": "孤岛惊魂3",
+			"year": 2012,
 			"steam": [],
 			"awards": [
 				{
@@ -1729,14 +1729,14 @@
 				}
 			],
 			"metacritic": {
-				"score": null,
-				"reviews": null,
-				"platform": "Nintendo Switch 2",
+				"score": 88,
+				"reviews": 43,
+				"platform": "PC",
 				"mustPlay": false,
-				"url": "https://www.metacritic.com/game/far-cry-3-classic-edition/",
+				"url": "https://www.metacritic.com/game/far-cry-3/",
 				"source": "metacritic"
 			},
-			"mcSlug": "far-cry-3-classic-edition",
+			"mcSlug": "far-cry-3",
 			"playtime": {
 				"hours": 52.3,
 				"sources": {
@@ -1751,7 +1751,7 @@
 			"slug": "g-phantom-blade-zero",
 			"written": false,
 			"titleEn": "Phantom Blade Zero",
-			"nameZh": null,
+			"nameZh": "影之刃零",
 			"year": 2026,
 			"steam": [],
 			"awards": [],
@@ -1805,7 +1805,7 @@
 			"slug": "g-assassins-creed-iv-black-flag",
 			"written": false,
 			"titleEn": "Assassin's Creed IV Black Flag",
-			"nameZh": null,
+			"nameZh": "刺客信条4：黑旗",
 			"year": 2013,
 			"steam": [],
 			"awards": [
@@ -1843,7 +1843,7 @@
 			"slug": "g-detroit-become-human",
 			"written": false,
 			"titleEn": "Detroit: Become Human",
-			"nameZh": null,
+			"nameZh": "底特律：变人",
 			"year": 2018,
 			"steam": [],
 			"awards": [
@@ -1877,7 +1877,7 @@
 			"slug": "g-resident-evil-0",
 			"written": false,
 			"titleEn": "Resident Evil 0",
-			"nameZh": null,
+			"nameZh": "生化危机0",
 			"year": 2002,
 			"steam": [],
 			"awards": [],
@@ -1903,8 +1903,8 @@
 		{
 			"slug": "g-watch-dogs",
 			"written": false,
-			"titleEn": "Watch_Dogs",
-			"nameZh": null,
+			"titleEn": "Watch Dogs",
+			"nameZh": "看门狗",
 			"year": 2014,
 			"steam": [
 				243470
@@ -1934,7 +1934,7 @@
 			"slug": "g-13-sentinels-aegis-rim",
 			"written": false,
 			"titleEn": "13 Sentinels: Aegis Rim",
-			"nameZh": null,
+			"nameZh": "十三机兵防卫圈",
 			"year": 2020,
 			"steam": [],
 			"awards": [],
@@ -1960,8 +1960,8 @@
 		{
 			"slug": "g-playerunknowns-battlegrounds",
 			"written": false,
-			"titleEn": "PUBG: BATTLEGROUNDS",
-			"nameZh": null,
+			"titleEn": "PUBG: Battlegrounds",
+			"nameZh": "绝地求生",
 			"year": 2017,
 			"steam": [
 				578080
@@ -2006,7 +2006,7 @@
 			"slug": "g-cuphead",
 			"written": false,
 			"titleEn": "Cuphead",
-			"nameZh": null,
+			"nameZh": "茶杯头",
 			"year": 2017,
 			"steam": [],
 			"awards": [
@@ -2094,7 +2094,7 @@
 			"slug": "g-nine-parchments",
 			"written": false,
 			"titleEn": "Nine Parchments",
-			"nameZh": null,
+			"nameZh": "九张羊皮纸",
 			"year": 2017,
 			"steam": [],
 			"awards": [],
@@ -2150,7 +2150,7 @@
 			"slug": "g-overcooked-2",
 			"written": false,
 			"titleEn": "Overcooked! 2",
-			"nameZh": null,
+			"nameZh": "胡闹厨房2",
 			"year": 2018,
 			"steam": [
 				728880
@@ -2186,7 +2186,7 @@
 			"slug": "g-battlefield-v",
 			"written": false,
 			"titleEn": "Battlefield V",
-			"nameZh": null,
+			"nameZh": "战地5",
 			"year": 2018,
 			"steam": [],
 			"awards": [],
@@ -2213,7 +2213,7 @@
 			"slug": "g-battlefield-6",
 			"written": false,
 			"titleEn": "Battlefield 6",
-			"nameZh": null,
+			"nameZh": "战地6",
 			"year": 2025,
 			"steam": [
 				2807960,
@@ -2249,7 +2249,7 @@
 			"slug": "g-the-order-1886",
 			"written": false,
 			"titleEn": "The Order: 1886",
-			"nameZh": null,
+			"nameZh": "教团：1886",
 			"year": 2015,
 			"steam": [],
 			"awards": [],
@@ -2276,7 +2276,7 @@
 			"slug": "g-pc-building-simulator",
 			"written": false,
 			"titleEn": "PC Building Simulator",
-			"nameZh": null,
+			"nameZh": "装机模拟器",
 			"year": 2019,
 			"steam": [
 				621060
@@ -2305,7 +2305,7 @@
 			"slug": "g-beyond-two-souls",
 			"written": false,
 			"titleEn": "Beyond: Two Souls",
-			"nameZh": null,
+			"nameZh": "超凡双生",
 			"year": 2013,
 			"steam": [],
 			"awards": [],
@@ -2332,7 +2332,7 @@
 			"slug": "g-slay-the-spire-2",
 			"written": false,
 			"titleEn": "Slay the Spire 2",
-			"nameZh": null,
+			"nameZh": "杀戮尖塔2",
 			"year": null,
 			"steam": [
 				2868840
@@ -2387,8 +2387,8 @@
 		{
 			"slug": "g-heavy-rain",
 			"written": false,
-			"titleEn": "HEAVY RAIN",
-			"nameZh": null,
+			"titleEn": "Heavy Rain",
+			"nameZh": "暴雨",
 			"year": 2010,
 			"steam": [],
 			"awards": [],
@@ -2415,7 +2415,7 @@
 			"slug": "g-tabletop-simulator",
 			"written": false,
 			"titleEn": "Tabletop Simulator",
-			"nameZh": null,
+			"nameZh": "桌游模拟器",
 			"year": 2014,
 			"steam": [
 				286160
@@ -2444,7 +2444,7 @@
 			"slug": "g-split-fiction",
 			"written": false,
 			"titleEn": "Split Fiction",
-			"nameZh": null,
+			"nameZh": "双影奇境",
 			"year": 2025,
 			"steam": [],
 			"awards": [],
@@ -2471,7 +2471,7 @@
 			"slug": "g-remnant-from-the-ashes",
 			"written": false,
 			"titleEn": "Remnant: From the Ashes",
-			"nameZh": null,
+			"nameZh": "遗迹：灰烬重生",
 			"year": 2019,
 			"steam": [
 				617290
@@ -2529,7 +2529,7 @@
 			"slug": "g-super-bunny-man",
 			"written": false,
 			"titleEn": "Super Bunny Man",
-			"nameZh": null,
+			"nameZh": "超级兔子人",
 			"year": 2023,
 			"steam": [
 				673750
@@ -2558,7 +2558,7 @@
 			"slug": "g-chinese-parents",
 			"written": false,
 			"titleEn": "Chinese Parents",
-			"nameZh": null,
+			"nameZh": "中国式家长",
 			"year": 2020,
 			"steam": [
 				736190
@@ -2614,7 +2614,7 @@
 			"slug": "g-counter-strike-2",
 			"written": false,
 			"titleEn": "Counter-Strike 2",
-			"nameZh": null,
+			"nameZh": "反恐精英2",
 			"year": 2023,
 			"steam": [
 				730
@@ -2676,7 +2676,7 @@
 			"slug": "g-rise-of-the-tomb-raider",
 			"written": false,
 			"titleEn": "Rise of the Tomb Raider",
-			"nameZh": null,
+			"nameZh": "古墓丽影：崛起",
 			"year": 2015,
 			"steam": [
 				391220
@@ -2711,7 +2711,7 @@
 			"slug": "g-balatro",
 			"written": false,
 			"titleEn": "Balatro",
-			"nameZh": null,
+			"nameZh": "小丑牌",
 			"year": 2024,
 			"steam": [
 				2379780
@@ -2766,7 +2766,7 @@
 			"slug": "g-journey",
 			"written": false,
 			"titleEn": "Journey",
-			"nameZh": null,
+			"nameZh": "风之旅人",
 			"year": 2012,
 			"steam": [],
 			"awards": [],
@@ -2793,7 +2793,7 @@
 			"slug": "g-chained-together",
 			"written": false,
 			"titleEn": "Chained Together",
-			"nameZh": null,
+			"nameZh": "链在一起",
 			"year": 2024,
 			"steam": [
 				2567870
@@ -2857,7 +2857,7 @@
 			"slug": "g-overcooked-all-you-can-eat",
 			"written": false,
 			"titleEn": "Overcooked! All You Can Eat",
-			"nameZh": null,
+			"nameZh": "胡闹厨房：全都好吃",
 			"year": 2020,
 			"steam": [
 				1243830
@@ -2925,8 +2925,8 @@
 		{
 			"slug": "g-naraka-bladepoint",
 			"written": false,
-			"titleEn": "NARAKA: BLADEPOINT",
-			"nameZh": null,
+			"titleEn": "Naraka: Bladepoint",
+			"nameZh": "永劫无间",
 			"year": 2021,
 			"steam": [
 				1203220
@@ -2954,8 +2954,8 @@
 		{
 			"slug": "g-watch-dogs-2",
 			"written": false,
-			"titleEn": "Watch_Dogs 2",
-			"nameZh": null,
+			"titleEn": "Watch Dogs 2",
+			"nameZh": "看门狗2",
 			"year": 2016,
 			"steam": [
 				447040
@@ -2985,7 +2985,7 @@
 			"slug": "g-project-winter",
 			"written": false,
 			"titleEn": "Project Winter",
-			"nameZh": null,
+			"nameZh": "冬日计划",
 			"year": 2021,
 			"steam": [
 				774861
@@ -3014,7 +3014,7 @@
 			"slug": "g-a-way-out",
 			"written": false,
 			"titleEn": "A Way Out",
-			"nameZh": null,
+			"nameZh": "逃出生天",
 			"year": 2018,
 			"steam": [],
 			"awards": [],
@@ -3041,7 +3041,7 @@
 			"slug": "g-dota-2",
 			"written": false,
 			"titleEn": "Dota 2",
-			"nameZh": null,
+			"nameZh": "刀塔2",
 			"year": 2013,
 			"steam": [
 				570
@@ -3070,7 +3070,7 @@
 			"slug": "g-assassins-creed-odyssey",
 			"written": false,
 			"titleEn": "Assassin's Creed Odyssey",
-			"nameZh": null,
+			"nameZh": "刺客信条：奥德赛",
 			"year": 2018,
 			"steam": [],
 			"awards": [],
@@ -3097,7 +3097,7 @@
 			"slug": "g-human-fall-flat",
 			"written": false,
 			"titleEn": "Human Fall Flat",
-			"nameZh": null,
+			"nameZh": "人类一败涂地",
 			"year": 2016,
 			"steam": [
 				477160
@@ -3126,7 +3126,7 @@
 			"slug": "g-titanfall-2",
 			"written": false,
 			"titleEn": "Titanfall 2",
-			"nameZh": null,
+			"nameZh": "泰坦陨落2",
 			"year": 2016,
 			"steam": [],
 			"awards": [
@@ -3158,8 +3158,8 @@
 		{
 			"slug": "g-astros-playroom",
 			"written": false,
-			"titleEn": "ASTRO's PLAYROOM",
-			"nameZh": null,
+			"titleEn": "Astro's Playroom",
+			"nameZh": "宇宙机器人无线控制器使用指南",
 			"year": 2020,
 			"steam": [],
 			"awards": [],
@@ -3186,7 +3186,7 @@
 			"slug": "g-liars-bar",
 			"written": false,
 			"titleEn": "Liar's Bar",
-			"nameZh": null,
+			"nameZh": "骗子酒馆",
 			"year": null,
 			"steam": [
 				3097560
@@ -3215,7 +3215,7 @@
 			"slug": "g-wo-long-fallen-dynasty",
 			"written": false,
 			"titleEn": "Wo Long: Fallen Dynasty",
-			"nameZh": null,
+			"nameZh": "卧龙：苍天陨落",
 			"year": 2023,
 			"steam": [],
 			"awards": [],
@@ -3242,7 +3242,7 @@
 			"slug": "g-risk-of-rain-2",
 			"written": false,
 			"titleEn": "Risk of Rain 2",
-			"nameZh": null,
+			"nameZh": "雨中冒险2",
 			"year": 2020,
 			"steam": [
 				632360
@@ -3330,7 +3330,7 @@
 			"slug": "g-to-the-moon",
 			"written": false,
 			"titleEn": "To the Moon",
-			"nameZh": null,
+			"nameZh": "去月球",
 			"year": 2011,
 			"steam": [
 				206440
@@ -3415,7 +3415,7 @@
 			"slug": "g-cities-skylines",
 			"written": false,
 			"titleEn": "Cities: Skylines",
-			"nameZh": null,
+			"nameZh": "城市：天际线",
 			"year": 2015,
 			"steam": [],
 			"awards": [],
@@ -3442,7 +3442,7 @@
 			"slug": "g-tom-clancys-rainbow-six-siege",
 			"written": false,
 			"titleEn": "Tom Clancy's Rainbow Six Siege",
-			"nameZh": null,
+			"nameZh": "彩虹六号：围攻",
 			"year": 2015,
 			"steam": [
 				359550
@@ -3471,7 +3471,7 @@
 			"slug": "g-tomb-raider",
 			"written": false,
 			"titleEn": "Tomb Raider",
-			"nameZh": null,
+			"nameZh": "古墓丽影",
 			"year": 2013,
 			"steam": [
 				203160
@@ -3500,7 +3500,7 @@
 			"slug": "g-assassins-creed-the-ezio-collection",
 			"written": false,
 			"titleEn": "Assassin's Creed The Ezio Collection",
-			"nameZh": null,
+			"nameZh": "刺客信条：艾吉奥合集",
 			"year": 2016,
 			"steam": [],
 			"awards": [],
@@ -3527,7 +3527,7 @@
 			"slug": "g-watch-dogs-legion",
 			"written": false,
 			"titleEn": "Watch Dogs: Legion",
-			"nameZh": null,
+			"nameZh": "看门狗：军团",
 			"year": 2020,
 			"steam": [],
 			"awards": [],
@@ -3554,7 +3554,7 @@
 			"slug": "g-cyberpunk-2077",
 			"written": false,
 			"titleEn": "Cyberpunk 2077",
-			"nameZh": null,
+			"nameZh": "赛博朋克2077",
 			"year": 2020,
 			"steam": [],
 			"awards": [
@@ -3592,8 +3592,8 @@
 		{
 			"slug": "g-resident-evil-resistance",
 			"written": false,
-			"titleEn": "RESIDENT EVIL RESISTANCE",
-			"nameZh": null,
+			"titleEn": "Resident Evil Resistance",
+			"nameZh": "生化危机：抵抗",
 			"year": 2020,
 			"steam": [],
 			"awards": [],
@@ -3699,8 +3699,8 @@
 		{
 			"slug": "g-hitman",
 			"written": false,
-			"titleEn": "HITMAN",
-			"nameZh": null,
+			"titleEn": "Hitman",
+			"nameZh": "杀手",
 			"year": 2016,
 			"steam": [
 				236870
@@ -3729,7 +3729,7 @@
 			"slug": "g-party-animals",
 			"written": false,
 			"titleEn": "Party Animals",
-			"nameZh": null,
+			"nameZh": "猛兽派对",
 			"year": 2023,
 			"steam": [
 				1260320
@@ -3758,7 +3758,7 @@
 			"slug": "g-moving-out-2",
 			"written": false,
 			"titleEn": "Moving Out 2",
-			"nameZh": null,
+			"nameZh": "胡闹搬家2",
 			"year": 2023,
 			"steam": [
 				1641700

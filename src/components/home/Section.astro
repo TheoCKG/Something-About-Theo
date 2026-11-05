@@ -1,0 +1,40 @@
+---
+// 首页 / 栏目页通用区块：左侧编号轨道（大号编号 + 栏目名 + 代码 + 条码），右侧标题和内容。
+// 版式参考 chenlizhe.cn 的 §01–§06 区块，配色沿用本站的深色 + 荧光绿。
+interface Props {
+	id?: string;
+	num: number;
+	total?: number;
+	name: string; // 轨道上的栏目名，如“教育经历”
+	code: string; // 如 EDU
+	title: string; // 区块大标题
+	lead?: string;
+	alt?: boolean; // 交替底色
+	link?: { href: string; label: string };
+	headingLevel?: 'h1' | 'h2';
+}
+const { id, num, total = 5, name, code, title, lead, alt = false, link, headingLevel = 'h2' } = Astro.props;
+const n = String(num).padStart(2, '0');
+const H = headingLevel;
+const headingId = id ? `${id}-heading` : undefined;
+---
+
+<section id={id} class:list={['sec', alt && 'is-alt']} aria-labelledby={headingId}>
+	<aside class="sec-rail" aria-hidden="true">
+		<span class="sec-num">{n}</span>
+		<span class="sec-name">{name}</span>
+		<span class="sec-code">{code}/{n}</span>
+		<i class="sec-bar"></i>
+		<span class="sec-sheet">SEC {n} / {String(total).padStart(2, '0')}</span>
+		<i class="sec-barcode"></i>
+	</aside>
+	<div class="sec-body">
+		<header class="sec-head">
+			<p class="sec-mobile-num" aria-hidden="true">{n} · {name}</p>
+			<H id={headingId}>{title}</H>
+			{lead && <p class="sec-lead">{lead}</p>}
+		</header>
+		<slot />
+		{link && <a class="pill-link" href={link.href}><i aria-hidden="true"></i>{link.label}<span aria-hidden="true">→</span></a>}
+	</div>
+</section>

@@ -18,10 +18,12 @@
 			"titleEn": "Star Wars Battlefront"
 		},
 		"Fall Guys: Ultimate Knockout": {
-			"zh": "糖豆人：终极淘汰赛"
+			"zh": "糖豆人：终极淘汰赛",
+			"cover": "/media/covers/g-fall-guys-ultimate-knockout.jpg"
 		},
 		"Thronebreaker: The Witcher Tales": {
-			"zh": "王权的陨落：巫师故事"
+			"zh": "王权的陨落：巫师故事",
+			"cover": "/media/covers/g-thronebreaker-the-witcher-tales.jpg"
 		},
 		"Gran Turismo SPORT": {
 			"zh": "GT Sport",
@@ -46,11 +48,13 @@
 			"zh": "底特律：变人"
 		},
 		"Resident Evil 0": {
-			"zh": "生化危机0"
+			"zh": "生化危机0",
+			"cover": "/media/covers/g-resident-evil-0.jpg"
 		},
 		"Watch_Dogs": {
 			"zh": "看门狗",
-			"titleEn": "Watch Dogs"
+			"titleEn": "Watch Dogs",
+			"cover": "/media/covers/g-watch-dogs.jpg"
 		},
 		"13 Sentinels: Aegis Rim": {
 			"zh": "十三机兵防卫圈"
@@ -63,7 +67,8 @@
 			"zh": "茶杯头"
 		},
 		"Nine Parchments": {
-			"zh": "九张羊皮纸"
+			"zh": "九张羊皮纸",
+			"cover": "/media/covers/g-nine-parchments.jpg"
 		},
 		"Overcooked! 2": {
 			"zh": "胡闹厨房2"
@@ -75,13 +80,15 @@
 			"zh": "战地5"
 		},
 		"Battlefield 6": {
-			"zh": "战地6"
+			"zh": "战地6",
+			"cover": "/media/covers/g-battlefield-6.jpg"
 		},
 		"The Order: 1886": {
 			"zh": "教团：1886"
 		},
 		"PC Building Simulator": {
-			"zh": "装机模拟器"
+			"zh": "装机模拟器",
+			"cover": "/media/covers/g-pc-building-simulator.jpg"
 		},
 		"Beyond: Two Souls": {
 			"zh": "超凡双生"
@@ -196,6 +203,9 @@
 		},
 		"Liar's Bar": {
 			"zh": "骗子酒馆"
+		},
+		"We Were Here": {
+			"cover": "/media/covers/g-we-were-here.jpg"
 		}
 	},
 	"games": [
@@ -356,7 +366,8 @@
 			"psn": [
 				"overwatch"
 			],
-			"hours": 436
+			"hours": 436,
+			"cover": "/media/covers/overwatch.jpg"
 		},
 		{
 			"slug": "the-division",

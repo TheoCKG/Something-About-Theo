@@ -1,5 +1,7 @@
-// 作品与经历的唯一数据源：作品页（/work）、关于页（/about）、首页都从这里取，改一处全站同步。
+// 履历的唯一数据源。首页按 教育 → 工作 → 游戏 → 项目 → 博客 的顺序排列，教育 / 工作 / 项目都只在首页出现一次。
 // 内容来自原 experience/*.mdx（2026-11 重构时迁移，文字未改写）。
+//   education：教育经历
+//   works：项目，job 字段有值的是工作经历（公司 + 职位），没有的是课程 / 训练营项目
 
 export type Lang = 'zh' | 'en';
 type T = Record<Lang, string>;
@@ -17,6 +19,7 @@ export interface WorkItem {
 	honor?: T;
 	points: Record<Lang, string[]>;
 	featured?: boolean;
+	job?: { org: T; position: T; start: string }; // 有值 = 工作经历
 }
 
 export const works: WorkItem[] = [
@@ -38,6 +41,7 @@ export const works: WorkItem[] = [
 		art: 'npc',
 		period: '2023 – 2024',
 		kind: { zh: '职业项目 · 元绎娱乐', en: 'Professional · YuanYi Entertainment' },
+		job: { org: { zh: '元绎娱乐', en: 'YuanYi Entertainment' }, position: { zh: 'AI 策划', en: 'AI Designer' }, start: '2023' },
 		title: { zh: '会回应的游戏世界', en: 'A world that responds' },
 		context: { zh: '元绎娱乐 · AI 策划', en: 'YuanYi Entertainment · AI Designer' },
 		summary: { zh: '由 UE5 + LLM 驱动的 AI NPC 模拟世界，游戏对象基于大模型自主感知、决策、行动。', en: 'A UE5 + LLM driven world where game objects perceive, decide, and act on their own.' },
@@ -65,6 +69,7 @@ export const works: WorkItem[] = [
 		art: 'movement',
 		period: '2022 – 2023',
 		kind: { zh: '职业项目 · 祖龙娱乐', en: 'Professional · Archosaur Games' },
+		job: { org: { zh: '祖龙娱乐', en: 'Archosaur Games' }, position: { zh: '战斗策划', en: 'Combat Designer' }, start: '2022' },
 		title: { zh: '动作与战斗机制', en: 'Movement & combat' },
 		context: { zh: '祖龙娱乐 · 战斗策划', en: 'Archosaur Games · Combat Designer' },
 		summary: { zh: '三人小队，英雄技能 + 动作射击类 FPS/TPS 大逃杀。', en: 'A three-player squad hero shooter (FPS/TPS battle royale).' },
@@ -88,7 +93,7 @@ export const works: WorkItem[] = [
 	{
 		id: 'rift',
 		art: 'rift',
-		period: '2025.10 – 2026.12',
+		period: '2025.10',
 		kind: { zh: '课程项目', en: 'Course project' },
 		title: { zh: '裂隙奇兵', en: 'Rift Vanguard' },
 		context: { zh: '清华《互动媒体制作工作坊（基础）》', en: 'Tsinghua interactive media workshop' },
@@ -113,20 +118,37 @@ export const works: WorkItem[] = [
 	},
 ];
 
-export interface TimelineItem {
-	period: string;
-	org: T;
-	role: T;
-	note?: T;
-	code: string;
-	workId?: string;
+export const jobs = works.filter((w) => w.job);
+export const projects = works.filter((w) => !w.job);
+
+export interface EducationItem {
+	id: string;
+	start: string;
+	period: T;
+	school: T;
+	degree: T;
+	notes: Record<Lang, string[]>;
+	projectIds?: string[]; // 在校期间做的项目，链接到项目经历
 }
 
-export const timeline: TimelineItem[] = [
-	{ period: '2025 —', org: { zh: '清华大学', en: 'Tsinghua University' }, role: { zh: '互动媒体设计与技术 · 硕士在读', en: 'M.S. · Interactive Media Design & Technology' }, code: 'LEARN' },
-	{ period: '2023 — 2024', org: { zh: '元绎娱乐', en: 'YuanYi Entertainment' }, role: { zh: 'AI 策划 · NPC 感知与行为系统', en: 'AI Designer · NPC perception & behavior' }, note: { zh: '2023 年“优秀员工”', en: 'Outstanding Employee' }, code: 'SYSTEMS', workId: 'ai-npc' },
-	{ period: '2022 — 2023', org: { zh: '祖龙娱乐', en: 'Archosaur Games' }, role: { zh: '战斗策划 · 动作与英雄技能', en: 'Combat Designer · movement & hero abilities' }, note: { zh: '2022 年“最佳新人”', en: 'Best Newcomer' }, code: 'COMBAT', workId: 'combat' },
-	{ period: '2018 — 2022', org: { zh: '北京大学', en: 'Peking University' }, role: { zh: '光华管理学院 · 市场营销本科', en: 'Guanghua School of Management · B.A. Marketing' }, note: { zh: '以 2018 年重庆市高考理科第 6 名获北京大学新生奖学金', en: 'Freshman scholarship (6th in Chongqing science gaokao)' }, code: 'FOUNDATION' },
+export const education: EducationItem[] = [
+	{
+		id: 'tsinghua',
+		start: '2025',
+		period: { zh: '2025 — 至今', en: '2025 — Present' },
+		school: { zh: '清华大学', en: 'Tsinghua University' },
+		degree: { zh: '互动媒体设计与技术 · 硕士在读', en: 'M.S. · Interactive Media Design & Technology' },
+		notes: { zh: [], en: [] },
+		projectIds: ['rift'],
+	},
+	{
+		id: 'pku',
+		start: '2018',
+		period: { zh: '2018 — 2022', en: '2018 — 2022' },
+		school: { zh: '北京大学', en: 'Peking University' },
+		degree: { zh: '光华管理学院 · 市场营销本科', en: 'Guanghua School of Management · B.A. Marketing' },
+		notes: { zh: ['以 2018 年重庆市高考理科第 6 名获北京大学新生奖学金'], en: ['Freshman scholarship (6th in Chongqing science gaokao, 2018)'] },
+	},
 ];
 
 export const RESUME_HREF = '/张文韬_战斗策划_清华大学_18523868820.pdf';

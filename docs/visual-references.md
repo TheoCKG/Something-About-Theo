@@ -35,6 +35,7 @@
 | Lusion | https://lusion.co/ | WebGL 动效工作室官网，转场和滚动节奏 |
 | Awwwards Portfolio 分类 | https://www.awwwards.com/websites/portfolio/ | 获奖作品集合集，按年份翻 |
 | Godly | https://godly.website/ | 网页设计灵感合集，偏大字排版和动效 |
+| Lizhe Chen | https://www.chenlizhe.cn/ | **2026-11 第三轮已用**：吸顶导航 + `[ 当前项 ]` 高亮、左侧编号轨道（大号编号 / 代码 / 色条 / 条码）、日志卡时间线、MODULE 项目卡、药丸按钮、交替底色 |
 
 ## 4. 技术实现参考
 

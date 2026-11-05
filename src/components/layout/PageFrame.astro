@@ -1,6 +1,6 @@
 ---
-// 全站外框。导航只有四个一级栏目（见 src/data/site.ts），每个栏目一个落地页；
-// 落地页自己负责标题区，普通文章页由这里统一输出面包屑 + 标题。
+// 全站外框。导航按履历顺序：教育 → 工作 → 游戏 → 项目 → 博客（见 src/data/site.ts）。
+// 教育 / 工作 / 项目是首页锚点，游戏 / 博客是独立页面；落地页自己负责标题区，普通文章页由这里统一输出面包屑 + 标题。
 import '../../styles/portfolio.css';
 import GameArticleHeader from '../games/GameArticleHeader.astro';
 import { getGameCard } from '../../data/gameCards';
@@ -15,6 +15,10 @@ const isBreakdown = path.startsWith('/blog/game-breakdown/');
 const game = isBreakdown ? getGameCard(path.split('/').pop()!) : undefined;
 const writingType = !landing && !isBreakdown ? WRITING_TYPES.find((w) => path.startsWith('/' + w.dir + '/')) : undefined;
 const homeHref = isEnglish ? '/en/' : '/';
+const isHome = path === '/';
+// 锚点栏目：在首页直接跳区块，在其他页面先回首页
+const navHref = (item: (typeof NAV)[number]) =>
+	item.anchor ? (isHome ? `#${item.anchor}` : `${homeHref}#${item.anchor}`) : item.zhOnly ? `${item.href}/` : localize(item.href!);
 const localize = (href: string) => (isEnglish ? `/en${href}/` : `${href}/`);
 const title = route?.entry?.data?.title ?? '';
 const description = route?.entry?.data?.description ?? '';
@@ -28,9 +32,9 @@ const switchHref = isEnglish ? (path === '/' ? '/' : `${path}/`) : path === '/' 
 	<header class="folio-header not-content">
 		<a class="folio-logo" href={homeHref} aria-label={t('Theo 首页', 'Theo home')}><span class="folio-logo-mark" aria-hidden="true">t</span>THEO.</a>
 		<nav aria-label={t('主导航', 'Main navigation')}>
-			{NAV.map((item) => (
-				<a href={item.zhOnly ? `${item.href}/` : localize(item.href)} aria-current={item.match(path) ? 'page' : undefined}>
-					{t(item.zh, item.en)}{isEnglish && item.zhOnly && <small> · 中文</small>}
+			{NAV.map((item, i) => (
+				<a href={navHref(item)} data-spy={isHome ? item.anchor ?? item.spy : undefined} aria-current={item.match?.(path) ? 'page' : undefined}>
+					<span class="nav-idx" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{t(item.zh, item.en)}{isEnglish && item.zhOnly && <small> · 中文</small>}
 				</a>
 			))}
 		</nav>
@@ -42,7 +46,7 @@ const switchHref = isEnglish ? (path === '/' ? '/' : `${path}/`) : path === '/' 
 		{game && <GameArticleHeader game={game} />}
 		{!landing && !isBreakdown && (
 			<header class="page-head not-content">
-				<a class="article-breadcrumb" href={localize('/blog')}>← {t('文章', 'Writing')}{writingType && <span> / {t(writingType.zh, writingType.en)}</span>}</a>
+				<a class="article-breadcrumb" href={localize('/blog')}>← {t('博客', 'Blog')}{writingType && <span> / {t(writingType.zh, writingType.en)}</span>}</a>
 				<h1 class="page-title">{title}</h1>
 				{description && <p class="page-desc">{description}</p>}
 			</header>
@@ -62,7 +66,7 @@ const switchHref = isEnglish ? (path === '/' ? '/' : `${path}/`) : path === '/' 
 <script>
 	// 滚动进场：首页各区块、作品条目、经历条目依次浮现（游戏小卡有自己的入场逻辑）
 	if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-		const targets = document.querySelectorAll<HTMLElement>('.section-heading, .work-card, .work-row, .experience-list > div, .writing-row, .contact-band, .is-article .resume-markdown > *:not(figure):not(details)');
+		const targets = document.querySelectorAll<HTMLElement>('.sec-head, .log-card, .module, .mini-stats, .writing-row, .contact-band, .is-article .resume-markdown > *:not(figure):not(details)');
 		const io = new IntersectionObserver((entries) => {
 			for (const e of entries) {
 				if (!e.isIntersecting) continue;

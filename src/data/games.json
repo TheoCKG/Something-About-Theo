@@ -1,6 +1,6 @@
 {
 	"$comment": "由 scripts/sync-games.mjs 生成，请勿手改；要改数据请编辑 games.manual.json / awards.json 后重新运行 npm run sync:games",
-	"syncedAt": "2026-11-05T10:20:08.093Z",
+	"syncedAt": "2026-11-05T10:37:40.435Z",
 	"sources": {
 		"steam": "api",
 		"psn": "api"
@@ -506,7 +506,7 @@
 				},
 				"shared": false
 			},
-			"cover": null
+			"cover": "/media/covers/valorant.jpg"
 		},
 		{
 			"slug": "overwatch",

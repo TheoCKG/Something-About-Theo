@@ -138,3 +138,26 @@ export const CATEGORY_HUE: Record<string, string> = {
 export const UNWRITTEN_HUE = '#9aa292';
 
 export const sourceLabel: Record<string, string> = { steam: 'Steam', psn: 'PlayStation', manual: '手动记录' };
+
+/** 游戏库总览数字（游戏库页和首页共用）。合集时长（如神海 1–3 共用一份）只计一次。 */
+export const libraryStats = (() => {
+	const timed = gameCards.filter((g) => g.hours != null);
+	const seen = new Set<number>();
+	const totalHours = timed.reduce((s, g) => {
+		if (g.sharedPlaytime) {
+			if (seen.has(g.hours as number)) return s;
+			seen.add(g.hours as number);
+		}
+		return s + (g.hours as number);
+	}, 0);
+	const scored = gameCards.filter((g) => g.mc?.score != null);
+	return {
+		games: gameCards.length,
+		written: gameCards.filter((g) => g.written).length,
+		timed: timed.length,
+		totalHours: Math.round(totalHours),
+		goty: gameCards.filter((g) => g.tier === 'grand').length,
+		awards: gameCards.reduce((s, g) => s + g.awards.length, 0),
+		avgMc: scored.length ? Math.round(scored.reduce((s, g) => s + (g.mc!.score as number), 0) / scored.length) : null,
+	};
+})();

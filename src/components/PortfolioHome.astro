@@ -1,75 +1,184 @@
 ---
-// 首页 = 四个一级栏目的预览，顺序与顶部导航一致：作品 → 游戏库 → 文章 → 关于。
-// 每个区块只放最有代表性的几条，并给出进入完整栏目的入口；联系方式在全站页脚。
+// 首页 = 一份完整的履历，顺序与顶部导航一致：教育 → 工作 → 游戏 → 项目 → 博客。
+// 教育 / 工作 / 项目只在这里写一次；游戏和博客条目多，这里放精选，完整内容在各自页面。
+// 版式参考 chenlizhe.cn（左侧编号轨道 + 右侧卡片），配色沿用深色 + 荧光绿。
 import CameraLab from './CameraLab.astro';
 import GameCard from './games/GameCard.astro';
+import Section from './home/Section.astro';
 import WorkArt from './pages/WorkArt.astro';
 import WritingIndex from './pages/WritingIndex.astro';
-import { gameCards, getGameCard } from '../data/gameCards';
-import { works, timeline, RESUME_HREF } from '../data/profile';
+import { getGameCard, libraryStats } from '../data/gameCards';
+import { education, jobs, projects, works, RESUME_HREF, GITHUB_HREF } from '../data/profile';
 
-const english = Astro.url.pathname.startsWith('/en');
-const lang = english ? 'en' : 'zh';
-const localize = (path: string) => (english ? `/en${path}` : path);
+const en = Astro.url.pathname.startsWith('/en');
+const lang = en ? 'en' : 'zh';
+const t = (zh: string, enText: string) => (en ? enText : zh);
+const localize = (path: string) => (en ? `/en${path}` : path);
 const featured = ['sekiro', 'monster-hunter-world', 'god-of-war-2018', 'apex-legends', 'the-witcher-3', 'it-takes-two'].map((slug) => getGameCard(slug)).filter((g) => g !== undefined);
-const featuredWork = works.filter((w) => w.featured);
-const writtenCount = gameCards.filter((g) => g.written).length;
+const S = libraryStats;
+const pad = (n: number) => String(n).padStart(2, '0');
+const workTitle = (id: string) => works.find((w) => w.id === id)?.title[lang] ?? id;
+const VISIBLE_POINTS = 3;
+
+const stats = [
+	{ k: 'S1', label: t('工作经历', 'Studios'), value: pad(jobs.length), unit: t('段', '') },
+	{ k: 'S2', label: t('项目', 'Projects'), value: pad(projects.length), unit: t('个', '') },
+	{ k: 'S3', label: t('玩过', 'Games played'), value: String(S.games), unit: t('款', '') },
+	{ k: 'S4', label: t('设计拆解', 'Breakdowns'), value: String(S.written), unit: t('篇', '') },
+	{ k: 'S5', label: t('游玩时长', 'Hours played'), value: S.totalHours.toLocaleString('en-US'), unit: 'h' },
+];
 ---
 
 <div class="portfolio-home not-content">
-	<section class="folio-hero" aria-labelledby="hero-heading">
-		<div class="hero-copy">
-			<p class="folio-kicker"><span class="signal-square"></span> THEO / COMBAT & TECHNICAL DESIGN</p>
+	<!-- ============ HERO ============ -->
+	<section class="hero2" aria-labelledby="hero-heading">
+		<div class="hero2-copy">
+			<p class="hero2-tag"><span>P1</span>COMBAT · 3C · AI NPC</p>
 			<h1 id="hero-heading">DESIGN<br />THE <span>FEEL.</span></h1>
-			<p class="hero-statement">{english ? 'The weight of combat. The life in a system.' : '战斗的手感，系统的生命力。'}</p>
-			<p class="hero-intro">{english ? 'I’m Wentao Zhang, a combat and technical designer exploring movement, abilities, and AI-driven characters.' : '我是张文韬 Theo，战斗与技术策划。关注角色移动、技能机制，以及能够感知、决策与行动的 AI NPC。'}</p>
-			<div class="folio-actions">
-				<a class="folio-button primary" href={localize('/work/')}>{english ? 'Explore my work' : '查看作品'} <span aria-hidden="true">↗</span></a>
-				<a class="folio-text-link" href={RESUME_HREF} download>{english ? 'Download résumé' : '下载简历'} <span aria-hidden="true">↓</span></a>
+			<p class="hero-statement">{t('战斗的手感，系统的生命力。', 'The weight of combat. The life in a system.')}</p>
+			<p class="hero-intro">{t('我是张文韬 Theo，战斗与技术策划。关注角色移动、技能机制，以及能够感知、决策与行动的 AI NPC。', 'I’m Wentao Zhang (Theo), a combat and technical designer exploring movement, abilities, and AI-driven characters.')}</p>
+			<div class="hero2-actions">
+				<a class="folio-button primary" href={RESUME_HREF} download>{t('下载简历', 'Résumé')} <span aria-hidden="true">↓</span></a>
+				<a class="chip-btn" href="#experience">{t('工作经历', 'Experience')}</a>
+				<a class="chip-btn" href="/blog/game-breakdown/">{t('游戏库', 'Game library')}</a>
+				<a class="chip-btn" href={GITHUB_HREF} target="_blank" rel="noreferrer">GitHub ↗</a>
 			</div>
-			<p class="hero-credits">{english ? 'Archosaur Games · AI NPC systems · Tsinghua IMDT' : '祖龙娱乐 · AI NPC 系统设计 · 清华 IMDT'}</p>
 		</div>
-		<div class="hero-lab"><CameraLab english={english} /></div>
-		<div class="hero-bottom"><span>PLAYER EXPERIENCE, BY DESIGN.</span><a href="#work">{english ? 'SCROLL TO EXPLORE' : '向下探索'} ↓</a></div>
+
+		<div class="player-card">
+			<div class="player-card-bar"><span class="pc-id">PLAYER 01 · THEO</span><span class="pc-status"><i></i>{t('镜头死区演示', 'Camera demo')}</span></div>
+			<CameraLab english={en} />
+			<div class="player-card-foot">
+				<div><strong>{t('张文韬 Theo', 'Wentao Zhang')}</strong><span>{t('战斗与技术策划 · 清华 IMDT', 'Combat & technical design · Tsinghua')}</span></div>
+				<i class="pc-stripes" aria-hidden="true"></i>
+			</div>
+		</div>
+
+		<dl class="stat-strip">
+			{stats.map((s) => <div><dt><em>{s.k}</em>{s.label}</dt><dd>{s.value}<small>{s.unit}</small></dd></div>)}
+		</dl>
 	</section>
 
-	<section id="work" class="folio-section" aria-labelledby="work-heading">
-		<div class="section-heading">
-			<div><p class="folio-kicker">01 / {english ? 'WORK' : '作品'}</p><h2 id="work-heading">{english ? 'From rules to experience.' : '从规则，到体验。'}</h2></div>
-			<a class="folio-text-link" href={localize('/work/')}>{english ? `All ${works.length} projects` : `全部 ${works.length} 个作品`} ↗</a>
-		</div>
-		<div class="work-grid">
-			{featuredWork.map((w, i) => (
-				<a class="work-card" href={localize(`/work/#${w.id}`)}>
-					<WorkArt item={w} index={i} />
-					<div class="work-caption"><p class="work-tags">{w.tags}</p><h3>{w.title[lang]} <span aria-hidden="true">↗</span></h3><p>{w.role[lang]}</p><span class="card-footer">{w.context[lang]}</span></div>
-				</a>
+	<!-- ============ 01 教育 ============ -->
+	<Section id="education" num={1} name={t('教育经历', 'Education')} code="EDU" title={t('教育经历', 'Education')} lead={t('北京大学市场营销本科，清华大学互动媒体硕士在读。', 'B.A. in Marketing at Peking University; now an M.S. student in interactive media at Tsinghua.')}>
+		<div class="edu-grid">
+			{education.map((e, i) => (
+				<article class="log-card">
+					<div class="log-bar"><span>LOG A · {pad(i + 1)}</span><span>{e.id.toUpperCase()}</span></div>
+					<div class="log-entry">
+						<div class="log-year"><strong>{e.start}</strong><span>{pad(i + 1)}</span></div>
+						<div class="log-main">
+							<p class="log-period">{e.period[lang]}</p>
+							<h3>{e.school[lang]}</h3>
+							<p class="log-role">{e.degree[lang]}</p>
+							{e.notes[lang].length > 0 && <ul class="dash-list">{e.notes[lang].map((n) => <li>{n}</li>)}</ul>}
+							{e.projectIds && (
+								<p class="log-links">{t('在校项目', 'Projects here')}：{e.projectIds.map((id) => <a href={`#${id}`}>{workTitle(id)} ↓</a>)}</p>
+							)}
+						</div>
+					</div>
+				</article>
 			))}
 		</div>
-	</section>
+	</Section>
 
-	<section class="folio-section research-section" aria-labelledby="studies-heading">
-		<div class="section-heading">
-			<div><p class="folio-kicker">02 / {english ? 'GAME LIBRARY' : '游戏库'}</p><h2 id="studies-heading">{english ? 'Play. Question. Break it down.' : '拆开好游戏，理解好设计。'}</h2></div>
-			<a class="folio-text-link" href="/blog/game-breakdown/">{english ? `${gameCards.length} games · ${writtenCount} studies · 中文` : `${gameCards.length} 款游戏 · ${writtenCount} 篇拆解`} ↗</a>
+	<!-- ============ 02 工作 ============ -->
+	<Section id="experience" num={2} name={t('工作经历', 'Experience')} code="JOB" title={t('工作经历', 'Experience')} lead={t('两段全职策划经历：祖龙娱乐做战斗与移动，元绎娱乐做 AI NPC 的感知与行为系统。', 'Two full-time design roles: combat and movement at Archosaur Games, AI NPC perception and behavior at YuanYi Entertainment.')} alt>
+		<div class="log-card is-wide">
+			<div class="log-bar"><span>LOG B · {t('工作经历', 'EXPERIENCE')}</span><span>{jobs.map((j) => j.job!.org.en.split(' ')[0].toUpperCase()).join(' · ')}</span></div>
+			{jobs.map((w, i) => (
+				<article class="log-entry job-entry" id={w.id}>
+					<div class="log-year"><strong>{w.job!.start}</strong><span>{pad(i + 1)}</span></div>
+					<div class="log-main">
+						<p class="log-period">{w.period}</p>
+						<h3>{w.job!.org[lang]}</h3>
+						<p class="log-role">{w.job!.position[lang]}{w.honor && <span class="honor-chip">★ {w.honor[lang]}</span>}</p>
+						<p class="job-project"><span>{t('项目', 'Project')}</span><strong>{w.title[lang]}</strong>{w.summary[lang]}</p>
+						<p class="job-scope"><span>{t('负责', 'Scope')}</span>{w.role[lang]}</p>
+						{w.points[lang].length > 0 && (
+							<ul class="dash-list">
+								{w.points[lang].slice(0, VISIBLE_POINTS).map((p) => <li>{p}</li>)}
+							</ul>
+						)}
+						{w.points[lang].length > VISIBLE_POINTS && (
+							<details class="more-points">
+								<summary>{t(`展开其余 ${w.points[lang].length - VISIBLE_POINTS} 条`, `Show ${w.points[lang].length - VISIBLE_POINTS} more`)}</summary>
+								<ul class="dash-list">{w.points[lang].slice(VISIBLE_POINTS).map((p) => <li>{p}</li>)}</ul>
+							</details>
+						)}
+						<p class="tag-row">{w.tags.split(' / ').map((tag) => <span>{tag}</span>)}</p>
+					</div>
+					<div class="job-art"><WorkArt item={w} index={i} /></div>
+				</article>
+			))}
 		</div>
+	</Section>
+
+	<!-- ============ 03 游戏 ============ -->
+	<Section
+		id="games"
+		num={3}
+		name={t('游戏经历', 'Games')}
+		code="PLAY"
+		title={t('游戏经历', 'Games')}
+		lead={t(`玩过 ${S.games} 款，其中 ${S.written} 款写了设计拆解。卡片上是我的游玩时长、Metacritic 评分和 TGA / 金摇杆奖项。`, `${S.games} games played, ${S.written} written up as design breakdowns (in Chinese), with my playtime, Metacritic scores and TGA / Golden Joystick awards.`)}
+		link={{ href: '/blog/game-breakdown/', label: t(`进入游戏库 · ${S.games} 款`, `Open the game library · ${S.games}`) }}
+	>
+		<dl class="mini-stats">
+			<div><dt>HOURS</dt><dd>{S.totalHours.toLocaleString('en-US')}</dd></div>
+			<div><dt>STUDIES</dt><dd>{S.written}</dd></div>
+			<div class="is-gold"><dt>GOTY</dt><dd>{pad(S.goty)}</dd></div>
+			<div><dt>AVG MC</dt><dd>{S.avgMc ?? '—'}</dd></div>
+		</dl>
 		<div class="studies-cards">
-			{featured.map((game, index) => <GameCard game={game} index={index} compact english={english} />)}
+			{featured.map((game, index) => <GameCard game={game} index={index} compact english={en} />)}
 		</div>
-	</section>
+	</Section>
 
-	<section class="folio-section research-section" aria-labelledby="writing-heading">
-		<div class="section-heading">
-			<div><p class="folio-kicker">03 / {english ? 'WRITING' : '文章'}</p><h2 id="writing-heading">{english ? 'Notes on design.' : '想清楚，再写下来。'}</h2></div>
-			<a class="folio-text-link" href={localize('/blog/')}>{english ? 'All writing' : '全部文章'} ↗</a>
+	<!-- ============ 04 项目 ============ -->
+	<Section id="projects" num={4} name={t('项目经历', 'Projects')} code="PRJ" title={t('项目经历', 'Projects')} lead={t('训练营和课程中参与的游戏项目。', 'Game projects from training camps and courses.')} alt>
+		<div class="module-list">
+			{projects.map((w, i) => (
+				<article class="module" id={w.id}>
+					<div class="module-bar"><span><em>MODULE {pad(i + 1)}</em>{w.title[lang]}</span><span>{w.kind[lang]} · {w.period}</span></div>
+					<div class="module-body">
+						<WorkArt item={w} index={i} />
+						<div class="module-text">
+							<h3>{w.title[lang]}</h3>
+							<p class="module-context">{w.context[lang]}</p>
+							<p class="module-summary">{w.summary[lang]}</p>
+							<dl class="module-facts">
+								<div><dt>{t('我的职责', 'My role')}</dt><dd>{w.role[lang]}</dd></div>
+								{w.honor && <div><dt>{t('荣誉', 'Recognition')}</dt><dd class="is-honor">★ {w.honor[lang]}</dd></div>}
+							</dl>
+							<p class="tag-row">{w.tags.split(' / ').map((tag) => <span>{tag}</span>)}</p>
+						</div>
+					</div>
+				</article>
+			))}
 		</div>
+	</Section>
+
+	<!-- ============ 05 博客 ============ -->
+	<Section id="blog" num={5} name={t('博客', 'Blog')} code="LOG" title={t('博客', 'Blog')} lead={t('拆解以外的文字：设计笔记与随笔。', 'Design notes and essays beyond the breakdowns (in Chinese).')} link={{ href: localize('/blog/'), label: t('全部文章', 'All posts') }}>
 		<WritingIndex compact limit={4} />
-	</section>
-
-	<section id="about" class="folio-section about-section" aria-labelledby="about-heading">
-		<div class="about-intro"><p class="folio-kicker">04 / {english ? 'ABOUT' : '关于'}</p><h2 id="about-heading">{english ? 'Design it. Build it. Feel it.' : <>设计，然后<br />让它发生。</>}</h2><p>{english ? 'My work connects player experience with the systems behind it, from combat and movement to AI character behavior.' : '我的经历连接着体验设计与技术实现：从角色的一次起跳，到 NPC 对世界的一次回应。'}</p><a class="folio-text-link" href={localize('/about/')}>{english ? 'More about me' : '关于我'} ↗</a></div>
-		<div class="experience-list">
-			{timeline.map((item) => <div><span class="experience-year">{item.period}</span><div><h3>{item.org[lang]}</h3><p>{item.role[lang]}</p></div><span class="experience-code">{item.code}</span></div>)}
-		</div>
-	</section>
+	</Section>
 </div>
+
+<script>
+	// 首页导航高亮：滚到哪个区块，顶部导航对应项就亮起
+	const links = [...document.querySelectorAll<HTMLAnchorElement>('.folio-header nav a[data-spy]')];
+	const sections = links.map((a) => document.getElementById(a.dataset.spy!)).filter((s): s is HTMLElement => !!s);
+	if (sections.length && 'IntersectionObserver' in window) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (!e.isIntersecting) continue;
+					links.forEach((a) => (a.dataset.spy === e.target.id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+				}
+			},
+			{ rootMargin: '-45% 0px -50% 0px' },
+		);
+		sections.forEach((s) => io.observe(s));
+	}
+</script>

@@ -1,34 +1,43 @@
 // @ts-check
 // 【文件作用】Astro 项目的主配置文件，控制整个网站的构建行为、集成插件和 Starlight 主题设置。
-// 站点栏目结构见 src/data/site.ts：作品 /work、游戏库 /blog/game-breakdown、文章 /blog、关于 /about。
+// 站点栏目结构见 src/data/site.ts：首页（教育 / 工作 / 项目）、游戏库 /blog/game-breakdown、博客 /blog。
 
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import remarkCjkFriendly from 'remark-cjk-friendly';
 
 // https://astro.build/config
 export default defineConfig({
 	// 网站的正式部署地址，用于生成 sitemap 和规范 URL
 	site: 'https://www.theo99.me/',
 
-	// redirects：2026-11 栏目重构后，旧地址跳到新位置，避免外部链接失效
+	// redirects：栏目调整后旧地址跳到新位置，避免外部链接失效。
+	// 教育 / 工作 / 项目现在是首页区块（/#education、/#experience、/#projects）
 	redirects: {
-		'/experience': '/about/',
-		'/experience/work-experience': '/about/',
-		'/experience/education': '/about/',
-		'/experience/projects': '/work/',
+		'/work': '/#projects',
+		'/about': '/#education',
+		'/experience': '/#experience',
+		'/experience/work-experience': '/#experience',
+		'/experience/education': '/#education',
+		'/experience/projects': '/#projects',
 		'/blog/blog-home': '/blog/',
 		'/blog/study-notes': '/blog/',
 		'/blog/game-appreciation': '/blog/',
 		'/blog/movie-critique': '/blog/',
-		'/en/experience': '/en/about/',
-		'/en/experience/work-experience': '/en/about/',
-		'/en/experience/education': '/en/about/',
-		'/en/experience/projects': '/en/work/',
+		'/en/work': '/en/#projects',
+		'/en/about': '/en/#education',
+		'/en/experience': '/en/#experience',
+		'/en/experience/work-experience': '/en/#experience',
+		'/en/experience/education': '/en/#education',
+		'/en/experience/projects': '/en/#projects',
 		'/en/blog/blog-home': '/en/blog/',
 		'/en/blog/study-notes': '/en/blog/',
 		'/en/blog/game-appreciation': '/en/blog/',
 		'/en/blog/movie-critique': '/en/blog/',
 	},
+
+	// 中文里 **“引号”**、**范围：**正文 这类紧贴标点的加粗，标准 Markdown 不认，这个插件修正
+	markdown: { remarkPlugins: [remarkCjkFriendly] },
 
 	integrations: [
 		starlight({
@@ -66,10 +75,8 @@ export default defineConfig({
 
 			// 页面不显示侧边栏，这里只用于 Starlight 生成页面索引
 			sidebar: [
-				{ label: '作品', slug: 'work' },
 				{ label: '游戏库', autogenerate: { directory: 'blog/game-breakdown' } },
-				{ label: '文章', autogenerate: { directory: 'blog/study-notes' } },
-				{ label: '关于', slug: 'about' },
+				{ label: '博客', autogenerate: { directory: 'blog/study-notes' } },
 			],
 		}),
 	],

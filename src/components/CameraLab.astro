@@ -1,0 +1,353 @@
+---
+interface Props {
+	english?: boolean;
+}
+
+const { english = false } = Astro.props;
+const copy = english
+	? {
+			title: 'Camera dead zone',
+			inside: 'Inside zone · camera holds',
+			following: 'Outside zone · camera follows',
+			position: 'Player position',
+			zone: 'Dead zone',
+			sizes: ['Small', 'Medium', 'Large'],
+			reset: 'Reset',
+			instruction: 'Move the player. Cross the zone to move the camera.',
+			note: 'Interactive principle study · Not project gameplay',
+			zoneLabel: 'DEAD ZONE',
+		}
+	: {
+			title: '镜头死区',
+			inside: '死区内 · 镜头固定',
+			following: '越过边界 · 镜头跟随',
+			position: '角色位置',
+			zone: '死区范围',
+			sizes: ['小', '中', '大'],
+			reset: '重置',
+			instruction: '移动角色，越过死区边界，观察镜头跟随。',
+			note: '原理示意 · 非项目实机',
+			zoneLabel: 'DEAD ZONE / 死区',
+		};
+---
+
+<theo-camera-lab
+	class="camera-lab"
+	data-inside={copy.inside}
+	data-following={copy.following}
+>
+	<div class="lab-header">
+		<div>
+			<p class="lab-kicker"><span></span> INTERACTION STUDY / 01</p>
+			<h2>{copy.title}<span class="title-cross" aria-hidden="true">+</span></h2>
+		</div>
+		<p class="lab-state" role="status" aria-live="polite"><span></span><span data-state>{copy.inside}</span></p>
+	</div>
+
+	<div class="lab-scene">
+		<svg viewBox="0 0 640 280" fill="none" aria-hidden="true">
+			<g class="scene-grid">
+				{[40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600].map((x) => <path d={`M${x} 0V280`} />)}
+				{[40, 80, 120, 160, 200, 240].map((y) => <path d={`M0 ${y}H640`} />)}
+			</g>
+
+			<g data-backdrop class="scene-backdrop">
+				<path d="M-300 224V173H-220V140H-150V174H-60V90H-14V133H60V168H114V113H171V151H238V74H268V116H302V169H365V128H396V180H460V97H523V144H586V173H642V118H683V155H752V88H795V136H862V172H960V224Z" />
+				<path d="M-100 224V192H-32V169H30V194H92V159H146V194H224V164H294V190H354V163H424V191H492V168H566V198H646V160H708V192H794V164H864V193H950V224Z" class="near-skyline" />
+				<path d="M250 76V112M250 122V133M472 99V130M484 99V130M126 115V138" class="skyline-detail" />
+			</g>
+
+			<g data-world>
+				<path class="ground-face" d="M-640 224H1920V280H-640Z" />
+				<path class="ground-line" d="M-640 224H1920" />
+				<path class="ground-bottom" d="M-640 246H-96L-72 258H128L150 246H462L486 260H650L676 246H956L980 257H1210L1234 246H1920" />
+				{[-320, -160, 0, 160, 320, 480, 640, 800, 960, 1120, 1280, 1440, 1600].map((x) => (
+					<g class="world-marker">
+						<path d={`M${x} 224V232`} />
+						<text x={x + 6} y="238">{String(x).padStart(4, '0')}</text>
+					</g>
+				))}
+				<path class="travel-track" d="M80 213H1120" />
+				{[80, 560, 800, 1120].map((x) => (
+					<g class="waypoint">
+						<circle cx={x} cy="213" r="3" />
+						<path d={`M${x} 201V195M${x - 3} 198H${x + 3}`} />
+					</g>
+				))}
+				<g data-player transform="translate(320 173)">
+					<ellipse class="player-shadow" cx="0" cy="51" rx="25" ry="5" />
+					<g data-player-body>
+						<path class="player-limb" d="M-5 32L-8 48H-15M8 32L12 48H19" />
+						<path class="player-body" d="M-10 21L4 17L13 23V35H-9Z" />
+						<path class="player-arm" d="M10 23L19 31H27M-9 24L-15 35" />
+						<path class="player-head" d="M-6 1H7L12 6V16H-6Z" />
+						<path class="player-visor" d="M3 7H12V10H3Z" />
+						<path class="player-pack" d="M-14 23H-10V33H-14Z" />
+					</g>
+					<path class="player-label-line" d="M0-8V-18" />
+					<text class="player-label" x="0" y="-25" text-anchor="middle">PLAYER</text>
+				</g>
+			</g>
+
+			<rect data-zone-fill class="zone-fill" x="250" y="72" width="140" height="151" />
+			<path data-zone-lines class="zone-lines" d="M250 223V72H390V223" />
+			<path class="center-cross" d="M315 122H325M320 117V127" />
+			<text class="zone-label" x="320" y="61" text-anchor="middle">{copy.zoneLabel}</text>
+			<g class="camera-frame">
+				<path d="M46 46V29H63M577 29H594V46M46 217V234H63M577 234H594V217" />
+				<path class="frame-hairline" d="M73 29H567M46 56V207M594 56V207" />
+			</g>
+			<text class="scene-caption" x="46" y="17">FOLLOW CAMERA</text>
+			<text class="scene-caption scene-caption-right" x="594" y="17" text-anchor="end">2D / WORLD SPACE</text>
+			<g class="camera-readout">
+				<rect x="464" y="251" width="132" height="22" rx="2" />
+				<text x="475" y="266">CAM X <tspan data-camera-output>+0000</tspan></text>
+			</g>
+		</svg>
+		<div class="scene-fade" aria-hidden="true"></div>
+	</div>
+
+	<div class="lab-controls">
+		<label class="position-control">
+			<span class="control-label">{copy.position}<span class="position-value">WORLD X <output data-world-output>0320</output></span></span>
+			<input data-position type="range" min="80" max="1120" step="4" value="320" />
+		</label>
+		<div class="control-bottom">
+			<div class="zone-control" role="group" aria-label={copy.zone}>
+				<span class="zone-control-label">{copy.zone}</span>
+				{[80, 140, 220].map((size, index) => (
+					<button type="button" data-zone={size} aria-pressed={index === 1 ? 'true' : 'false'}>{copy.sizes[index]}</button>
+				))}
+			</div>
+			<button class="reset-button" data-reset type="button"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 5a5.2 5.2 0 1 1-.2 5M3 1.8V5h3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>{copy.reset}</button>
+		</div>
+	</div>
+
+	<div class="lab-footer">
+		<p>{copy.instruction}</p>
+		<span>{copy.note}</span>
+	</div>
+</theo-camera-lab>
+
+<script>
+	class CameraLab extends HTMLElement {
+		private cleanup?: () => void;
+
+		connectedCallback() {
+			const input = this.querySelector<HTMLInputElement>('[data-position]')!;
+			const world = this.querySelector<SVGGElement>('[data-world]')!;
+			const backdrop = this.querySelector<SVGGElement>('[data-backdrop]')!;
+			const player = this.querySelector<SVGGElement>('[data-player]')!;
+			const playerBody = this.querySelector<SVGGElement>('[data-player-body]')!;
+			const zoneFill = this.querySelector<SVGRectElement>('[data-zone-fill]')!;
+			const zoneLines = this.querySelector<SVGPathElement>('[data-zone-lines]')!;
+			const worldOutput = this.querySelector<HTMLOutputElement>('[data-world-output]')!;
+			const cameraOutput = this.querySelector<SVGTSpanElement>('[data-camera-output]')!;
+			const stateOutput = this.querySelector<HTMLElement>('[data-state]')!;
+			const buttons = this.querySelectorAll<HTMLButtonElement>('[data-zone]');
+			const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+			const listeners = new AbortController();
+			let playerX = 320;
+			let cameraX = 0;
+			let cameraTarget = 0;
+			let cameraStart = 0;
+			let zoneWidth = 140;
+			let animationStart = 0;
+			let frame = 0;
+
+			const render = () => {
+				world.setAttribute('transform', `translate(${-cameraX} 0)`);
+				backdrop.setAttribute('transform', `translate(${-cameraX * 0.22} 0)`);
+				player.setAttribute('transform', `translate(${playerX} 173)`);
+				worldOutput.value = String(playerX).padStart(4, '0');
+				cameraOutput.textContent = `${cameraX < 0 ? '−' : '+'}${String(Math.round(Math.abs(cameraX))).padStart(4, '0')}`;
+			};
+
+			const animate = (now: number) => {
+				const progress = Math.min((now - animationStart) / 180, 1);
+				cameraX = cameraStart + (cameraTarget - cameraStart) * (1 - Math.pow(1 - progress, 3));
+				render();
+				frame = progress < 1 ? requestAnimationFrame(animate) : 0;
+			};
+
+			const follow = () => {
+				const previousTarget = cameraTarget;
+				const screenX = playerX - cameraTarget;
+				const left = 320 - zoneWidth / 2;
+				const right = 320 + zoneWidth / 2;
+				if (screenX < left) cameraTarget = playerX - left;
+				if (screenX > right) cameraTarget = playerX - right;
+				const following = cameraTarget !== previousTarget || cameraX !== cameraTarget;
+				stateOutput.textContent = following ? this.dataset.following! : this.dataset.inside!;
+				this.toggleAttribute('data-following-active', following);
+				if (frame) cancelAnimationFrame(frame);
+				frame = 0;
+				if (reducedMotion.matches || cameraX === cameraTarget) {
+					cameraX = cameraTarget;
+					render();
+					return;
+				}
+				cameraStart = cameraX;
+				animationStart = performance.now();
+				render();
+				frame = requestAnimationFrame(animate);
+			};
+
+			const setZone = (width: number) => {
+				zoneWidth = width;
+				const left = 320 - width / 2;
+				zoneFill.setAttribute('x', String(left));
+				zoneFill.setAttribute('width', String(width));
+				zoneLines.setAttribute('d', `M${left} 223V72H${left + width}V223`);
+				buttons.forEach((button) => button.setAttribute('aria-pressed', String(Number(button.dataset.zone) === width)));
+			};
+
+			input.addEventListener('input', () => {
+				const next = Number(input.value);
+				if (next !== playerX) playerBody.setAttribute('transform', next < playerX ? 'scale(-1 1)' : 'scale(1 1)');
+				playerX = next;
+				follow();
+			}, { signal: listeners.signal });
+
+			buttons.forEach((button) => button.addEventListener('click', () => {
+				setZone(Number(button.dataset.zone));
+				follow();
+			}, { signal: listeners.signal }));
+
+			this.querySelector('[data-reset]')!.addEventListener('click', () => {
+				if (frame) cancelAnimationFrame(frame);
+				frame = 0;
+				playerX = 320;
+				cameraX = cameraTarget = 0;
+				input.value = '320';
+				playerBody.removeAttribute('transform');
+				setZone(140);
+				stateOutput.textContent = this.dataset.inside!;
+				this.removeAttribute('data-following-active');
+				render();
+			}, { signal: listeners.signal });
+
+			reducedMotion.addEventListener('change', () => {
+				if (!reducedMotion.matches) return;
+				if (frame) cancelAnimationFrame(frame);
+				frame = 0;
+				cameraX = cameraTarget;
+				render();
+			}, { signal: listeners.signal });
+
+			this.cleanup = () => {
+				listeners.abort();
+				if (frame) cancelAnimationFrame(frame);
+			};
+		}
+
+		disconnectedCallback() {
+			this.cleanup?.();
+		}
+	}
+
+	if (!customElements.get('theo-camera-lab')) customElements.define('theo-camera-lab', CameraLab);
+</script>
+
+<style>
+	.camera-lab {
+		--lab-accent: #d7ff3f;
+		--lab-text: #eeeae1;
+		display: grid;
+		grid-template-rows: auto minmax(0, 1fr) auto auto;
+		width: 100%;
+		height: 468px;
+		min-width: 0;
+		box-sizing: border-box;
+		overflow: hidden;
+		color: var(--lab-text);
+		background: #151715;
+		border: 1px solid #383c32;
+		border-radius: 6px;
+		box-shadow: 0 24px 70px #00000026, inset 0 1px #ffffff05;
+		font-family: inherit;
+		isolation: isolate;
+	}
+
+	.lab-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 23px 25px 0; }
+	.lab-kicker { display: flex; align-items: center; gap: 7px; margin: 0 0 9px; color: #a3aa93; font: 9px/1.2 'Consolas', monospace; letter-spacing: 1.6px; }
+	.lab-kicker > span { width: 5px; height: 5px; background: var(--lab-accent); }
+	.lab-header h2 { margin: 0; color: var(--lab-text); font-size: 22px; line-height: 1.15; letter-spacing: -.035em; font-weight: 600; }
+	.title-cross { display: inline-block; margin-left: 13px; color: #747b68; font-size: 19px; font-weight: 400; }
+	.lab-state { display: flex; align-items: center; gap: 6px; margin: 0; color: #a0a68f; font-size: 10px; line-height: 1.5; white-space: nowrap; }
+	.lab-state > span:first-child { width: 4px; height: 4px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+	.camera-lab[data-following-active] .lab-state { color: var(--lab-accent); }
+	.lab-scene { position: relative; min-height: 0; overflow: hidden; margin-top: 11px; background: radial-gradient(ellipse at 54% 65%, #d7ff3f09, transparent 65%); }
+	.lab-scene > svg { display: block; width: 100%; height: 100%; overflow: hidden; }
+	.scene-grid { stroke: #c9d6ac; stroke-width: .6px; opacity: .055; }
+	.scene-backdrop { fill: #252923; }
+	.near-skyline { fill: #31362b; }
+	.skyline-detail { fill: none; stroke: #414835; stroke-width: 2px; }
+	.ground-face { fill: #1b1e19; }
+	.ground-line { stroke: #89916a; stroke-width: 1.5px; }
+	.ground-bottom { stroke: #454b37; stroke-width: 1px; }
+	.world-marker { stroke: #68734d; stroke-width: 1px; }
+	.world-marker text { fill: #8c947b; stroke: none; font: 8px 'Consolas', monospace; }
+	.travel-track { stroke: #91a165; stroke-width: 1px; stroke-dasharray: 2 8; opacity: .5; }
+	.waypoint { stroke: #828e61; stroke-width: 1px; }
+	.waypoint circle { fill: #1b1e19; }
+	.player-shadow { fill: #d7ff3f; opacity: .09; }
+	.player-limb { stroke: var(--lab-text); stroke-width: 5px; stroke-linejoin: bevel; }
+	.player-body { fill: var(--lab-text); }
+	.player-arm { stroke: #c9c8bc; stroke-width: 4px; stroke-linejoin: bevel; }
+	.player-head { fill: var(--lab-accent); }
+	.player-visor { fill: #252d16; }
+	.player-pack { fill: #7f876b; }
+	.player-label-line { stroke: var(--lab-accent); stroke-width: 1px; opacity: .65; }
+	.player-label { fill: var(--lab-accent); font: 9px 'Consolas', monospace; letter-spacing: 1.2px; }
+	.zone-fill { fill: var(--lab-accent); opacity: .045; pointer-events: none; }
+	.zone-lines { stroke: var(--lab-accent); stroke-width: 1px; stroke-dasharray: 4 4; opacity: .6; }
+	.center-cross { stroke: var(--lab-accent); opacity: .45; }
+	.zone-label { fill: #c3ce9e; font: 9px 'Consolas', 'Microsoft YaHei', sans-serif; letter-spacing: 1px; }
+	.camera-frame { stroke: #bfc5ad; stroke-width: 1px; opacity: .65; }
+	.frame-hairline { opacity: .2; }
+	.scene-caption { fill: #7e8670; font: 8px 'Consolas', monospace; letter-spacing: 1px; }
+	.camera-readout rect { fill: #151715; stroke: #3b4231; stroke-width: .8px; }
+	.camera-readout text { fill: #969f82; font: 10px 'Consolas', monospace; letter-spacing: 1px; }
+	.camera-readout tspan { fill: var(--lab-accent); }
+	.scene-fade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #151715b3, transparent 8%, transparent 92%, #151715b3); }
+	.lab-controls { margin: 0 25px; padding-top: 13px; border-top: 1px solid #363b2e; }
+	.position-control { display: block; }
+	.control-label { display: flex; align-items: center; justify-content: space-between; color: #b4b7aa; font-size: 11px; }
+	.position-value { color: #747d65; font: 9px 'Consolas', monospace; letter-spacing: 1px; }
+	.position-value output { color: var(--lab-accent); font-size: 11px; }
+	input[type='range'] { display: block; width: 100%; height: 30px; margin: 4px 0 0; padding: 0; background: transparent; accent-color: var(--lab-accent); cursor: pointer; appearance: none; -webkit-appearance: none; }
+	input[type='range']::-webkit-slider-runnable-track { height: 3px; background: #444d34; border-radius: 3px; }
+	input[type='range']::-moz-range-track { height: 3px; background: #444d34; border-radius: 3px; }
+	input[type='range']::-webkit-slider-thumb { width: 12px; height: 18px; margin-top: -7.5px; border: 2px solid #151715; border-radius: 3px; background: var(--lab-accent); box-shadow: 0 0 0 1px var(--lab-accent); -webkit-appearance: none; }
+	input[type='range']::-moz-range-thumb { width: 8px; height: 14px; border: 2px solid #151715; border-radius: 3px; background: var(--lab-accent); box-shadow: 0 0 0 1px var(--lab-accent); }
+	input:focus-visible, button:focus-visible { outline: 2px solid var(--lab-accent); outline-offset: 4px; }
+	.control-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 3px; }
+	.zone-control { display: flex; align-items: center; gap: 5px; }
+	.zone-control-label { margin-right: 5px; color: #8d9580; font-size: 10px; }
+	button { display: inline-flex; justify-content: center; align-items: center; min-width: 44px; min-height: 44px; margin: 0; padding: 0 11px; border: 1px solid #3d4532; border-radius: 3px; background: transparent; color: #a8b097; font-family: inherit; font-size: 11px; cursor: pointer; transition: border-color 140ms, color 140ms, background-color 140ms; }
+	button:hover { border-color: #9eaf71; color: var(--lab-text); }
+	button[aria-pressed='true'] { border-color: #96ac3c; background: #d7ff3f12; color: var(--lab-accent); }
+	.reset-button { gap: 6px; border-color: transparent; padding-right: 0; color: #8f9780; }
+	.lab-footer { display: flex; justify-content: space-between; flex-wrap: wrap; column-gap: 12px; row-gap: 5px; padding: 14px 25px 18px; }
+	.lab-footer p, .lab-footer > span { margin: 0; color: #7b836d; font-size: 9px; line-height: 1.5; }
+	.lab-footer > span { color: #b4bba5; }
+
+	@media (max-width: 640px) {
+		.camera-lab { height: 444px; }
+		.lab-header { align-items: flex-start; flex-wrap: wrap; gap: 10px; padding: 20px 18px 0; }
+		.lab-kicker { font-size: 8px; letter-spacing: 1.15px; }
+		.lab-header h2 { font-size: 21px; }
+		.lab-state { margin-top: 3px; font-size: 9px; }
+		.lab-controls { margin: 0 18px; }
+		.lab-footer { padding: 13px 18px 17px; }
+		.zone-control { gap: 4px; }
+		.zone-control-label { margin-right: 3px; }
+		button { padding: 0 9px; }
+		.reset-button { padding-left: 6px; padding-right: 0; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		button { transition: none; }
+	}
+</style>

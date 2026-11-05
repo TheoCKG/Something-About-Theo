@@ -1,0 +1,73 @@
+---
+import CameraLab from './CameraLab.astro';
+import { breakdowns } from '../data/breakdowns';
+
+const english = Astro.url.pathname.startsWith('/en');
+const localize = (path: string) => english ? `/en${path}` : path;
+const studies = ['monster-hunter-world', 'sekiro', 'apex-legends'].map(slug => breakdowns.find(item => item.slug === slug)).filter(Boolean);
+const cv = '/张文韬_战斗策划_清华大学_18523868820.pdf';
+---
+
+<div class="portfolio-home not-content">
+	<section class="folio-hero" aria-labelledby="hero-heading">
+		<div class="hero-copy">
+			<p class="folio-kicker"><span class="signal-square"></span> THEO / COMBAT & TECHNICAL DESIGN</p>
+			<h1 id="hero-heading">DESIGN<br />THE <span>FEEL.</span></h1>
+			<p class="hero-statement">{english ? 'The weight of combat. The life in a system.' : '战斗的手感，系统的生命力。'}</p>
+			<p class="hero-intro">{english ? 'I’m Wentao Zhang, a combat and technical designer exploring movement, abilities, and AI-driven characters.' : '我是张文韬 Theo，战斗与技术策划。关注角色移动、技能机制，以及能够感知、决策与行动的 AI NPC。'}</p>
+			<div class="folio-actions">
+				<a class="folio-button primary" href="#work">{english ? 'Explore my work' : '查看精选作品'} <span aria-hidden="true">↗</span></a>
+				<a class="folio-text-link" href={cv} download>{english ? 'Download résumé' : '下载简历'} <span aria-hidden="true">↓</span></a>
+			</div>
+			<p class="hero-credits">{english ? 'Archosaur Games · AI NPC systems · Tsinghua IMDT' : '祖龙娱乐 · AI NPC 系统设计 · 清华 IMDT'}</p>
+		</div>
+		<div class="hero-lab"><CameraLab english={english} /></div>
+		<div class="hero-bottom"><span>PLAYER EXPERIENCE, BY DESIGN.</span><a href="#work">{english ? 'SCROLL TO EXPLORE' : '向下探索'} ↓</a></div>
+	</section>
+
+	<section id="work" class="folio-section" aria-labelledby="work-heading">
+		<div class="section-heading">
+			<div><p class="folio-kicker">01 / SELECTED WORK</p><h2 id="work-heading">{english ? 'From rules to experience.' : '从规则，到体验。'}</h2></div>
+			<a class="folio-text-link" href={localize('/experience/projects/')}>{english ? 'All projects' : '全部项目'} ↗</a>
+		</div>
+		<div class="work-grid">
+			<a class="work-card" href={localize('/experience/projects/')}>
+				<div class="work-art reaper-art" aria-hidden="true"><span class="art-label">MONSTER REAPER / 2026</span><span class="reaper-word">HIT.<br /><i>MOVE.</i><br />REPEAT.</span><span class="art-index">01</span></div>
+				<div class="work-caption"><p class="work-tags">COMBAT / CAMERA / GAME FEEL</p><h3>Monster Reaper <span aria-hidden="true">↗</span></h3><p>{english ? 'Enemy creation, camera dead zones, and movement feel for a 2D action roguelike.' : '2D 动作肉鸽中的怪物制作、镜头死区与移动手感调整。'}</p><span class="card-footer">{english ? 'Tencent training camp · Project overview' : '腾讯星跃训练营 · 项目概览'}</span></div>
+			</a>
+			<a class="work-card" href={localize('/experience/work-experience/')}>
+				<div class="work-art npc-art" aria-hidden="true"><span class="art-label">AI NPC / UE5 + LLM</span><div class="npc-orbit"><span>PERCEIVE</span><strong>NPC</strong><span>DECIDE → ACT</span></div><span class="art-index">02</span></div>
+				<div class="work-caption"><p class="work-tags">PERCEPTION / BEHAVIOR / LUA</p><h3>{english ? 'A world that responds' : '会回应的游戏世界'} <span aria-hidden="true">↗</span></h3><p>{english ? 'AI NPC perception, behavior rules, animation blending, and the interaction-to-action loop.' : 'NPC 感知与行为规则、动画融合，以及玩家交互到角色行动的闭环。'}</p><span class="card-footer">{english ? 'YuanYi Entertainment · AI design' : '元绎娱乐 · AI 策划'}</span></div>
+			</a>
+			<a class="work-card" href={localize('/experience/work-experience/')}>
+				<div class="work-art movement-art" aria-hidden="true"><span class="art-label">MOVEMENT & ABILITIES</span><div class="movement-lines"><i></i><i></i><i></i></div><span class="movement-word">FLOW<br />STATE.</span><span class="art-index">03</span></div>
+				<div class="work-caption"><p class="work-tags">MOVEMENT / HEROES / COMBAT</p><h3>{english ? 'Movement & combat' : '动作与战斗机制'} <span aria-hidden="true">↗</span></h3><p>{english ? 'Parkour actions, consistent movement rules, and hero ability design for an action shooter.' : '动作射击项目中的跑酷动作、统一运动规则与英雄技能设计。'}</p><span class="card-footer">{english ? 'Archosaur Games · Combat design' : '祖龙娱乐 · 战斗策划'}</span></div>
+			</a>
+		</div>
+	</section>
+
+	<section class="folio-section research-section" aria-labelledby="studies-heading">
+		<div class="section-heading">
+			<div><p class="folio-kicker">02 / GAME STUDIES</p><h2 id="studies-heading">{english ? 'Play. Question. Break it down.' : '拆开好游戏，理解好设计。'}</h2></div>
+			<a class="folio-text-link" href="/blog/game-breakdown/">{english ? `Explore ${breakdowns.length} studies · 中文` : `浏览 ${breakdowns.length} 篇拆解`} ↗</a>
+		</div>
+		<div class="studies-grid">
+			{studies.map((study, index) => study && <a class="study-card" href={`/blog/game-breakdown/${study.slug}/`}>
+				<div class="study-image"><img src={`/media/games/${study.slug}.jpg`} alt={`${study.game}官方商店截图`} loading="lazy" width="640" height="360" /><span>STUDY / {String(index + 1).padStart(2, '0')}</span></div>
+				<div class="study-caption"><p class="work-tags">{study.category}</p><h3>{study.game}<span aria-hidden="true">↗</span></h3><p>{study.summary}</p><span class="card-footer">{english ? 'Official store screenshot · Chinese analysis' : '官方商店截图 · 机制与设计分析'}</span></div>
+			</a>)}
+		</div>
+	</section>
+
+	<section id="about" class="folio-section about-section" aria-labelledby="about-heading">
+		<div class="about-intro"><p class="folio-kicker">03 / ABOUT THE DESIGNER</p><h2 id="about-heading">{english ? 'Design it. Build it. Feel it.' : <>设计，然后<br />让它发生。</>}</h2><p>{english ? 'My work connects player experience with the systems behind it, from combat and movement to AI character behavior.' : '我的经历连接着体验设计与技术实现：从角色的一次起跳，到 NPC 对世界的一次回应。'}</p><a class="folio-text-link" href={localize('/experience/work-experience/')}>{english ? 'Read my experience' : '查看完整经历'} ↗</a></div>
+		<div class="experience-list">
+			<div><span class="experience-year">2025 —</span><div><h3>{english ? 'Tsinghua University' : '清华大学'}</h3><p>{english ? 'Master’s · Interactive Media Design & Technology' : '互动媒体设计与技术 · 硕士在读'}</p></div><span class="experience-code">LEARN</span></div>
+			<div><span class="experience-year">2023 — 2024</span><div><h3>{english ? 'YuanYi Entertainment' : '元绎娱乐'}</h3><p>{english ? 'AI design · NPC perception & behavior' : 'AI 策划 · NPC 感知与行为系统'}</p></div><span class="experience-code">SYSTEMS</span></div>
+			<div><span class="experience-year">2022 — 2023</span><div><h3>{english ? 'Archosaur Games' : '祖龙娱乐'}</h3><p>{english ? 'Combat design · Movement & hero abilities' : '战斗策划 · 动作与英雄技能'}</p></div><span class="experience-code">COMBAT</span></div>
+			<div><span class="experience-year">2018 — 2022</span><div><h3>{english ? 'Peking University' : '北京大学'}</h3><p>{english ? 'Guanghua School of Management · Marketing' : '光华管理学院 · 市场营销本科'}</p></div><span class="experience-code">FOUNDATION</span></div>
+		</div>
+	</section>
+
+	<section id="contact" class="contact-band" aria-labelledby="contact-heading"><div><p class="folio-kicker">NEXT / LET’S CONNECT</p><h2 id="contact-heading">LET’S MAKE<br />IT FEEL RIGHT.</h2><p>{english ? 'Find my experience and contact details in my résumé.' : '完整经历与联系方式，收录在我的简历中。'}</p></div><div class="contact-actions"><a class="folio-button" href={cv} download>{english ? 'Download résumé' : '下载简历'} ↓</a><a href="https://github.com/TheoCKG" target="_blank" rel="noreferrer">GITHUB ↗</a></div></section>
+</div>

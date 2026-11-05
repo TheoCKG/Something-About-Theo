@@ -1,11 +1,36 @@
 ---
+import '../../styles/portfolio.css';
 const routeId = Astro.locals.starlightRoute?.id ?? '';
 const pageId = routeId === '' ? 'home' : routeId;
 const pageGroup = routeId === '' ? 'home' : routeId.split('/')[0];
 const isEnglish = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/');
 const backToTopLabel = isEnglish ? 'Back to top' : '回到顶部';
+const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, '').replace(/\/+$/, '') || '/';
+const isPortfolioRoute = path === '/' || path.startsWith('/blog/game-breakdown');
+const isArticle = path.startsWith('/blog/game-breakdown/');
+const homeHref = isEnglish ? '/en/' : '/';
+const resumeHref = '/张文韬_战斗策划_清华大学_18523868820.pdf';
 ---
 
+{isPortfolioRoute ? (
+	<div class="portfolio-shell">
+		<header class="folio-header not-content">
+			<a class="folio-logo" href={homeHref} aria-label="Theo 首页"><span class="folio-logo-mark" aria-hidden="true">t</span>THEO.</a>
+			<nav aria-label={isEnglish ? 'Main navigation' : '主导航'}>
+				<a href={`${homeHref}#work`}>{isEnglish ? 'Selected work' : '精选作品'}</a>
+				<a href="/blog/game-breakdown/" aria-current={path.startsWith('/blog/game-breakdown') ? 'page' : undefined}>{isEnglish ? 'Game studies' : '游戏拆解'}</a>
+				<a href={`${homeHref}#about`}>{isEnglish ? 'Experience' : '关于与经历'}</a>
+				<a href={`${homeHref}#contact`}>{isEnglish ? 'Contact' : '联系'}</a>
+			</nav>
+			<div class="folio-header-tools"><a href={isEnglish ? '/' : '/en/'} aria-label={isEnglish ? '切换到中文首页' : 'English homepage'}>{isEnglish ? '中文' : 'EN'}</a><a class="folio-header-cv" href={resumeHref} download>{isEnglish ? 'RÉSUMÉ' : '简历'} ↓</a></div>
+		</header>
+		<main id="_top" class:list={['folio-main', isArticle && 'is-article']}>
+			{isArticle && <a class="article-breadcrumb" href="/blog/game-breakdown/">← {isEnglish ? 'All game studies' : '返回游戏拆解'}</a>}
+			<slot />
+		</main>
+		<footer class="folio-footer not-content"><span>THEO / COMBAT & TECHNICAL DESIGN</span><a href="#_top">{backToTopLabel} ↑</a></footer>
+	</div>
+) : (
 <div class="resume-layout not-content" data-page-id={pageId} data-page-group={pageGroup}>
 	<input id="resume-nav-toggle" class="resume-nav-toggle" type="checkbox" />
 	<label for="resume-nav-toggle" class="resume-mobile-toggle" aria-label="打开导航菜单">
@@ -33,3 +58,4 @@ const backToTopLabel = isEnglish ? 'Back to top' : '回到顶部';
 		<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5 6.75 10.75m5.25-5.25 5.25 5.25M12 6v12.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
 	</a>
 </div>
+)}

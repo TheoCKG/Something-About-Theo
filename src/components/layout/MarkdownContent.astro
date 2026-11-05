@@ -1,3 +1,6 @@
-<div class="resume-markdown sl-markdown-content">
-	<slot />
-</div>
+---
+const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, '').replace(/\/+$/, '') || '/';
+const isLanding = path === '/' || path === '/blog/game-breakdown';
+---
+
+{isLanding ? <slot /> : <div class="resume-markdown sl-markdown-content"><slot /></div>}

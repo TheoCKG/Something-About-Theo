@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "monster-hunter-world",
+    "game": "Monster Hunter: World",
+    "appId": 582010,
+    "screenshotId": 0,
+    "sourcePage": "https://store.steampowered.com/app/582010/",
+    "sourceImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/582010/ss_a262c53b8629de7c6547933dc0b49d31f4e1b1f1.1920x1080.jpg?t=1791439347",
+    "path": "/media/games/monster-hunter-world.jpg",
+    "bytes": 272165,
+    "rights": "© CAPCOM CO., LTD. ALL RIGHTS RESERVED.",
+    "alt": "猎人骑乘蛮颚龙头部，展示近身战斗中的体型、站位与动作关系。",
+    "verifiedOn": "2026-10-22"
+  },
+  {
+    "slug": "sekiro",
+    "game": "Sekiro™: Shadows Die Twice - GOTY Edition",
+    "appId": 814380,
+    "screenshotId": 2,
+    "sourcePage": "https://store.steampowered.com/app/814380/",
+    "sourceImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/ss_15f0e9982621aed44900215ad283811af0779b1d.1920x1080.jpg?t=1762888662",
+    "path": "/media/games/sekiro.jpg",
+    "bytes": 1057083,
+    "rights": "© 2019–2020 FromSoftware, Inc.; published and distributed by Activision.",
+    "alt": "狼与僧人敌人近身交锋，画面包含敌方长柄武器、玩家跳跃动作与义手斧。",
+    "verifiedOn": "2026-10-22"
+  },
+  {
+    "slug": "apex-legends",
+    "game": "Apex Legends™",
+    "appId": 1172470,
+    "screenshotId": 1,
+    "sourcePage": "https://store.steampowered.com/app/1172470/",
+    "sourceImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/d64ce54903a3ba6429c6e3189ad746a7db70ee3e/ss_d64ce54903a3ba6429c6e3189ad746a7db70ee3e.1920x1080.jpg?t=1790164440",
+    "path": "/media/games/apex-legends.jpg",
+    "bytes": 973213,
+    "rights": "Electronic Arts / Respawn Entertainment. All game imagery belongs to its respective owners.",
+    "alt": "第一人称视角下的技能视觉效果与近处角色，周围建筑提供高低与遮挡关系。",
+    "verifiedOn": "2026-10-22"
+  },
+  {
+    "slug": "the-division-2",
+    "game": "Tom Clancy’s The Division® 2",
+    "appId": 2221490,
+    "screenshotId": 7,
+    "sourcePage": "https://store.steampowered.com/app/2221490/",
+    "sourceImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2221490/be0b56637f8e456fa72c376d4e8688a124d84e70/ss_be0b56637f8e456fa72c376d4e8688a124d84e70.1920x1080.jpg?t=1791884938",
+    "path": "/media/games/the-division-2.jpg",
+    "bytes": 479972,
+    "rights": "© 2019 Ubisoft Entertainment. All Rights Reserved.",
+    "alt": "带游戏 HUD 的多人交火画面，能同时看到掩体、敌人、队友与空中无人机。",
+    "verifiedOn": "2026-10-22"
+  }
+]

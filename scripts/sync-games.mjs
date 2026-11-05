@@ -158,7 +158,8 @@ for (const g of manual.games) {
 
 const result = {
 	$comment: '由 scripts/sync-games.mjs 生成，请勿手改；要改数据请编辑 games.manual.json 后重新运行 npm run sync:games',
-	syncedAt: new Date().toISOString(),
+	// 数据没变就沿用上次的时间戳，避免每周产生只改时间的空提交
+	syncedAt: JSON.stringify(previous.games) === JSON.stringify(out) && previous.syncedAt ? previous.syncedAt : new Date().toISOString(),
 	sources: { steam: steamMode, psn: psnTitles ? 'api' : (previous.sources?.psn ?? 'none') },
 	games: out,
 };

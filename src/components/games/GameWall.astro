@@ -10,7 +10,15 @@ const grandGames = gameCards.filter((g) => g.tier === 'grand');
 const tgaTotal = gameCards.reduce((s, g) => s + g.tgaCount, 0);
 const gjTotal = gameCards.reduce((s, g) => s + g.gjCount, 0);
 const timed = gameCards.filter((g) => g.hours != null);
-const totalHours = timed.reduce((s, g) => s + (g.hours as number), 0);
+// 合集时长（如神海 1–3 共用一份）只计一次
+const seenShared = new Set<number>();
+const totalHours = timed.reduce((s, g) => {
+	if (g.sharedPlaytime) {
+		if (seenShared.has(g.hours as number)) return s;
+		seenShared.add(g.hours as number);
+	}
+	return s + (g.hours as number);
+}, 0);
 const mustPlay = gameCards.filter((g) => g.mc?.mustPlay).length;
 const syncDate = new Date(syncedAt).toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai', year: 'numeric', month: 'long', day: 'numeric' });
 const pad = (n: number) => String(n).padStart(2, '0');

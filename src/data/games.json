@@ -1,6 +1,6 @@
 {
 	"$comment": "由 scripts/sync-games.mjs 生成，请勿手改；要改数据请编辑 games.manual.json / awards.json 后重新运行 npm run sync:games",
-	"syncedAt": "2026-11-15T22:24:39.047Z",
+	"syncedAt": "2026-11-22T23:09:18.583Z",
 	"sources": {
 		"steam": "api",
 		"psn": "api"
@@ -458,9 +458,9 @@
 			},
 			"mcSlug": "apex-legends",
 			"playtime": {
-				"hours": 1053.3,
+				"hours": 1057.7,
 				"sources": {
-					"steam": 1036.8,
+					"steam": 1041.2,
 					"psn": 16.5
 				},
 				"shared": false
@@ -1757,7 +1757,7 @@
 			"awards": [],
 			"metacritic": {
 				"score": 88,
-				"reviews": 56,
+				"reviews": 60,
 				"platform": "PC",
 				"mustPlay": false,
 				"url": "https://www.metacritic.com/game/phantom-blade-zero/",
@@ -2340,7 +2340,7 @@
 			"awards": [],
 			"metacritic": {
 				"score": null,
-				"reviews": 9,
+				"reviews": 8,
 				"platform": "PC",
 				"mustPlay": false,
 				"url": "https://www.metacritic.com/game/slay-the-spire-2/",
